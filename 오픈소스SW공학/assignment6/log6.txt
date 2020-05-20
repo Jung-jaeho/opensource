@@ -1,0 +1,414 @@
+Script started on 2020-05-15 16:58:49+0900
+]0;jaeho@jaeho-VirtualBox: ~/gdb_hw[01;32mjaeho@jaeho-VirtualBox[00m:[01;34m~/gdb_hw[00m$ p[KPS1= [K"\d \t \u $"
+금  5월 15 16:59:08 jaeho $gcc -g -o hw6 gdb_hw6.c
+금  5월 15 17:00:10 jaeho $gdb hw6
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from hw6...done.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw6 
+
+Program received signal SIGFPE, Arithmetic exception.
+0x000055555555472a in div (num1=10, num2=0) at gdb_hw6.c:25
+25		return num1 / num2; 
+(gdb) Quit
+(gdb) l
+20		return 0;
+21	}
+22	
+23	double div(int num1, int num2)
+24	{
+25		return num1 / num2; 
+26	}(gdb) c
+Continuing.
+
+Program terminated with signal SIGFPE, Arithmetic exception.
+The program no longer exists.
+(gdb) l[Kl
+Line number 27 out of range; gdb_hw6.c has 26 lines.
+(gdb) c
+The program is not being run.
+(gdb) l
+Line number 27 out of range; gdb_hw6.c has 26 lines.
+(gdb) l 10
+5	#include <stdio.h>
+6	
+7	double div(int num1, int num2);
+8	
+9	int main()
+10	{
+11		int x = 10, y = 0, a = 20;
+12		double result1 = 0.0, result2 = 0.0;
+13		
+14		result1 = div(x, y);
+(gdb) r 20
+Starting program: /home/jaeho/gdb_hw/hw6 20
+
+Program received signal SIGFPE, Arithmetic exception.
+0x000055555555472a in div (num1=10, num2=0) at gdb_hw6.c:25
+25		return num1 / num2; 
+(gdb) quit
+A debugging session is active.
+
+	Inferior 1 [process 10739] will be killed.
+
+Quit anyway? (y or n) y
+금  5월 15 17:05:06 jaeho $gdb[K[Kdb [K hw6cc -g -o hw6 gdb_hw6.c[7PPS1="\d \t \u $"gcc -g -o hw6 gdb_hw6.cdb hw6[K
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from hw6...done.
+(gdb) l 20
+15		result2 = div(x, a);
+16		
+17		printf("%d / %d = %.2lf\n", x, y, result1);
+18		printf("%d / %d = %.2lf\n", x, a, result2);
+19		
+20		return 0;
+21	}
+22	
+23	double div(int num1, int num2)
+24	{
+(gdb) l10
+Undefined command: "l10".  Try "help".
+(gdb) l 10
+5	#include <stdio.h>
+6	
+7	double div(int num1, int num2);
+8	
+9	int main()
+10	{
+11		int x = 10, y = 0, a = 20;
+12		double result1 = 0.0, result2 = 0.0;
+13		
+14		result1 = div(x, y);
+(gdb) b 14 [K[K4
+Breakpoint 1 at 0x699: file gdb_hw6.c, line 14.
+(gdb) b 15
+Breakpoint 2 at 0x6b1: file gdb_hw6.c, line 15.
+(gdb) b info
+Function "info" not defined.
+Make breakpoint pending on future shared library load? (y or [n]) i[Kn
+(gdb) info b
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000000000000699 in main at gdb_hw6.c:14
+2       breakpoint     keep y   0x00000000000006b1 in main at gdb_hw6.c:15
+(gdb) r[Kr
+Starting program: /home/jaeho/gdb_hw/hw6 
+
+Breakpoint 1, main () at gdb_hw6.c:14
+14		result1 = div(x, y);
+(gdb) q[Kp result1
+$1 = 0
+(gdb) p x
+$2 = 10
+(gdb) p y
+$3 = 0
+(gdb) c
+Continuing.
+
+Program received signal SIGFPE, Arithmetic exception.
+0x000055555555472a in div (num1=10, num2=0) at gdb_hw6.c:25
+25		return num1 / num2; 
+(gdb) di[K[Kdisas func
+No symbol "func" in current context.
+(gdb) l
+20		return 0;
+21	}
+22	
+23	double div(int num1, int num2)
+24	{
+25		return num1 / num2; 
+26	}(gdb) l[Kb [K[Kb 25
+Breakpoint 3 at 0x555555554726: file gdb_hw6.c, line 25.
+(gdb) r
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+Starting program: /home/jaeho/gdb_hw/hw6 
+
+Breakpoint 1, main () at gdb_hw6.c:14
+14		result1 = div(x, y);
+(gdb) c
+Continuing.
+
+Breakpoint 3, div (num1=10, num2=0) at gdb_hw6.c:25
+25		return num1 / num2; 
+(gdb) c
+Continuing.
+
+Program received signal SIGFPE, Arithmetic exception.
+0x000055555555472a in div (num1=10, num2=0) at gdb_hw6.c:25
+25		return num1 / num2; 
+(gdb) c
+Continuing.
+
+Program terminated with signal SIGFPE, Arithmetic exception.
+The program no longer exists.
+(gdb) c
+The program is not being run.
+(gdb) info b[K[K[K[K[K[Kinfo b
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000555555554699 in main at gdb_hw6.c:14
+	breakpoint already hit 1 time
+2       breakpoint     keep y   0x00005555555546b1 in main at gdb_hw6.c:15
+3       breakpoint     keep y   0x0000555555554726 in div at gdb_hw6.c:25
+	breakpoint already hit 1 time
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw6 
+
+Breakpoint 1, main () at gdb_hw6.c:14
+14		result1 = div(x, y);
+(gdb) c
+Continuing.
+
+Breakpoint 3, div (num1=10, num2=0) at gdb_hw6.c:25
+25		return num1 / num2; 
+(gdb) c
+Continuing.
+
+Program received signal SIGFPE, Arithmetic exception.
+0x000055555555472a in div (num1=10, num2=0) at gdb_hw6.c:25
+25		return num1 / num2; 
+(gdb) Quit
+(gdb) disas
+Dump of assembler code for function div:
+   0x000055555555471c <+0>:	push   %rbp
+   0x000055555555471d <+1>:	mov    %rsp,%rbp
+   0x0000555555554720 <+4>:	mov    %edi,-0x4(%rbp)
+   0x0000555555554723 <+7>:	mov    %esi,-0x8(%rbp)
+   0x0000555555554726 <+10>:	mov    -0x4(%rbp),%eax
+   0x0000555555554729 <+13>:	cltd   
+=> 0x000055555555472a <+14>:	idivl  -0x8(%rbp)
+   0x000055555555472d <+17>:	cvtsi2sd %eax,%xmm0
+   0x0000555555554731 <+21>:	pop    %rbp
+   0x0000555555554732 <+22>:	retq   
+End of assembler dump.
+(gdb) disas div
+Dump of assembler code for function div:
+   0x000055555555471c <+0>:	push   %rbp
+   0x000055555555471d <+1>:	mov    %rsp,%rbp
+   0x0000555555554720 <+4>:	mov    %edi,-0x4(%rbp)
+   0x0000555555554723 <+7>:	mov    %esi,-0x8(%rbp)
+   0x0000555555554726 <+10>:	mov    -0x4(%rbp),%eax
+   0x0000555555554729 <+13>:	cltd   
+=> 0x000055555555472a <+14>:	idivl  -0x8(%rbp)
+   0x000055555555472d <+17>:	cvtsi2sd %eax,%xmm0
+   0x0000555555554731 <+21>:	pop    %rbp
+   0x0000555555554732 <+22>:	retq   
+End of assembler dump.
+(gdb) r[Kr
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+Starting program: /home/jaeho/gdb_hw/hw6 
+
+Breakpoint 1, main () at gdb_hw6.c:14
+14		result1 = div(x, y);
+(gdb) si
+0x000055555555469c	14		result1 = div(x, y);
+(gdb) si
+0x000055555555469f	14		result1 = div(x, y);
+(gdb) si
+0x00005555555546a1	14		result1 = div(x, y);
+(gdb) ni[Ki
+0x00005555555546a3	14		result1 = div(x, y);
+(gdb) n
+
+Breakpoint 3, div (num1=10, num2=0) at gdb_hw6.c:25
+25		return num1 / num2; 
+(gdb) s
+
+Program received signal SIGFPE, Arithmetic exception.
+0x000055555555472a in div (num1=10, num2=0) at gdb_hw6.c:25
+25		return num1 / num2; 
+(gdb) s
+
+Program terminated with signal SIGFPE, Arithmetic exception.
+The program no longer exists.
+(gdb) s
+The program is not being run.
+(gdb) bt
+No stack.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw6 
+
+Breakpoint 1, main () at gdb_hw6.c:14
+14		result1 = div(x, y);
+(gdb) c
+Continuing.
+
+Breakpoint 3, div (num1=10, num2=0) at gdb_hw6.c:25
+25		return num1 / num2; 
+(gdb) c
+Continuing.
+
+Program received signal SIGFPE, Arithmetic exception.
+0x000055555555472a in div (num1=10, num2=0) at gdb_hw6.c:25
+25		return num1 / num2; 
+(gdb) bt
+#0  0x000055555555472a in div (num1=10, num2=0) at gdb_hw6.c:25
+#1  0x00005555555546a8 in main () at gdb_hw6.c:14
+(gdb) c
+Continuing.
+
+Program terminated with signal SIGFPE, Arithmetic exception.
+The program no longer exists.
+(gdb) bt
+No stack.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw6 
+
+Breakpoint 1, main () at gdb_hw6.c:14
+14		result1 = div(x, y);
+(gdb) c
+Continuing.
+
+Breakpoint 3, div (num1=10, num2=0) at gdb_hw6.c:25
+25		return num1 / num2; 
+(gdb) c[Kc
+Continuing.
+
+Program received signal SIGFPE, Arithmetic exception.
+0x000055555555472a in div (num1=10, num2=0) at gdb_hw6.c:25
+25		return num1 / num2; 
+(gdb) info resgisters
+Undefined info command: "resgisters".  Try "help info".
+(gdb) info registers
+rax            0xa	10
+rbx            0x0	0
+rcx            0x555555554740	93824992233280
+rdx            0x0	0
+rsi            0x0	0
+rdi            0xa	10
+rbp            0x7fffffffdfc0	0x7fffffffdfc0
+rsp            0x7fffffffdfc0	0x7fffffffdfc0
+r8             0x7ffff7dd0d80	140737351847296
+r9             0x7ffff7dd0d80	140737351847296
+r10            0x0	0
+r11            0x0	0
+r12            0x555555554560	93824992232800
+r13            0x7fffffffe0e0	140737488347360
+r14            0x0	0
+r15            0x0	0
+rip            0x55555555472a	0x55555555472a <div+14>
+eflags         0x10202	[ IF RF ]
+cs             0x33	51
+ss             0x2b	43
+ds             0x0	0
+es             0x0	0
+fs             0x0	0
+gs             0x0	0
+(gdb) l[Kquit[K[K[K[Kk
+Kill the program being debugged? (y or n) y
+(gdb) quit()[K[K
+금  5월 15 18:23:39 jaeho $ls
+gdb_hw1.c  gdb_hw3.c  gdb_hw5.c  [0m[01;32mhw1[0m  [01;32mhw4[0m  [01;32mhw6[0m      log3.txt  log5.txt
+gdb_hw2.c  gdb_hw4.c  gdb_hw6.c  [01;32mhw3[0m  [01;32mhw5[0m  log.txt  log4.txt  log6.txt
+금  5월 15 18:23:41 jaeho $vim lo[K[Klo[K[Kgdb_hw6.c
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;28r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[28;1H"gdb_hw6.c" [noeol][도스] 26L, 586C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[34m//일반적인 나눗셈 (즉, 결과가 실수로 나오는..)을 수행하는 프로그램이다.
+//모든 input에 대해 동작하지 않는다.
+//모든 input에 대해 동작할 수 있도록 디버깅하시오![m
+
+[35m#include [m[31m<stdio.h>[m
+
+[32mdouble[m div([32mint[m num1, [32mint[m num2);
+
+[32mint[m main()
+{[11;9H[32mint[m x = [31m10[m, y = [31m0[m, a = [31m20[m;[12;9H[32mdouble[m result1 = [31m0.0[m, result2 = [31m0.0[m;[14;9Hresult1 = div(x, y);[15;9Hresult2 = div(x, a);[17;9Hprintf([31m"[m[35m%d[m[31m / [m[35m%d[m[31m = [m[35m%.2lf\n[m[31m"[m, x, y, result1);[18;9Hprintf([31m"[m[35m%d[m[31m / [m[35m%d[m[31m = [m[35m%.2lf\n[m[31m"[m, x, a, result2);[20;9H[38;5;130mreturn[m [31m0[m;
+}
+
+[32mdouble[m div([32mint[m num1, [32mint[m num2)
+{[25;9H[38;5;130mreturn[m num1 / num2;
+}
+[94m~                                                                              [m[28;62H1,1[10C모두[1;1H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[1;1H[96m//일반적인 나눗셈 (즉, 결과가 실수로 나오는..)을 수행하는 프로그램이다.
+//모든 input에 대해 동작하지 않는다.
+//모든 input에 대해 동작할 수 있도록 디버깅하시오![m
+
+[38;5;81m#include [m[95m<stdio.h>[m
+
+[38;5;121mdouble[m div([38;5;121mint[m num1, [38;5;121mint[m num2);
+
+[38;5;121mint[m main()
+{[11;9H[38;5;121mint[m x = [95m10[m, y = [95m0[m, a = [95m20[m;[12;9H[38;5;121mdouble[m result1 = [95m0.0[m, result2 = [95m0.0[m;[14;9Hresult1 = div(x, y);[15;9Hresult2 = div(x, a);[17;9Hprintf([95m"[m[38;5;224m%d[m[95m / [m[38;5;224m%d[m[95m = [m[38;5;224m%.2lf\n[m[95m"[m, x, y, result1);[18;9Hprintf([95m"[m[38;5;224m%d[m[95m / [m[38;5;224m%d[m[95m = [m[38;5;224m%.2lf\n[m[95m"[m, x, a, result2);[20;9H[93mreturn[m [95m0[m;
+}
+
+[38;5;121mdouble[m div([38;5;121mint[m num1, [38;5;121mint[m num2)
+{[25;9H[93mreturn[m num1 / num2;
+}
+[94m~                                                                              [m[28;62H1,1[10C모두"gdb_hw6.c" [noeol][도스] 26L, 586C[1;1H[?25h[?25l[28;52H~@k[1;1H[28;52H   [2;1H[28;62H2[2;1H[?25h[?25l[28;52H~@k[2;1H[28;52H   [3;1H[28;62H3[3;1H[?25h[?25l[28;52H~@k[3;1H[28;52H   [4;1H[28;62H4,0-1[4;1H[?25h[?25l[28;52H~@k[4;1H[28;52H   [5;1H[28;62H5,1  [5;1H[?25h[?25l[28;52H~@k[5;1H[28;52H   [6;1H[28;62H6,0-1[6;1H[?25h[?25l[28;52H~@k[6;1H[28;52H   [7;1H[28;62H7,1  [7;1H[?25h[?25l[28;52H~@k[7;1H[28;52H   [6;1H[28;62H6,0-1[6;1H[?25h[?25l[28;52H~@k[6;1H[28;52H   [7;1H[28;62H7,1  [7;1H[?25h[?25l[28;52H~@k[7;1H[28;52H   [8;1H[28;62H8,0-1[8;1H[?25h[?25l[28;52H~@k[8;1H[28;52H   [9;1H[28;62H9,1  [9;1H[?25h[?25l[28;52H~@k[9;1H[28;52H   [10;1H[46m{[21;1H}[m[28;62H10,1[10;1H[?25h[?25l[28;52H~@k[10;1H[28;52H   [11;8H[10;1H{[21;1H}[28;63H1,1-8[11;8H[?25h[?25l[28;52H~@k[11;8H[28;52H   [12;8H[28;63H2[12;8H[?25h[?25l[28;52H~@k[12;8H[28;52H   [13;8H[28;63H3[13;8H[?25h[?25l[28;52H~@k[13;8H[28;52H   [14;8H[28;63H4[14;8H[?25h[?25l[28;52H~@k[14;8H[28;52H   [15;8H[28;63H5[15;8H[?25h[?25l[28;52H~@k[15;8H[28;52H   [16;8H[28;63H6[16;8H[?25h[?25l[28;52H~@k[16;8H[28;52H   [17;8H[28;63H7[17;8H[?25h[?25l[28;52H~@k[17;8H[28;52H   [18;8H[28;63H8[18;8H[?25h[?25l[28;52H~@k[18;8H[28;52H   [19;8H[28;63H9[19;8H[?25h[?25l[28;52H~@k[19;8H[28;52H   [20;8H[28;62H20[20;8H[?25h[?25l[28;52H~@k[20;8H[28;52H   [21;1H[10;1H[46m{[21;1H}[m[28;63H1,1  [21;1H[?25h[?25l[28;52H~@k[21;1H[28;52H   [22;1H[10;1H{[21;1H}[28;63H2,0-1[22;1H[?25h[?25l[28;52H~@k[22;1H[28;52H   [23;1H[28;63H3,1  [23;1H[?25h[?25l[28;52H~@k[23;1H[28;52H   [24;1H[46m{
+
+}[m[28;63H4[24;1H[?25h[?25l[28;52H~@k[24;1H[28;52H   [25;8H[24;1H{
+
+}[28;63H5,1-8[25;8H[?25h[?25l[28;52H~@k[25;8H[28;52H   [26;1H[24;1H[46m{
+
+}[m[28;63H6,1  [26;1H[?25h[?25l[28;52H~@k[26;1H[28;52H   [25;8H[24;1H{
+
+}[28;63H5,1-8[25;8H[?25h[?25l[28;52H~@@[25;8H[28;52H   [25;28H[28;65H21-28[25;28H[?25h[?25l[28;52H~@k[25;28H[28;52H   [25;27H[28;66H0-27[25;27H[?25h[?25l[28;52H~@k[25;27H[28;52H   [25;26H[28;65H19-26[25;26H[?25h[?25l[28;52H~@k[25;26H[28;52H   [25;25H[28;66H8-25[25;25H[?25h[?25l[28;52H~@k[25;25H[28;52H   [25;24H[28;66H7-24[25;24H[?25h[?25l[28;52H~@k[25;24H[28;52H   [25;23H[28;66H6-23[25;23H[?25h[?25l[28;52H~@k[25;23H[28;52H   [25;22H[28;66H5-22[25;22H[?25h[?25l[28;52H~@k[25;22H[28;52H   [25;21H[28;66H4-21[25;21H[?25h[?25l[28;52H~@k[25;21H[28;52H   [25;20H[28;66H3-20[25;20H[?25h[?25l[28;52H~@k[25;20H[28;52H   [25;19H[28;66H2-19[25;19H[?25h[?25l[28;52H~@k[25;19H[28;52H   [25;18H[28;66H1-18[25;18H[?25h[?25l[28;52H~@k[25;18H[28;52H   [25;17H[28;66H0-17[25;17H[?25h[?25l[28;52H~@k[25;17H[28;52H   [25;16H[28;65H9-16 [25;16H[?25h[?25l[28;52H~@k[25;16H[28;52H   [25;15H[28;65H8-15[25;15H[?25h[?25l[28;52H~@k[25;15H[28;52H   [25;14H[28;65H7-14[25;14H[?25h[?25l[28;52H~@k[25;14H[28;52H   [25;15H[28;65H8-15[25;15H[?25h[?25l[28;52H~@k[25;15H[28;52H   [25;16H[28;65H9-16[25;16H[?25h[?25l[28;52H~@k[25;16H[28;52H   [25;16H
+
+
+[1m-- 끼워넣기 --[m[28;15H[K[28;62H25,9-16      모두[25;16H[?25h[?25l(num1 / num2;[28;65H10-17[25;17H[?25h[?25linum1 / num2;[28;66H1-18[25;18H[?25h[?25lnnum1 / num2;[28;66H2-19[25;19H[?25h[?25lum1 / num2; [28;66H1-18[25;18H[?25h[?25lnum1 / num2; [28;66H0-17[25;17H[?25h[?25ldnum1 / num2;[28;66H1-18[25;18H[?25h[?25lonum1 / num2;[28;66H2-19[25;19H[?25h[?25lunum1 / num2;[28;66H3-20[25;20H[?25h[?25lbnum1 / num2;[28;66H4-21[25;21H[?25h[?25llnum1 / num2;[28;66H5-22[25;22H[?25h[?25lenum1 / num2;[28;66H6-23[25;23H[?25h[?25l[38;5;121mdouble[m)num1 / num2;[25;16H[46m([6C)[m[28;66H7-24[25;24H[?25h[?25l[25;16H([6C)[28;66H8-25[25;25H[?25h[?25l[28;66H9-26[25;26H[?25h[?25l[28;65H20-27[25;27H[?25h[?25l[28;66H1-28[25;28H[?25h[?25l[28;66H2-29[25;29H[?25h[?25l[28;66H3-30[25;30H[?25h[?25l[28;66H4-31[25;31H[?25h[?25l(num2;[28;66H5-32[25;32H[?25h[?25ldnum2;[28;66H6-33[25;33H[?25h[?25lonum2;[28;66H7-34[25;34H[?25h[?25lunum2;[28;66H8-35[25;35H[?25h[?25lbnum2;[28;66H9-36[25;36H[?25h[?25llnum2;[28;65H30-37[25;37H[?25h[?25lenum2;[28;66H1-38[25;38H[?25h[?25l[38;5;121mdouble[m)num2;[25;31H[46m([6C)[m[28;66H2-39[25;39H[?25h[?25l[24;1H[46m{[m[25;31H([6C)
+[46m}[m[28;63H4,2    [24;2H[?25h[?25l[23;11H[46m([18C)[m
+{
+
+}[28;63H3,31[23;31H[?25h[?25l[23;11H([18C)
+[46m{
+
+}[m[28;63H4,2 [24;2H[?25h[?25l[23;11H[46m([18C)[m
+{
+
+}[28;63H3,31[23;31H[?25h[?25l[23;11H([18C)
+[46m{
+
+}[m[28;63H4,2 [24;2H[?25h[?25l[23;11H[46m([18C)[m
+{
+
+}[28;63H3,31[23;31H[?25h[?25l[23;11H([18C)[28;63H2,1 [22;1H[?25h[?25l[10;1H[46m{[21;1H}[m[28;63H1,2[21;2H[?25h[28;1H[K[21;1H[?25l[28;52H^[[21;1H[28;52H  [21;2H[28;62H21,1[9C모두[21;1H[?25h[?25l[28;52H:[21;1H[28;52H[K[28;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"gdb_hw6.c" [도스] 26L, 604C 저장 했습니다
+[?2004l[?1l>[?25h[?1049l[23;0;0t금  5월 15 18:25:57 jaeho $vim gdb_hw6.cls[Kgdb hw6cc -g -o hw6 gdb_hw6.c
+금  5월 15 18:26:08 jaeho $gcc -g -o hw6 gdb_hw6.c[10Pvim[C[C[C[C[C[C[C[C[C[Cls[Kgdb hw6
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from hw6...done.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw6 
+10 / 0 = inf
+10 / 20 = 0.50
+[Inferior 1 (process 10885) exited normally]
+(gdb) e[Kqu[K[Kquit
+금  5월 15 18:29:31 jaeho $eixt[K[K[Kxit
+exit
+
+Script done on 2020-05-15 18:29:34+0900

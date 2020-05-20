@@ -1,0 +1,262 @@
+Script started on 2020-05-15 11:23:11+0900
+]0;jaeho@jaeho-VirtualBox: ~/gdb_hw[01;32mjaeho@jaeho-VirtualBox[00m:[01;34m~/gdb_hw[00m$ PS1="\d \t \u $"
+금  5월 15 11:23:54 jaeho $PS1="\d \t \u $"[Kgcc -g -o hw4 l[Kh[Kgdb_lo[K[Khw4.c
+금  5월 15 11:25:03 jaeho $ls
+gdb_hw1.c  gdb_hw3.c  gdb_hw5.c  [0m[01;32mhw1[0m  [01;32mhw4[0m      log3.txt
+gdb_hw2.c  gdb_hw4.c  gdb_hw6.c  [01;32mhw3[0m  log.txt  log4.txt
+금  5월 15 11:25:06 jaeho $gdb t[Khw4
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from hw4...done.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw4 
+5
+0
+[Inferior 1 (process 10179) exited normally]
+(gdb) b[Kb [K[Kb[Kb[Kb 25
+Breakpoint 1 at 0x555555554797: file gdb_hw4.c, line 25.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw4 
+5
+
+Breakpoint 1, fact (n=4) at gdb_hw4.c:25
+25			result *= n;
+(gdb) info locals
+result = 1
+(gdb) c
+Continuing.
+
+Breakpoint 1, fact (n=3) at gdb_hw4.c:25
+25			result *= n;
+(gdb) c[Kc
+Continuing.
+
+Breakpoint 1, fact (n=2) at gdb_hw4.c:25
+25			result *= n;
+(gdb) info locals
+result = 12
+(gdb) l
+20	{
+21	    int result = 1;
+22		
+23	    while(n--)
+24	    {
+25			result *= n;
+26	    }
+27		
+28	    return result;
+29	}(gdb) l[Kc
+Continuing.
+
+Breakpoint 1, fact (n=1) at gdb_hw4.c:25
+25			result *= n;
+(gdb) c
+Continuing.
+
+Breakpoint 1, fact (n=0) at gdb_hw4.c:25
+25			result *= n;
+(gdb) local [K[K[K[K[K[Kon[K[Kinfo locals
+result = 24
+(gdb) l[Kl
+20	{
+21	    int result = 1;
+22		
+23	    while(n--)
+24	    {
+25			result *= n;
+26	    }
+27		
+28	    return result;
+29	}(gdb) l[Kc
+Continuing.
+0
+[Inferior 1 (process 10209) exited normally]
+(gdb) c
+The program is not being run.
+(gdb) b[Kb i[K[K[Kl[Kl[Kls
+Undefined command: "ls".  Try "help".
+(gdb) k[Kk
+The program is not being run.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw4 
+4
+
+Breakpoint 1, fact (n=3) at gdb_hw4.c:25
+25			result *= n;
+(gdb) p[Kp result
+$1 = 1
+(gdb) p n
+$2 = 3
+(gdb) r
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+Starting program: /home/jaeho/gdb_hw/hw4 
+4
+
+Breakpoint 1, fact (n=3) at gdb_hw4.c:25
+25			result *= n;
+(gdb) s[Ks[Ks
+23	    while(n--)
+(gdb) c
+Continuing.
+
+Breakpoint 1, fact (n=2) at gdb_hw4.c:25
+25			result *= n;
+(gdb) p reuslt[K[K[K[Ksult n
+A syntax error in expression, near `n'.
+(gdb) p reuslt
+No symbol "reuslt" in current context.
+(gdb) p result
+$3 = 3
+(gdb) p n
+$4 = 2
+(gdb) r
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+Starting program: /home/jaeho/gdb_hw/hw4 
+4
+
+Breakpoint 1, fact (n=3) at gdb_hw4.c:25
+25			result *= n;
+(gdb) c
+Continuing.
+
+Breakpoint 1, fact (n=2) at gdb_hw4.c:25
+25			result *= n;
+(gdb) c
+Continuing.
+
+Breakpoint 1, fact (n=1) at gdb_hw4.c:25
+25			result *= n;
+(gdb) print[K[K[K[K[Kn result
+
+Breakpoint 1, fact (n=0) at gdb_hw4.c:25
+25			result *= n;
+(gdb) n[Kp [K[Kp n
+$5 = 0
+(gdb) p result
+$6 = 6
+(gdb) p result
+$7 = 6
+(gdb) c
+Continuing.
+0
+[Inferior 1 (process 10390) exited normally]
+(gdb) p result
+$8 = '\000' <repeats 113 times>
+(gdb) p n
+No symbol "n" in current context.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw4 
+4
+
+Breakpoint 1, fact (n=3) at gdb_hw4.c:25
+25			result *= n;
+(gdb) p n
+$9 = 3
+(gdb) p result
+$10 = 1
+(gdb) c
+Continuing.
+
+Breakpoint 1, fact (n=2) at gdb_hw4.c:25
+25			result *= n;
+(gdb) c
+Continuing.
+
+Breakpoint 1, fact (n=1) at gdb_hw4.c:25
+25			result *= n;
+(gdb) p n
+$11 = 1
+(gdb) p result
+$12 = 6
+(gdb) c
+Continuing.
+
+Breakpoint 1, fact (n=0) at gdb_hw4.c:25
+25			result *= n;
+(gdb) c[Kc
+Continuing.
+0
+[Inferior 1 (process 10395) exited normally]
+(gdb) p n[K[K[Kk
+The program is not being run.
+(gdb) quit
+금  5월 15 14:16:35 jaeho $vim gdb_hw4.c
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;28r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[28;1H"gdb_hw4.c" [noeol][도스] 29L, 362C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[34m//factorial 계산하는 프로그램이다. 정상동작하지 않음![m
+
+[35m#include [m[31m<stdio.h>[m
+
+[32mint[m fact([32mint[m n);
+
+[32mint[m main()
+{
+    [32mint[m n;[10;9H[32mint[m re;[12;9Hscanf([31m"[m[35m%d[m[31m"[m, &n);
+    re = fact(n);[14;9Hprintf([31m"[m[35m%d\n[m[31m"[m, re);[16;5H[38;5;130mreturn[m [31m0[m;
+}
+
+[32mint[m fact([32mint[m n)
+{
+    [32mint[m result = [31m1[m;[23;5H[38;5;130mwhile[m(n--)
+    {[25;17Hresult *= n;
+    }[28;62H1,1[8C꼭대기[1;1H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[1;1H[96m//factorial 계산하는 프로그램이다. 정상동작하지 않음![m
+
+[38;5;81m#include [m[95m<stdio.h>[m
+
+[38;5;121mint[m fact([38;5;121mint[m n);
+
+[38;5;121mint[m main()
+{
+    [38;5;121mint[m n;[10;9H[38;5;121mint[m re;[12;9Hscanf([95m"[m[38;5;224m%d[m[95m"[m, &n);
+    re = fact(n);[14;9Hprintf([95m"[m[38;5;224m%d\n[m[95m"[m, re);[16;5H[93mreturn[m [95m0[m;
+}
+
+[38;5;121mint[m fact([38;5;121mint[m n)
+{
+    [38;5;121mint[m result = [95m1[m;[23;5H[93mwhile[m(n--)
+    {[25;17Hresult *= n;
+    }[28;62H1,1[8C꼭대기"gdb_hw4.c" [noeol][도스] 29L, 362C[1;1H[?25h[?25l[28;52H~@k[1;1H[28;52H   [1;1H[28;1H[1m-- 끼워넣기 --[m[28;15H[K[28;62H1,1[8C꼭대기[1;1H[?25h[?25l[28;62H2[2;1H[?25h[?25l[28;62H3[3;1H[?25h[?25l[28;62H4[4;1H[?25h[?25l[28;62H5[5;1H[?25h[?25l[28;62H6[6;1H[?25h[?25l[28;62H7[7;1H[?25h[?25l
+[46m{[17;1H}[m[28;62H8[8;1H[?25h[?25l{[17;1H}[28;62H9[9;1H[?25h[?25l[28;62H10,1[10;1H[?25h[?25l[28;63H1[11;1H[?25h[?25l[28;63H2[12;1H[?25h[?25l[28;63H3[13;1H[?25h[?25l[28;63H4[14;1H[?25h[?25l[28;63H5[15;1H[?25h[?25l[28;63H6[16;1H[?25h[?25l[8;1H[46m{[17;1H}[m[28;63H7[17;1H[?25h[?25l[8;1H{[17;1H}[28;63H8[18;1H[?25h[?25l[28;63H9[19;1H[?25h[?25l[28;62H20[20;1H[?25h[?25l[28;63H1[21;1H[?25h[?25l[28;63H2[22;1H[?25h[?25l[1;27r[27;1H
+[1;28r[27;5H[93mreturn[m result;[28;62H[K[28;62H23,1[10C50%[22;1H[?25h[?25l[9C[46m([mn--[46m)[m[28;66H5[22;15H[?25h[?25l[28;66H4[22;14H[?25h[?25l(n--)[28;66H3[22;13H[?25h[?25l)[22;14H[K[28;66H2[22;12H[?25h[?25l-)[22;13H[K[22;10H[46m([m-[46m)[m[28;66H1[22;11H[?25h[?25l[28;66H2[22;12H[?25h[?25l)[22;12H[K[22;11H[46m)[m[28;66H1[22;11H[?25h[?25l[46mn[m)n[46m)[m[28;66H2[22;12H[?25h[?25l[46m>[m)>[46m)[m[28;66H3[22;13H[?25h[?25l[95m[46m0[m)[95m0[m[46m)[m[28;66H4[22;14H[?25h[?25l[1;27r[27;1H
+[1;28r[27;1H}[28;62H[K[28;62H24,6[9C바닥[21;10H([3C)
+    [46m{[24;5H}[22;6H[?25h[?25l[m{[24;5H}[28;63H5,2-9[23;9H[?25h[?25l[28;65H15-29[23;29H[?25h[?25l[1;27r[27;1H
+[1;28r[23;27r[23;1H[L[1;28r[28;62H[K[28;62H26,3-17      바닥[23;17H[?25h[?25ln[28;65H4-18[23;18H[?25h[?25l-[28;65H5-19[23;19H[?25h[?25l-[28;65H6-20[23;20H[?25h[?25l;[28;65H7-21[23;21H[?25h[?25l:[28;65H8-22[23;22H[?25h[?25l[23;21H[K[28;65H7-21[23;21H[?25h[?25l[21;5H[46m{[24;5H}[m[28;63H7,6   [24;6H[?25h[?25l[21;5H{[24;5H}[28;63H8,2-9[25;9H[?25h[?25l[28;63H9,19 [26;19H[?25h[?25l[17;1H[46m{[27;1H}[m[28;62H30,2 [27;2H[?25h[28;1H[K[27;1H[?25l[28;52H^[[27;1H[28;52H  [27;2H[28;62H30,1[9C바닥[27;1H[?25h[?25l[28;52H:[27;1H[28;52H[K[28;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"gdb_hw4.c" [도스] 30L, 372C 저장 했습니다
+[?2004l[?1l>[?25h[?1049l[23;0;0t금  5월 15 14:20:58 jaeho $vim gdb_hw4.c[6Pgdb hw4ls[Kgcc -g -o hw4 gdb_hw4.c
+금  5월 15 14:21:03 jaeho $gcc -g -o hw4 gdb_hw4.c[10Pvim[C[C[C[C[C[C[C[C[C[C[6Pgdb hw4ls[Kgdb hw4
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from hw4...done.
+(gdb) c[Kr
+Starting program: /home/jaeho/gdb_hw/hw4 
+5
+120
+[Inferior 1 (process 10446) exited normally]
+(gdb) qyut[K[K[Kuit
+금  5월 15 14:22:59 jaeho $eixt[K[K[K[Keixt[K[K[Kxit
+exit
+
+Script done on 2020-05-15 14:23:03+0900

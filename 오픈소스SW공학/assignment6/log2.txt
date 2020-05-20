@@ -1,0 +1,1974 @@
+Script started on 2020-05-15 18:36:26+0900
+]0;jaeho@jaeho-VirtualBox: ~/gdb_hw[01;32mjaeho@jaeho-VirtualBox[00m:[01;34m~/gdb_hw[00m$ PS1="\d \t \u $"
+금  5월 15 18:36:41 jaeho $g[Kgcc -o[Kg -o hw2 gdb_hw3.c
+금  5월 15 18:37:30 jaeho $l[Kls[K[Kls
+gdb_hw1.c  gdb_hw3.c  gdb_hw5.c  [0m[01;32mhw1[0m  [01;32mhw3[0m  [01;32mhw5[0m  log.txt   log3.txt  log5.txt
+gdb_hw2.c  gdb_hw4.c  gdb_hw6.c  [01;32mhw2[0m  [01;32mhw4[0m  [01;32mhw6[0m  log2.txt  log4.txt  log6.txt
+금  5월 15 18:37:34 jaeho $gdb [K[K[K[Kce[K[Kcelar[K[K[K[K[Kclear
+[3J[H[2J금  5월 15 18:40:19 jaeho $clear[3Plsgcc -g -o hw2 gdb_hw3.c[K[K[K2.h[Kc
+금  5월 15 18:40:39 jaeho $ls
+gdb_hw1.c  gdb_hw3.c  gdb_hw5.c  [0m[01;32mhw1[0m  [01;32mhw3[0m  [01;32mhw5[0m  log.txt   log3.txt  log5.txt
+gdb_hw2.c  gdb_hw4.c  gdb_hw6.c  [01;32mhw2[0m  [01;32mhw4[0m  [01;32mhw6[0m  log2.txt  log4.txt  log6.txt
+금  5월 15 18:40:41 jaeho $gb[Kdb g[Khw2
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from hw2...done.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw2 
+k k
+k
+qu  quit
+k
+q ^C
+Program received signal SIGINT, Interrupt.
+0x00005555555547d5 in max_arr2 (arr=0x7fffffffd050, arr_len=5) at gdb_hw2.c:33
+33	}
+(gdb) e[Kl
+28	{
+29		if (arr_len == 1)
+30			return arr[0];
+31		else
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+33	}
+(gdb) l 20
+15		int a[1000] = { 0 };
+16		int i;
+17	
+18		for (i = 0; i < 1000; i++)
+19			a[i] = 999 - i; 
+20	
+21		printf("%d\n", max_arr2(a, 1000));	 
+22	
+23		return 0;
+24	
+(gdb) r
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+Starting program: /home/jaeho/gdb_hw/hw2 
+^C
+Program received signal SIGINT, Interrupt.
+0x0000555555554765 in max_arr2 (arr=0x7fffffffd050, arr_len=1) at gdb_hw2.c:28
+28	{
+(gdb) b 21
+Breakpoint 1 at 0x555555554716: file gdb_hw2.c, line 21.
+(gdb) b32[K[K 32
+Breakpoint 2 at 0x555555554776: file gdb_hw2.c, line 32.
+(gdb) quit
+A debugging session is active.
+
+	Inferior 1 [process 10947] will be killed.
+
+Quit anyway? (y or n) y
+금  5월 15 18:56:56 jaeho $ls
+gdb_hw1.c  gdb_hw3.c  gdb_hw5.c  [0m[01;32mhw1[0m  [01;32mhw3[0m  [01;32mhw5[0m  log.txt   log3.txt  log5.txt
+gdb_hw2.c  gdb_hw4.c  gdb_hw6.c  [01;32mhw2[0m  [01;32mhw4[0m  [01;32mhw6[0m  log2.txt  log4.txt  log6.txt
+금  5월 15 18:56:58 jaeho $celar[K[K[K[Klear
+[3J[H[2J금  5월 15 18:57:01 jaeho $ls
+gdb_hw1.c  gdb_hw3.c  gdb_hw5.c  [0m[01;32mhw1[0m  [01;32mhw3[0m  [01;32mhw5[0m  log.txt   log3.txt  log5.txt
+gdb_hw2.c  gdb_hw4.c  gdb_hw6.c  [01;32mhw2[0m  [01;32mhw4[0m  [01;32mhw6[0m  log2.txt  log4.txt  log6.txt
+금  5월 15 18:57:02 jaeho $vim gdb_hw2.c
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;28r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[28;1H"gdb_hw2.c" [도스] 33L, 731C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[34m//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다[2;1H.
+//배열 원소 값이 단조증가일 때에는 정상동작합니다.
+//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 [m[94m>>[m[5;1H[34m찾으세요![m
+
+[35m#include [m[31m<stdio.h>[m
+
+[35m#define max(x,y) ((x)>(y)?(x):(y))[m
+
+
+[32mint[m max_arr2([32mint[m arr[],[32mint[m arr_len);
+
+
+[32mint[m main()
+{[17;9H[32mint[m a[[31m1000[m] = { [31m0[m };[18;9H[32mint[m i;[20;9H[38;5;130mfor[m (i = [31m0[m; i < [31m1000[m; i++)[21;17Ha[i] = [31m999[m - i;[23;9Hprintf([31m"[m[35m%d\n[m[31m"[m, max_arr2(a, [31m1000[m));[25;9H[38;5;130mreturn[m [31m0[m;
+
+}[28;62H1,1[8C꼭대기[1;1H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[1;1H[96m//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다[2;1H.
+//배열 원소 값이 단조증가일 때에는 정상동작합니다.
+//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 [m[94m>>[m[5;1H[96m찾으세요![m
+
+[38;5;81m#include [m[95m<stdio.h>[m
+
+[38;5;81m#define max(x,y) ((x)>(y)?(x):(y))[m
+
+
+[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len);
+
+
+[38;5;121mint[m main()
+{[17;9H[38;5;121mint[m a[[95m1000[m] = { [95m0[m };[18;9H[38;5;121mint[m i;[20;9H[93mfor[m (i = [95m0[m; i < [95m1000[m; i++)[21;17Ha[i] = [95m999[m - i;[23;9Hprintf([95m"[m[38;5;224m%d\n[m[95m"[m, max_arr2(a, [95m1000[m));[25;9H[93mreturn[m [95m0[m;
+
+}[28;62H1,1[8C꼭대기"gdb_hw2.c" [도스] 33L, 731C[1;1H[?25h[?25l[28;52H~@k[1;1H[28;52H   [1;1H[28;1H[1m-- 끼워넣기 -- [m[28;15H[K[28;62H1,1[8C꼭대기[1;1H[?25h[?25l[28;62H2[3;1H[?25h[?25l[28;62H1[1;1H[?25h[?25l[28;62H2[3;1H[?25h[?25l[28;62H3[4;1H[?25h[?25l[28;62H4[6;1H[?25h[?25l[28;62H5[7;1H[?25h[?25l[28;62H6[8;1H[?25h[?25l[28;62H7[9;1H[?25h[?25l[28;62H8[10;1H[?25h[?25l[28;62H9[11;1H[?25h[?25l[28;62H10,1[12;1H[?25h[?25l[28;63H1[13;1H[?25h[?25l[28;63H2[14;1H[?25h[?25l[28;63H3[15;1H[?25h[?25l
+[46m{[27;1H}[m[28;63H4[16;1H[?25h[?25l{[27;1H}[28;63H5[17;1H[?25h[?25l[28;63H6[18;1H[?25h[?25l[28;65H2-9[18;9H[?25h[?25l[28;63H7,1  [19;1H[?25h[?25l[28;63H8,2-9[20;9H[?25h[?25l[28;65H3-10[20;10H[?25h[?25l[28;63H7,1   [19;1H[?25h[?25l[28;63H6,3-10[18;10H[?25h[?25l[28;63H5[17;10H[?25h[?25l[28;65H4-11[17;11H[?25h[?25l[28;65H5-12[17;12H[?25h[?25l[28;65H6-13[17;13H[?25h[?25la[46m[[4C][m[28;65H7-14[17;14H[?25h[?25l[28;65H8-15[17;15H[?25h[?25l[[4C][28;65H9-16[17;16H[?25h[?25l[28;65H10-17[17;17H[?25h[?25l[28;66H1-18[17;18H[?25h[?25l[46m[[4C][m[28;66H2-19[17;19H[?25h[?25l[[4C][28;66H1-18[17;18H[?25h[?25l] = { [95m0[m };[17;28H[K[28;66H0-17[17;17H[?25h[?25l] = { [95m0[m };[17;27H[K[28;65H9-16 [17;16H[?25h[?25l[28;63H6,8-15[18;15H[?25h[?25l[28;63H7,1   [19;1H[?25h[?25l[28;63H8,9-16[20;16H[?25h[?25l[28;65H10-17[20;17H[?25h[?25l[28;66H1-18[20;18H[?25h[?25l[28;66H2-19[20;19H[?25h[?25l[28;66H3-20[20;20H[?25h[?25l[28;66H4-21[20;21H[?25h[?25l[28;66H5-22[20;22H[?25h[?25l[28;66H6-23[20;23H[?25h[?25l[28;66H7-24[20;24H[?25h[?25l[28;66H8-25[20;25H[?25h[?25l[28;66H9-26[20;26H[?25h[?25l[28;65H20-27[20;27H[?25h[?25l[1C; i++)[20;34H[K[28;65H19-26[20;26H[?25h[?25l[38;5;81m0[m[1C; i++)[20;33H[K[28;66H8-25[20;25H[?25h[?25l[95m100[m; i++)[28;66H9-26[20;26H[?25h[?25l[28;65H20-27[20;27H[?25h[?25l; i++)[20;33H[K[28;65H19-26[20;26H[?25h[?25l[28;65H20-27[20;27H[?25h[?25l[28;66H1-28[20;28H[?25h[?25l[28;63H9,14[21;28H[?25h[?25l[28;66H3-27[21;27H[?25h[?25l[28;66H2-26[21;26H[?25h[?25l - i; [28;66H1-25[21;25H[?25h[?25l - i; [28;66H0-24[21;24H[?25h[?25l[28;66H1-25[21;25H[?25h[?25l[28;66H2-26[21;26H[?25h[?25l[28;66H3-27[21;27H[?25h[?25l i; [28;66H2-26[21;26H[?25h[?25li; [28;66H1-25[21;25H[?25h[?25l i; [28;66H0-24[21;24H[?25h[?25l[28;62H20,1    [22;1H[?25h[?25l[1;27r[1;1H[2M[1;28r[27;1H[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len)[28;62H[K[28;62H21,17-24      14%[21;24H[?25h[?25l[28;63H0,1    [20;1H[?25h[?25l[28;63H1,17-24[21;24H[?25h[?25l[28;66H8-25[21;25H[?25h[?25l[28;66H9-26[21;26H[?25h[?25l[28;65H20-27[21;27H[?25h[?25l[28;66H1-28[21;28H[?25h[?25l[28;66H2-29[21;29H[?25h[?25l[28;66H3-30[21;30H[?25h[?25l[28;66H4-31[21;31H[?25h[?25l2[46m([7C)[m[28;66H5-32[21;32H[?25h[?25l[28;66H6-33[21;33H[?25h[?25l([7C)[28;66H7-34[21;34H[?25h[?25l[28;66H8-35[21;35H[?25h[?25l[28;66H9-36[21;36H[?25h[?25l[28;65H30-37[21;37H[?25h[?25l[28;66H1-38[21;38H[?25h[?25l[28;66H2-39[21;39H[?25h[?25l)); [28;66H1-38[21;38H[?25h[?25l)); [28;66H0-37[21;37H[?25h[?25l[28;63H2,1    [22;1H[?25h[?25l[1;27r[27;1H
+[1;28r[27;1H{[28;62H[K[28;62H23,11-18      28%[22;18H[?25h[?25l[1;27r[1;1H[2M[1;28r[26;9H[93mif[m (arr_len == [95m1[m)[27;17H[93mreturn[m arr[[95m0[m];[28;62H[K[28;62H24,1[10C50%[21;1H[?25h[?25l[11;1H[46m{[22;1H}[m[28;63H5,2[22;2H[?25h[?25l[1;27r[27;1H
+[1;28r[27;9H[93melse[m[28;62H[K[28;62H26,1[10C66%[10;1H{[21;1H}
+[?25h[?25l[1;27r[27;1H
+[1;28r[27;17H[93mreturn[m max(arr[arr_len - [95m1[m], max_arr2(arr, arr_len - [95m1[m));[28;62H[K[28;62H27,36[9C83%[22;13H[46m([21C)[?25h[?25l[1;27r[m[27;1H
+[1;28r[27;1H}[28;62H[K[28;62H28,2[9C바닥[21;13H([21C)
+[46m{[27;1H}[22;2H[?25h[?25l[m{[23;12H[46m([12C)[m[27;1H}[28;63H9,19-26[23;26H[?25h[?25l[22;1H[46m{[m[23;12H([12C)[27;1H[46m}[m[28;63H8,2    [22;2H[?25h[?25l[21;13H[46m([21C)[m
+{[27;1H}[28;63H7,36[21;36H[?25h[?25l[21;13H([21C)[28;63H6,1 [20;1H[?25h[?25l[8;1H[46m{[19;1H}[m[28;63H5,2[19;2H[?25h[?25l[8;1H{[19;1H}[28;63H4,1[18;1H[?25h[?25l[28;63H3,11-18[17;18H[?25h[?25l[28;63H2,1    [16;1H[?25h[?25l[28;63H1,30-37[15;37H[?25h[?25l[28;63H0,1    [14;1H[?25h[?25l[28;62H19,14-28[13;28H[?25h[?25l[12;13H[46m([18C)[m[28;63H8,26-33[12;33H[?25h[?25l[12;13H([18C)[28;63H7,1    [11;1H[?25h[?25l[28;63H6,8-15[10;15H[?25h[?25l[28;63H5,20-27[9;27H[?25h[?25l[8;1H[46m{[19;1H}[m[28;63H4,2    [8;2H[?25h[?25l[7;9H[46m()[m
+{[19;1H}[28;63H3,11[7;11H[?25h[?25l()[28;63H2,1 [6;1H[?25h[?25l[1;27r[1;1H[L[1;28r[28;62H[K[28;62H11,2[10C83%[6;2H[?25h[?25l[1;27r[1;1H[L[1;28r[1;1H[38;5;81m#include [m[95m<stdio.h>[m[28;62H[K[28;62H10,37[9C66%[6;37H[?25h[?25l[1;27r[1;1H[L[1;28r[28;62H[K[28;62H9,1[11C50%[6;1H[?25h[?25l[1;27r[1;1H[2L[1;28r[1;1H[96m//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 [m[94m>>[m[2;1H[96m찾으세요![m[28;62H[K[28;62H8,2[11C28%[7;2H[?25h[?25l[6;18H[38;5;81m[46m([15C)[m[28;62H7,35[6;35H[?25h[?25l[1;27r[1;1H[L[1;28r[1;1H[96m//배열 원소 값이 단조증가일 때에는 정상동작합니다.[m[28;62H[K[28;62H6,1[11C14%[7;18H[38;5;81m([15C)[6;1H[?25h[?25l[m[7;18H[38;5;81m[46m([15C)[m[28;62H7,35[7;35H[?25h[?25l[7;18H[38;5;81m([15C)[m[28;62H8,2 [8;2H[?25h[?25l[28;62H9,1[9;1H[?25h[?25l[28;62H10,37[10;37H[?25h[?25l[28;63H1,2 [11;2H[?25h[28;1H[K[11;1H[?25l[28;52H^[[11;1H[28;52H  [11;2H[28;62H11,1[10C14%[11;1H[?25h[?25l[28;52H:[11;1H[28;52H[K[28;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"gdb_hw2.c" [도스] 33L, 720C 저장 했습니다
+[?2004l[?1l>[?25h[?1049l[23;0;0t금  5월 15 18:57:58 jaeho $vim gdb_hw2.cls[Kclear[3Plsgdb hw2ls[Kgcc -g -o hw2 gdb_hw2.c
+금  5월 15 18:58:05 jaeho $gdb g[Kgdb[K[K[Kgdb)[K_hw2.c
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+"/home/jaeho/gdb_hw/gdb_hw2.c": not in executable format: File format not recognized
+(gdb) r
+Starting program:  
+No executable file specified.
+Use the "file" or "exec-file" command.
+(gdb) l[Kquit
+금  5월 15 18:58:37 jaeho $gdb hw2
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from hw2...done.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw2 
+9
+[Inferior 1 (process 10969) exited normally]
+(gdb) quit
+금  5월 15 19:00:24 jaeho $v[Kl[Kcelar[K[K[K[Klear
+[3J[H[2J금  5월 15 19:00:30 jaeho $ls
+gdb_hw1.c  gdb_hw3.c  gdb_hw5.c  [0m[01;32mhw1[0m  [01;32mhw3[0m  [01;32mhw5[0m  log.txt   log3.txt  log5.txt
+gdb_hw2.c  gdb_hw4.c  gdb_hw6.c  [01;32mhw2[0m  [01;32mhw4[0m  [01;32mhw6[0m  log2.txt  log4.txt  log6.txt
+금  5월 15 19:00:31 jaeho $vim gdb_hw2.c
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;28r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[28;1H"gdb_hw2.c" [도스] 33L, 720C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[34m//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다[2;1H.
+//배열 원소 값이 단조증가일 때에는 정상동작합니다.
+//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 [m[94m>>[m[5;1H[34m찾으세요![m
+
+[35m#include [m[31m<stdio.h>[m
+
+[35m#define max(x,y) ((x)>(y)?(x):(y))[m
+
+
+[32mint[m max_arr2([32mint[m arr[],[32mint[m arr_len);
+
+
+[32mint[m main()
+{[17;9H[32mint[m a[[31m10[m] = { [31m0[m };[18;9H[32mint[m i;[20;9H[38;5;130mfor[m (i = [31m0[m; i < [31m10[m; i++)[21;17Ha[i] =  i;[23;9Hprintf([31m"[m[35m%d\n[m[31m"[m, max_arr2(a, [31m10[m));[25;9H[38;5;130mreturn[m [31m0[m;
+
+}[28;62H11,1[7C꼭대기[13;1H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[1;1H[96m//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다[2;1H.
+//배열 원소 값이 단조증가일 때에는 정상동작합니다.
+//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 [m[94m>>[m[5;1H[96m찾으세요![m
+
+[38;5;81m#include [m[95m<stdio.h>[m
+
+[38;5;81m#define max(x,y) ((x)>(y)?(x):(y))[m
+
+
+[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len);
+
+
+[38;5;121mint[m main()
+{[17;9H[38;5;121mint[m a[[95m10[m] = { [95m0[m };[18;9H[38;5;121mint[m i;[20;9H[93mfor[m (i = [95m0[m; i < [95m10[m; i++)[21;17Ha[i] =  i;[23;9Hprintf([95m"[m[38;5;224m%d\n[m[95m"[m, max_arr2(a, [95m10[m));[25;9H[93mreturn[m [95m0[m;
+
+}[28;62H11,1[7C꼭대기"gdb_hw2.c" [도스] 33L, 720C[13;1H[?25h[?25l[28;52H^[[13;1H[28;52H  [13;1H[28;52H^[[13;1H[28;52H  [13;1H[?25h[?25l[28;52H:[13;1H[28;1H[K[28;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"gdb_hw2.c" [도스] 33L, 720C 저장 했습니다
+[?2004l[?1l>[?25h[?1049l[23;0;0t금  5월 15 19:01:41 jaeho $vim gdb_hw2.cls[Kclear[K[K[K[K[Kvim hw2
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;28r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[28;1H"hw2" [noeol][변환 되었습니다] 39L, 11704C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[34m^?[mELF[34m^B^A^A^@^@^@^@^@^@^@^@^@^C^@[m>[34m^@^A^@^@^@[m [34m^E^@^@^@^@^@^@[m@[34m^@^@^@^@^@^@^@[mÀ"[34m^@^^[2;1H@^@^@^@^@^@^@^@^@[m@[34m^@[m8[34m^@[m  [34m^@[m@[34m^@[m"[34m^@[m![34m^@^F^@^@^@^D^@^@^@[m@[34m^@^@^@^@^@^@^@[m@[34m^@^@^@^@^@^^[3;1H@^@[m@[34m^@^@^@^@^@^@^@[mø[3;20H[34m^A^@^@^@^@^@^@[mø[3;35H[34m^A^@^@^@^@^@^@^H^@^@^@^@^@^@^@^C^@^@^@^D^@^@^^[4;1H@[m8[34m^B^@^@^@^@^@^@[m8[34m^B^@^@^@^@^@^@[m8[34m^B^@^@^@^@^@^@^\^@^@^@^@^@^@^@^\^@^@^@^@^@^@^@^^[5;1HA^@^@^@^@^@^@^@^A^@^@^@^E^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@@[m[6;1HÐ[6;6H[34m^@^@^@^@^@^@[mÐ[6;22H[34m^@^@^@^@^@^@^@^@[m [34m^@^@^@^@^@^A^@^@^@^F^@^@^@[m°[6;66H[34m^M^@^@^@^@^@^@@[m[7;1H°[7;2H[34m^M[m [34m^@^@^@^@^@[m°[7;16H[34m^M[m [34m^@^@^@^@^@[m`[34m^B^@^@^@^@^@^@[mh[34m^B^@^@^@^@^@^@^@^@[m [34m^@^@^@^@^@^B^@^@@[8;1H^@^F^@^@^@[mÀ[34m^M^@^@^@^@^@^@[mÀ[34m^M[m [34m^@^@^@^@^@[mÀ[34m^M[m [34m^@^@^@^@^@[mð[8;55H[34m^A^@^@^@^@^@^@[mð[8;70H[34m^A^@^@^@^@@[9;1H^@^@^H^@^@^@^@^@^@^@^D^@^@^@^D^@^@^@[mT[34m^B^@^@^@^@^@^@[mT[34m^B^@^@^@^@^@^@[mT[34m^B^@^@^@^@^@@[10;1H^@[mD[34m^@^@^@^@^@^@^@[mD[34m^@^@^@^@^@^@^@^D^@^@^@^@^@^@^@[mPåtd[34m^D^@^@^@[mX[34m^H^@^@^@^@^@^@[mX[34m^H^^[11;1H@^@^@^@^@^@[mX[34m^H^@^@^@^@^@^@[mD[34m^@^@^@^@^@^@^@[mD[34m^@^@^@^@^@^@^@^D^@^@^@^@^@^@^@[mQåtd[34m^F^^[12;1H@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@@[13;1H^@^@^@^P^@^@^@^@^@^@^@[mRåtd[34m^D^@^@^@[m°[13;36H[34m^M^@^@^@^@^@^@[m°[13;51H[34m^M[m [34m^@^@^@^@^@[m°[13;65H[34m^M[m [34m^@^@^@^@^@[mP[34m^^[14;1HB^@^@^@^@^@^@[mP[34m^B^@^@^@^@^@^@^A^@^@^@^@^@^@^@[m/lib64/ld-linux-x86-64.so.2[34m^@^D^@^@@[15;1H^@^P^@^@^@^A^@^@^@[mGNU[34m^@^@^@^@^@^C^@^@^@^B^@^@^@^@^@^@^@^D^@^@^@^T^@^@^@^C^@^@^@@[m[16;1HGNU[34m^@[mi[34m^G^[[m/&ô`¸[16;16Hà[16;17Hîß[16;19H4ô¬h [34m<80>[m![34m<86>[m¼[16;34H[34m^A^@^@^@^A^@^@^@^A^@^@^@^@^@^@^@^@^@^@^@^@^@^@@[17;1H^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@[mZ[34m^@^@^@[m [34m^@^@^^[18;1H@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^K^@^@^@^R^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@@[19;1H^@^\^@^@^@^R^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@[m2[34m^@^@^@^R^@^@^@^@^@^@^@^@^@^@@[20;1H^@^@^@^@^@^@^@^@^@[mv[34m^@^@^@[m [34m^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@<85>^@^@^@[m [34m^@^@@[21;1H^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@[m#[34m^@^@^@[m"[34m^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^^[22;1H@^@[mlibc.so.6[34m^@[m__stack_chk_fail[34m^@[mprintf[34m^@[m__cxa_finalize[34m^@[m__libc_start_main[34m^@[mGLIBB[23;1HC_2.2.5[34m^@[mGLIBC_2.4[34m^@[m_ITM_deregisterTMCloneTable[34m^@[m__gmon_start__[34m^@[m_ITM_registerTT[24;1HMCloneTable[34m^@^@^@^@^@^@^B^@^C^@^C^@^@^@^@^@^C^@^A^@^B^@^A^@^@^@^P^@^@^@^@^@^@^@@[m[25;1Hu[34m^Z[mi    [34m^@^@^C^@[mD[34m^@^@^@^P^@^@^@^T[mii[34m^M^@^@^B^@[mP[34m^@^@^@^@^@^@^@[m°[25;62H[34m^M[m [34m^@^@^@^@^@^H^@^^[26;1H@^@^@^@^@^@[m [34m^F^@^@^@^@^@^@[m¸[26;28H[34m^M[m [34m^@^@^@^@^@^H^@^@^@^@^@^@^@[m`[34m^F^@^@^@^@^@^@^H^P[m [34m^@^^[27;1H@^@^@^@^H^@^@^@^@^@^@^@^H^P[m [34m^@^@^@^@^@[mØ[27;40H[34m^O[m [34m^@^@^@^@^@^F^@^@^@^A^@^@^@^@^@^@^@^@^[m[28;62H1,1[8C꼭대기[1;1H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[1;1H[38;5;81m^?[mELF[38;5;81m^B^A^A^@^@^@^@^@^@^@^@^@^C^@[m>[38;5;81m^@^A^@^@^@[m [38;5;81m^E^@^@^@^@^@^@[m@[38;5;81m^@^@^@^@^@^@^@[mÀ"[38;5;81m^@^^[2;1H@^@^@^@^@^@^@^@^@[m@[38;5;81m^@[m8[38;5;81m^@[m  [38;5;81m^@[m@[38;5;81m^@[m"[38;5;81m^@[m![38;5;81m^@^F^@^@^@^D^@^@^@[m@[38;5;81m^@^@^@^@^@^@^@[m@[38;5;81m^@^@^@^@^@^^[3;1H@^@[m@[38;5;81m^@^@^@^@^@^@^@[mø[3;20H[38;5;81m^A^@^@^@^@^@^@[mø[3;35H[38;5;81m^A^@^@^@^@^@^@^H^@^@^@^@^@^@^@^C^@^@^@^D^@^@^^[4;1H@[m8[38;5;81m^B^@^@^@^@^@^@[m8[38;5;81m^B^@^@^@^@^@^@[m8[38;5;81m^B^@^@^@^@^@^@^\^@^@^@^@^@^@^@^\^@^@^@^@^@^@^@^^[5;1HA^@^@^@^@^@^@^@^A^@^@^@^E^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@@[m[6;1HÐ[6;6H[38;5;81m^@^@^@^@^@^@[mÐ[6;22H[38;5;81m^@^@^@^@^@^@^@^@[m [38;5;81m^@^@^@^@^@^A^@^@^@^F^@^@^@[m°[6;66H[38;5;81m^M^@^@^@^@^@^@@[m[7;1H°[7;2H[38;5;81m^M[m [38;5;81m^@^@^@^@^@[m°[7;16H[38;5;81m^M[m [38;5;81m^@^@^@^@^@[m`[38;5;81m^B^@^@^@^@^@^@[mh[38;5;81m^B^@^@^@^@^@^@^@^@[m [38;5;81m^@^@^@^@^@^B^@^@@[8;1H^@^F^@^@^@[mÀ[38;5;81m^M^@^@^@^@^@^@[mÀ[38;5;81m^M[m [38;5;81m^@^@^@^@^@[mÀ[38;5;81m^M[m [38;5;81m^@^@^@^@^@[mð[8;55H[38;5;81m^A^@^@^@^@^@^@[mð[8;70H[38;5;81m^A^@^@^@^@@[9;1H^@^@^H^@^@^@^@^@^@^@^D^@^@^@^D^@^@^@[mT[38;5;81m^B^@^@^@^@^@^@[mT[38;5;81m^B^@^@^@^@^@^@[mT[38;5;81m^B^@^@^@^@^@@[10;1H^@[mD[38;5;81m^@^@^@^@^@^@^@[mD[38;5;81m^@^@^@^@^@^@^@^D^@^@^@^@^@^@^@[mPåtd[38;5;81m^D^@^@^@[mX[38;5;81m^H^@^@^@^@^@^@[mX[38;5;81m^H^^[11;1H@^@^@^@^@^@[mX[38;5;81m^H^@^@^@^@^@^@[mD[38;5;81m^@^@^@^@^@^@^@[mD[38;5;81m^@^@^@^@^@^@^@^D^@^@^@^@^@^@^@[mQåtd[38;5;81m^F^^[12;1H@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@@[13;1H^@^@^@^P^@^@^@^@^@^@^@[mRåtd[38;5;81m^D^@^@^@[m°[13;36H[38;5;81m^M^@^@^@^@^@^@[m°[13;51H[38;5;81m^M[m [38;5;81m^@^@^@^@^@[m°[13;65H[38;5;81m^M[m [38;5;81m^@^@^@^@^@[mP[38;5;81m^^[14;1HB^@^@^@^@^@^@[mP[38;5;81m^B^@^@^@^@^@^@^A^@^@^@^@^@^@^@[m/lib64/ld-linux-x86-64.so.2[38;5;81m^@^D^@^@@[15;1H^@^P^@^@^@^A^@^@^@[mGNU[38;5;81m^@^@^@^@^@^C^@^@^@^B^@^@^@^@^@^@^@^D^@^@^@^T^@^@^@^C^@^@^@@[m[16;1HGNU[38;5;81m^@[mi[38;5;81m^G^[[m/&ô`¸[16;16Hà[16;17Hîß[16;19H4ô¬h [38;5;81m<80>[m![38;5;81m<86>[m¼[16;34H[38;5;81m^A^@^@^@^A^@^@^@^A^@^@^@^@^@^@^@^@^@^@^@^@^@^@@[17;1H^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@[mZ[38;5;81m^@^@^@[m [38;5;81m^@^@^^[18;1H@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^K^@^@^@^R^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@@[19;1H^@^\^@^@^@^R^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@[m2[38;5;81m^@^@^@^R^@^@^@^@^@^@^@^@^@^@@[20;1H^@^@^@^@^@^@^@^@^@[mv[38;5;81m^@^@^@[m [38;5;81m^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@<85>^@^@^@[m [38;5;81m^@^@@[21;1H^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@[m#[38;5;81m^@^@^@[m"[38;5;81m^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^^[22;1H@^@[mlibc.so.6[38;5;81m^@[m__stack_chk_fail[38;5;81m^@[mprintf[38;5;81m^@[m__cxa_finalize[38;5;81m^@[m__libc_start_main[38;5;81m^@[mGLIBB[23;1HC_2.2.5[38;5;81m^@[mGLIBC_2.4[38;5;81m^@[m_ITM_deregisterTMCloneTable[38;5;81m^@[m__gmon_start__[38;5;81m^@[m_ITM_registerTT[24;1HMCloneTable[38;5;81m^@^@^@^@^@^@^B^@^C^@^C^@^@^@^@^@^C^@^A^@^B^@^A^@^@^@^P^@^@^@^@^@^@^@@[m[25;1Hu[38;5;81m^Z[mi    [38;5;81m^@^@^C^@[mD[38;5;81m^@^@^@^P^@^@^@^T[mii[38;5;81m^M^@^@^B^@[mP[38;5;81m^@^@^@^@^@^@^@[m°[25;62H[38;5;81m^M[m [38;5;81m^@^@^@^@^@^H^@^^[26;1H@^@^@^@^@^@[m [38;5;81m^F^@^@^@^@^@^@[m¸[26;28H[38;5;81m^M[m [38;5;81m^@^@^@^@^@^H^@^@^@^@^@^@^@[m`[38;5;81m^F^@^@^@^@^@^@^H^P[m [38;5;81m^@^^[27;1H@^@^@^@^H^@^@^@^@^@^@^@^H^P[m [38;5;81m^@^@^@^@^@[mØ[27;40H[38;5;81m^O[m [38;5;81m^@^@^@^@^@^F^@^@^@^A^@^@^@^@^@^@^@^@^[m[28;62H1,1[8C꼭대기"hw2" [noeol][변환 되었습니다] 39L, 11704C[1;1H[?25h[?25l[28;52HL[1;1H[28;52H [1;1H[?25h[?25l[28;52H:[1;1H[28;1H[K[28;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"hw2" [변환 되었습니다] 39L, 11705C 저장 했습니다
+[?2004l[?1l>[?25h[?1049l[23;0;0t금  5월 15 19:01:52 jaeho $gdb hw2
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from hw2...done.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw2 
+9
+[Inferior 1 (process 10983) exited normally]
+(gdb) b[Kl
+1	//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다.
+2	//배열 원소 값이 단조증가일 때에는 정상동작합니다.
+3	//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 찾으세요!
+4	
+5	#include <stdio.h>
+6	
+7	#define max(x,y) ((x)>(y)?(x):(y))
+8	 
+9	
+10	int max_arr2(int arr[],int arr_len);
+(gdb) l 20
+15		int a[10] = { 0 };
+16		int i;
+17	
+18		for (i = 0; i < 10; i++)
+19			a[i] =  i; 
+20	
+21		printf("%d\n", max_arr2(a, 10));	 
+22	
+23		return 0;
+24	
+(gdb) b[Kl 25
+20	
+21		printf("%d\n", max_arr2(a, 10));	 
+22	
+23		return 0;
+24	
+25	}
+26	
+27	int max_arr2(int arr[],int arr_len)
+28	{
+29		if (arr_len == 1)
+(gdb) b[Kl27
+Undefined command: "l27".  Try "help".
+(gdb) l 28[K7
+22	
+23		return 0;
+24	
+25	}
+26	
+27	int max_arr2(int arr[],int arr_len)
+28	{
+29		if (arr_len == 1)
+30			return arr[0];
+31		else
+(gdb) l 27
+22	
+23		return 0;
+24	
+25	}
+26	
+27	int max_arr2(int arr[],int arr_len)
+28	{
+29		if (arr_len == 1)
+30			return arr[0];
+31		else
+(gdb) l 30
+25	}
+26	
+27	int max_arr2(int arr[],int arr_len)
+28	{
+29		if (arr_len == 1)
+30			return arr[0];
+31		else
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+33	}
+(gdb) b [K[Kb 32[K3[K2
+Breakpoint 1 at 0x555555554765: file gdb_hw2.c, line 32.
+(gdb) info b
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000555555554765 in max_arr2 at gdb_hw2.c:32
+(gdb) r[Kr
+Starting program: /home/jaeho/gdb_hw/hw2 
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=10) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=9) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c[Kp arr_len
+$1 = 9
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=8) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=7) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=6) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=5) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=4) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=3) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=2) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c[Kc
+Continuing.
+9
+[Inferior 1 (process 10988) exited normally]
+(gdb) disas main
+Dump of assembler code for function main:
+   0x00005555555546aa <+0>:	push   %rbp
+   0x00005555555546ab <+1>:	mov    %rsp,%rbp
+   0x00005555555546ae <+4>:	sub    $0x40,%rsp
+   0x00005555555546b2 <+8>:	mov    %fs:0x28,%rax
+   0x00005555555546bb <+17>:	mov    %rax,-0x8(%rbp)
+   0x00005555555546bf <+21>:	xor    %eax,%eax
+   0x00005555555546c1 <+23>:	movq   $0x0,-0x30(%rbp)
+   0x00005555555546c9 <+31>:	movq   $0x0,-0x28(%rbp)
+   0x00005555555546d1 <+39>:	movq   $0x0,-0x20(%rbp)
+   0x00005555555546d9 <+47>:	movq   $0x0,-0x18(%rbp)
+   0x00005555555546e1 <+55>:	movq   $0x0,-0x10(%rbp)
+   0x00005555555546e9 <+63>:	movl   $0x0,-0x34(%rbp)
+   0x00005555555546f0 <+70>:	jmp    0x555555554702 <main+88>
+   0x00005555555546f2 <+72>:	mov    -0x34(%rbp),%eax
+   0x00005555555546f5 <+75>:	cltq   
+   0x00005555555546f7 <+77>:	mov    -0x34(%rbp),%edx
+   0x00005555555546fa <+80>:	mov    %edx,-0x30(%rbp,%rax,4)
+   0x00005555555546fe <+84>:	addl   $0x1,-0x34(%rbp)
+   0x0000555555554702 <+88>:	cmpl   $0x9,-0x34(%rbp)
+   0x0000555555554706 <+92>:	jle    0x5555555546f2 <main+72>
+   0x0000555555554708 <+94>:	lea    -0x30(%rbp),%rax
+   0x000055555555470c <+98>:	mov    $0xa,%esi
+   0x0000555555554711 <+103>:	mov    %rax,%rdi
+   0x0000555555554714 <+106>:	callq  0x555555554747 <max_arr2>
+   0x0000555555554719 <+111>:	mov    %eax,%esi
+   0x000055555555471b <+113>:	lea    0x132(%rip),%rdi        # 0x555555554854---Type <return> to continue, or q <return> to quit---q
+Quit
+(gdb) l[Kl[Kr[Kr
+Starting program: /home/jaeho/gdb_hw/hw2 
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=10) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=9) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=8) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=7) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=6) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=5) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=4) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=3) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=2) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+9
+[Inferior 1 (process 10991) exited normally]
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw2 
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=10) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=9) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=8) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=7) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=6) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=5) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=4) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=3) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=2) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) disas main
+Dump of assembler code for function main:
+   0x00005555555546aa <+0>:	push   %rbp
+   0x00005555555546ab <+1>:	mov    %rsp,%rbp
+   0x00005555555546ae <+4>:	sub    $0x40,%rsp
+   0x00005555555546b2 <+8>:	mov    %fs:0x28,%rax
+   0x00005555555546bb <+17>:	mov    %rax,-0x8(%rbp)
+   0x00005555555546bf <+21>:	xor    %eax,%eax
+   0x00005555555546c1 <+23>:	movq   $0x0,-0x30(%rbp)
+   0x00005555555546c9 <+31>:	movq   $0x0,-0x28(%rbp)
+   0x00005555555546d1 <+39>:	movq   $0x0,-0x20(%rbp)
+   0x00005555555546d9 <+47>:	movq   $0x0,-0x18(%rbp)
+   0x00005555555546e1 <+55>:	movq   $0x0,-0x10(%rbp)
+   0x00005555555546e9 <+63>:	movl   $0x0,-0x34(%rbp)
+   0x00005555555546f0 <+70>:	jmp    0x555555554702 <main+88>
+   0x00005555555546f2 <+72>:	mov    -0x34(%rbp),%eax
+   0x00005555555546f5 <+75>:	cltq   
+   0x00005555555546f7 <+77>:	mov    -0x34(%rbp),%edx
+   0x00005555555546fa <+80>:	mov    %edx,-0x30(%rbp,%rax,4)
+   0x00005555555546fe <+84>:	addl   $0x1,-0x34(%rbp)
+   0x0000555555554702 <+88>:	cmpl   $0x9,-0x34(%rbp)
+   0x0000555555554706 <+92>:	jle    0x5555555546f2 <main+72>
+   0x0000555555554708 <+94>:	lea    -0x30(%rbp),%rax
+   0x000055555555470c <+98>:	mov    $0xa,%esi
+   0x0000555555554711 <+103>:	mov    %rax,%rdi
+   0x0000555555554714 <+106>:	callq  0x555555554747 <max_arr2>
+   0x0000555555554719 <+111>:	mov    %eax,%esi
+   0x000055555555471b <+113>:	lea    0x132(%rip),%rdi        # 0x555555554854---Type <return> to continue, or q <return> to quit---q
+Quit
+(gdb) c
+Continuing.
+9
+[Inferior 1 (process 10994) exited normally]
+(gdb) d[Kdisas main
+Dump of assembler code for function main:
+   0x00005555555546aa <+0>:	push   %rbp
+   0x00005555555546ab <+1>:	mov    %rsp,%rbp
+   0x00005555555546ae <+4>:	sub    $0x40,%rsp
+   0x00005555555546b2 <+8>:	mov    %fs:0x28,%rax
+   0x00005555555546bb <+17>:	mov    %rax,-0x8(%rbp)
+   0x00005555555546bf <+21>:	xor    %eax,%eax
+   0x00005555555546c1 <+23>:	movq   $0x0,-0x30(%rbp)
+   0x00005555555546c9 <+31>:	movq   $0x0,-0x28(%rbp)
+   0x00005555555546d1 <+39>:	movq   $0x0,-0x20(%rbp)
+   0x00005555555546d9 <+47>:	movq   $0x0,-0x18(%rbp)
+   0x00005555555546e1 <+55>:	movq   $0x0,-0x10(%rbp)
+   0x00005555555546e9 <+63>:	movl   $0x0,-0x34(%rbp)
+   0x00005555555546f0 <+70>:	jmp    0x555555554702 <main+88>
+   0x00005555555546f2 <+72>:	mov    -0x34(%rbp),%eax
+   0x00005555555546f5 <+75>:	cltq   
+   0x00005555555546f7 <+77>:	mov    -0x34(%rbp),%edx
+   0x00005555555546fa <+80>:	mov    %edx,-0x30(%rbp,%rax,4)
+   0x00005555555546fe <+84>:	addl   $0x1,-0x34(%rbp)
+   0x0000555555554702 <+88>:	cmpl   $0x9,-0x34(%rbp)
+   0x0000555555554706 <+92>:	jle    0x5555555546f2 <main+72>
+   0x0000555555554708 <+94>:	lea    -0x30(%rbp),%rax
+   0x000055555555470c <+98>:	mov    $0xa,%esi
+   0x0000555555554711 <+103>:	mov    %rax,%rdi
+   0x0000555555554714 <+106>:	callq  0x555555554747 <max_arr2>
+   0x0000555555554719 <+111>:	mov    %eax,%esi
+   0x000055555555471b <+113>:	lea    0x132(%rip),%rdi        # 0x555555554854---Type <return> to continue, or q <return> to quit---q
+Quit
+(gdb) r[Kr
+Starting program: /home/jaeho/gdb_hw/hw2 
+c
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=10) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=9) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=8) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=7) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=6) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=5) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=4) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=3) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) disas main
+Dump of assembler code for function main:
+   0x00005555555546aa <+0>:	push   %rbp
+   0x00005555555546ab <+1>:	mov    %rsp,%rbp
+   0x00005555555546ae <+4>:	sub    $0x40,%rsp
+   0x00005555555546b2 <+8>:	mov    %fs:0x28,%rax
+   0x00005555555546bb <+17>:	mov    %rax,-0x8(%rbp)
+   0x00005555555546bf <+21>:	xor    %eax,%eax
+   0x00005555555546c1 <+23>:	movq   $0x0,-0x30(%rbp)
+   0x00005555555546c9 <+31>:	movq   $0x0,-0x28(%rbp)
+   0x00005555555546d1 <+39>:	movq   $0x0,-0x20(%rbp)
+   0x00005555555546d9 <+47>:	movq   $0x0,-0x18(%rbp)
+   0x00005555555546e1 <+55>:	movq   $0x0,-0x10(%rbp)
+   0x00005555555546e9 <+63>:	movl   $0x0,-0x34(%rbp)
+   0x00005555555546f0 <+70>:	jmp    0x555555554702 <main+88>
+   0x00005555555546f2 <+72>:	mov    -0x34(%rbp),%eax
+   0x00005555555546f5 <+75>:	cltq   
+   0x00005555555546f7 <+77>:	mov    -0x34(%rbp),%edx
+   0x00005555555546fa <+80>:	mov    %edx,-0x30(%rbp,%rax,4)
+   0x00005555555546fe <+84>:	addl   $0x1,-0x34(%rbp)
+   0x0000555555554702 <+88>:	cmpl   $0x9,-0x34(%rbp)
+   0x0000555555554706 <+92>:	jle    0x5555555546f2 <main+72>
+   0x0000555555554708 <+94>:	lea    -0x30(%rbp),%rax
+   0x000055555555470c <+98>:	mov    $0xa,%esi
+   0x0000555555554711 <+103>:	mov    %rax,%rdi
+   0x0000555555554714 <+106>:	callq  0x555555554747 <max_arr2>
+   0x0000555555554719 <+111>:	mov    %eax,%esi
+   0x000055555555471b <+113>:	lea    0x132(%rip),%rdi        # 0x555555554854---Type <return> to continue, or q <return> to quit---q
+Quit
+(gdb) l
+27	int max_arr2(int arr[],int arr_len)
+28	{
+29		if (arr_len == 1)
+30			return arr[0];
+31		else
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+33	}
+(gdb) l30
+Undefined command: "l30".  Try "help".
+(gdb) l 30
+25	}
+26	
+27	int max_arr2(int arr[],int arr_len)
+28	{
+29		if (arr_len == 1)
+30			return arr[0];
+31		else
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+33	}
+(gdb) b[Kb 30
+Breakpoint 2 at 0x55555555475d: file gdb_hw2.c, line 30.
+(gdb) b inf[K[K[K[K[Kinfo b
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000555555554765 in max_arr2 at gdb_hw2.c:32
+	breakpoint already hit 8 times
+2       breakpoint     keep y   0x000055555555475d in max_arr2 at gdb_hw2.c:30
+(gdb) r
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+Starting program: /home/jaeho/gdb_hw/hw2 
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=10) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=9) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=8) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=7) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=6) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=5) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=4) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=3) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=2) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=1) at gdb_hw2.c:30
+30			return arr[0];
+(gdb) disas main[K[K[K[Km[Kmax_arr2
+Dump of assembler code for function max_arr2:
+   0x0000555555554747 <+0>:	push   %rbp
+   0x0000555555554748 <+1>:	mov    %rsp,%rbp
+   0x000055555555474b <+4>:	push   %rbx
+   0x000055555555474c <+5>:	sub    $0x18,%rsp
+   0x0000555555554750 <+9>:	mov    %rdi,-0x18(%rbp)
+   0x0000555555554754 <+13>:	mov    %esi,-0x1c(%rbp)
+   0x0000555555554757 <+16>:	cmpl   $0x1,-0x1c(%rbp)
+   0x000055555555475b <+20>:	jne    0x555555554765 <max_arr2+30>
+=> 0x000055555555475d <+22>:	mov    -0x18(%rbp),%rax
+   0x0000555555554761 <+26>:	mov    (%rax),%eax
+   0x0000555555554763 <+28>:	jmp    0x5555555547bf <max_arr2+120>
+   0x0000555555554765 <+30>:	mov    -0x1c(%rbp),%eax
+   0x0000555555554768 <+33>:	cltq   
+   0x000055555555476a <+35>:	shl    $0x2,%rax
+   0x000055555555476e <+39>:	lea    -0x4(%rax),%rdx
+   0x0000555555554772 <+43>:	mov    -0x18(%rbp),%rax
+   0x0000555555554776 <+47>:	add    %rdx,%rax
+   0x0000555555554779 <+50>:	mov    (%rax),%ebx
+   0x000055555555477b <+52>:	mov    -0x1c(%rbp),%eax
+   0x000055555555477e <+55>:	lea    -0x1(%rax),%edx
+   0x0000555555554781 <+58>:	mov    -0x18(%rbp),%rax
+   0x0000555555554785 <+62>:	mov    %edx,%esi
+   0x0000555555554787 <+64>:	mov    %rax,%rdi
+   0x000055555555478a <+67>:	callq  0x555555554747 <max_arr2>
+   0x000055555555478f <+72>:	cmp    %eax,%ebx
+   0x0000555555554791 <+74>:	jle    0x5555555547ab <max_arr2+100>
+---Type <return> to continue, or q <return> to quit---a[Kq
+Quit
+(gdb) r[Kr
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+Starting program: /home/jaeho/gdb_hw/hw2 
+c
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=10) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c[Kc[Kc
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=9) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=8) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=7) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=6) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=5) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=4) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=3) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=2) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=1) at gdb_hw2.c:30
+30			return arr[0];
+(gdb) c
+Continuing.
+9
+[Inferior 1 (process 10998) exited normally]
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw2 
+c
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=10) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c[Kc
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=9) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=8) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=7) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=6) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=5) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=4) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=3) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=2) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) crcrdisas max_arr2[C[C[C[C[C[Cc[Kdisas max_arr2
+Dump of assembler code for function max_arr2:
+   0x0000555555554747 <+0>:	push   %rbp
+   0x0000555555554748 <+1>:	mov    %rsp,%rbp
+   0x000055555555474b <+4>:	push   %rbx
+   0x000055555555474c <+5>:	sub    $0x18,%rsp
+   0x0000555555554750 <+9>:	mov    %rdi,-0x18(%rbp)
+   0x0000555555554754 <+13>:	mov    %esi,-0x1c(%rbp)
+   0x0000555555554757 <+16>:	cmpl   $0x1,-0x1c(%rbp)
+   0x000055555555475b <+20>:	jne    0x555555554765 <max_arr2+30>
+   0x000055555555475d <+22>:	mov    -0x18(%rbp),%rax
+   0x0000555555554761 <+26>:	mov    (%rax),%eax
+   0x0000555555554763 <+28>:	jmp    0x5555555547bf <max_arr2+120>
+=> 0x0000555555554765 <+30>:	mov    -0x1c(%rbp),%eax
+   0x0000555555554768 <+33>:	cltq   
+   0x000055555555476a <+35>:	shl    $0x2,%rax
+   0x000055555555476e <+39>:	lea    -0x4(%rax),%rdx
+   0x0000555555554772 <+43>:	mov    -0x18(%rbp),%rax
+   0x0000555555554776 <+47>:	add    %rdx,%rax
+   0x0000555555554779 <+50>:	mov    (%rax),%ebx
+   0x000055555555477b <+52>:	mov    -0x1c(%rbp),%eax
+   0x000055555555477e <+55>:	lea    -0x1(%rax),%edx
+   0x0000555555554781 <+58>:	mov    -0x18(%rbp),%rax
+   0x0000555555554785 <+62>:	mov    %edx,%esi
+   0x0000555555554787 <+64>:	mov    %rax,%rdi
+   0x000055555555478a <+67>:	callq  0x555555554747 <max_arr2>
+   0x000055555555478f <+72>:	cmp    %eax,%ebx
+   0x0000555555554791 <+74>:	jle    0x5555555547ab <max_arr2+100>
+---Type <return> to continue, or q <return> to quit---q
+Quit
+(gdb) g[Kg[Kr
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+Starting program: /home/jaeho/gdb_hw/hw2 
+c
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=10) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c[Kc
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=9) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=8) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=7) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=6) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=5) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=4) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=3) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=2) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=1) at gdb_hw2.c:30
+30			return arr[0];
+(gdb) c
+Continuing.
+9
+[Inferior 1 (process 11001) exited normally]
+(gdb) crdisas max_arr2[C[C[C[C[C[Cc[Krcrcdisas max_arr2[C[C[C[C[C[Cr[Kdisas max_arr2
+Dump of assembler code for function max_arr2:
+   0x0000555555554747 <+0>:	push   %rbp
+   0x0000555555554748 <+1>:	mov    %rsp,%rbp
+   0x000055555555474b <+4>:	push   %rbx
+   0x000055555555474c <+5>:	sub    $0x18,%rsp
+   0x0000555555554750 <+9>:	mov    %rdi,-0x18(%rbp)
+   0x0000555555554754 <+13>:	mov    %esi,-0x1c(%rbp)
+   0x0000555555554757 <+16>:	cmpl   $0x1,-0x1c(%rbp)
+   0x000055555555475b <+20>:	jne    0x555555554765 <max_arr2+30>
+   0x000055555555475d <+22>:	mov    -0x18(%rbp),%rax
+   0x0000555555554761 <+26>:	mov    (%rax),%eax
+   0x0000555555554763 <+28>:	jmp    0x5555555547bf <max_arr2+120>
+   0x0000555555554765 <+30>:	mov    -0x1c(%rbp),%eax
+   0x0000555555554768 <+33>:	cltq   
+   0x000055555555476a <+35>:	shl    $0x2,%rax
+   0x000055555555476e <+39>:	lea    -0x4(%rax),%rdx
+   0x0000555555554772 <+43>:	mov    -0x18(%rbp),%rax
+   0x0000555555554776 <+47>:	add    %rdx,%rax
+   0x0000555555554779 <+50>:	mov    (%rax),%ebx
+   0x000055555555477b <+52>:	mov    -0x1c(%rbp),%eax
+   0x000055555555477e <+55>:	lea    -0x1(%rax),%edx
+   0x0000555555554781 <+58>:	mov    -0x18(%rbp),%rax
+   0x0000555555554785 <+62>:	mov    %edx,%esi
+   0x0000555555554787 <+64>:	mov    %rax,%rdi
+   0x000055555555478a <+67>:	callq  0x555555554747 <max_arr2>
+   0x000055555555478f <+72>:	cmp    %eax,%ebx
+   0x0000555555554791 <+74>:	jle    0x5555555547ab <max_arr2+100>
+---Type <return> to continue, or q <return> to quit---q
+Quit
+(gdb) quit
+금  5월 15 19:20:24 jaeho $vim gdb_hw2.c
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;28r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[28;1H"gdb_hw2.c" [도스] 33L, 720C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[34m//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다[2;1H.
+//배열 원소 값이 단조증가일 때에는 정상동작합니다.
+//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 [m[94m>>[m[5;1H[34m찾으세요![m
+
+[35m#include [m[31m<stdio.h>[m
+
+[35m#define max(x,y) ((x)>(y)?(x):(y))[m
+
+
+[32mint[m max_arr2([32mint[m arr[],[32mint[m arr_len);
+
+
+[32mint[m main()
+{[17;9H[32mint[m a[[31m10[m] = { [31m0[m };[18;9H[32mint[m i;[20;9H[38;5;130mfor[m (i = [31m0[m; i < [31m10[m; i++)[21;17Ha[i] =  i;[23;9Hprintf([31m"[m[35m%d\n[m[31m"[m, max_arr2(a, [31m10[m));[25;9H[38;5;130mreturn[m [31m0[m;
+
+}[28;62H11,1[7C꼭대기[13;1H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[1;1H[96m//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다[2;1H.
+//배열 원소 값이 단조증가일 때에는 정상동작합니다.
+//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 [m[94m>>[m[5;1H[96m찾으세요![m
+
+[38;5;81m#include [m[95m<stdio.h>[m
+
+[38;5;81m#define max(x,y) ((x)>(y)?(x):(y))[m
+
+
+[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len);
+
+
+[38;5;121mint[m main()
+{[17;9H[38;5;121mint[m a[[95m10[m] = { [95m0[m };[18;9H[38;5;121mint[m i;[20;9H[93mfor[m (i = [95m0[m; i < [95m10[m; i++)[21;17Ha[i] =  i;[23;9Hprintf([95m"[m[38;5;224m%d\n[m[95m"[m, max_arr2(a, [95m10[m));[25;9H[93mreturn[m [95m0[m;
+
+}[28;62H11,1[7C꼭대기"gdb_hw2.c" [도스] 33L, 720C[13;1H[?25h[?25l[28;52H~@k[13;1H[28;52H   [14;1H[28;63H2,0-1[14;1H[?25h[?25l[28;52H~@k[14;1H[28;52H   [15;1H[28;63H3,1  [15;1H[?25h[?25l[28;52H~@k[15;1H[28;52H   [16;1H[46m{[27;1H}[m[28;63H4[16;1H[?25h[?25l[28;52H~@k[16;1H[28;52H   [17;8H[16;1H{[27;1H}[28;63H5,1-8[17;8H[?25h[?25l[28;52H~@k[17;8H[28;52H   [18;8H[28;63H6[18;8H[?25h[?25l[28;52H~@k[18;8H[28;52H   [19;1H[28;63H7,0-1[19;1H[?25h[?25l[28;52H~@k[19;1H[28;52H   [20;8H[28;63H8,1-8[20;8H[?25h[?25l[28;52H~@k[20;8H[28;52H   [20;9H[28;65H2-9[20;9H[?25h[?25l[28;52H~@k[20;9H[28;52H   [20;10H[28;65H3-10[20;10H[?25h[?25l[28;52H~@k[20;10H[28;52H   [20;11H[28;65H4-11[20;11H[?25h[?25l[28;52H~@k[20;11H[28;52H   [20;12H[28;65H5-12[20;12H[?25h[?25l[28;52H~@k[20;12H[28;52H   [20;13H[46m([18C)[m[28;65H6-13[20;13H[?25h[?25l[28;52H~@k[20;13H[28;52H   [20;14H([18C)[28;65H7-14[20;14H[?25h[?25l[28;52H~@k[20;14H[28;52H   [20;15H[28;65H8-15[20;15H[?25h[?25l[28;52H~@k[20;15H[28;52H   [20;16H[28;65H9-16[20;16H[?25h[?25l[28;52H~@k[20;16H[28;52H   [20;17H[28;65H10-17[20;17H[?25h[?25l[28;52H~@k[20;17H[28;52H   [20;18H[28;66H1-18[20;18H[?25h[?25l[28;52H~@k[20;18H[28;52H   [20;19H[28;66H2-19[20;19H[?25h[?25l[28;52H~@k[20;19H[28;52H   [20;20H[28;66H3-20[20;20H[?25h[?25l[28;52H~@k[20;20H[28;52H   [20;21H[28;66H4-21[20;21H[?25h[?25l[28;52H~@k[20;21H[28;52H   [20;22H[28;66H5-22[20;22H[?25h[?25l[28;52H~@k[20;22H[28;52H   [20;23H[28;66H6-23[20;23H[?25h[?25l[28;52H~@k[20;23H[28;52H   [20;24H[28;66H7-24[20;24H[?25h[?25l[28;52H~@k[20;24H[28;52H   [20;25H[28;66H8-25[20;25H[?25h[?25l[28;52H~@k[20;25H[28;52H   [20;26H[28;66H9-26[20;26H[?25h[?25l[28;52H~@k[20;26H[28;52H   [21;26H[28;63H9,12[21;26H[?25h[?25l[28;52H~@k[21;26H[28;52H   [21;25H[28;66H1-25[21;25H[?25h[?25l[28;52H~@k[21;25H[28;52H   [21;24H[28;66H0-24[21;24H[?25h[?25l[28;52H9[21;24H[?25h[?25l[28;53H~@k[21;24H[28;52H    [21;24H[28;1H[1m-- 끼워넣기 -- [m[28;15H[K[28;62H19,10-24   꼭대기[21;24H[?25h[?25l[95m9[m i;[28;66H1-25[21;25H[?25h[?25l- i;[28;66H2-26[21;26H[?25h[?25l[28;66H1-25[21;25H[?25h[?25l[28;66H2-26[21;26H[?25h[?25l i; [28;66H1-25[21;25H[?25h[?25l- i;[28;66H2-26[21;26H[?25h[?25l[28;66H1-25[21;25H[?25h[?25l - i;[28;66H2-26[21;26H[?25h[?25l[28;66H3-27[21;27H[?25h[?25l[28;63H8,20[20;27H[?25h[?25l[28;63H9,13[21;27H[?25h[?25l[28;62H20,1    [22;1H[?25h[?25l[1;27r[1;1H[2M[1;28r[27;1H[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len)[28;62H[K[28;62H21,20-27      14%[21;27H[?25h[?25l[28;63H2,1    [22;1H[?25h[?25l[1;27r[27;1H
+[1;28r[27;1H{[28;62H[K[28;62H23,11-18      28%[22;18H[?25h[?25l[1;27r[1;1H[2M[1;28r[26;9H[93mif[m (arr_len == [95m1[m)[27;17H[93mreturn[m arr[[95m0[m];[28;62H[K[28;62H24,1[10C50%[21;1H[?25h[?25l[11;1H[46m{[22;1H}[m[28;63H5,2[22;2H[?25h[?25l[1;27r[27;1H
+[1;28r[27;9H[93melse[m[28;62H[K[28;62H26,1[10C66%[10;1H{[21;1H}
+[?25h[?25l[1;27r[27;1H
+[1;28r[27;17H[93mreturn[m max(arr[arr_len - [95m1[m], max_arr2(arr, arr_len - [95m1[m));[28;62H[K[28;62H27,27[9C83%[22;27H[?25h[?25l[1;27r[27;1H
+[1;28r[27;1H}[28;62H[K[28;62H28,2[9C바닥[22;1H[46m{[27;1H}[22;2H[?25h[?25l[m{[23;12H[46m([12C)[m[27;1H}[28;63H9,19-26[23;26H[?25h[?25l[23;12H([12C)[24;27H[46m[[1C][m[28;62H30,13-27[24;27H[?25h[?25l[23;12H[46m([12C)[m[24;27H[[1C][28;62H29,19-26[23;26H[?25h[?25l[22;1H[46m{[m[23;12H([12C)[27;1H[46m}[m[28;63H8,2    [22;2H[?25h[?25l{[27;1H}[28;63H7,27[21;27H[?25h[?25l[28;63H6,1 [20;1H[?25h[?25l[8;1H[46m{[19;1H}[m[28;63H5,2[19;2H[?25h[?25l[8;1H{[19;1H}[28;63H4,1[18;1H[?25h[?25l[28;63H3,11-18[17;18H[?25h[?25l[28;63H2,1    [16;1H[?25h[?25l[28;63H1,20-27[15;27H[?25h[?25l[28;63H0,1    [14;1H[?25h[?25l[28;62H19,13-27[13;27H[?25h[?25l[28;63H8,20[12;27H[?25h[?25l[28;63H7,1    [11;1H[?25h[?25l[28;63H6,8-15[10;15H[?25h[?25l[28;63H5,20-27[9;27H[?25h[?25l[8;1H[46m{[19;1H}[m[28;63H4,2    [8;2H[?25h[?25l[7;9H[46m()[m
+{[19;1H}[28;63H3,11[7;11H[?25h[28;1H[K[7;10H[?25l[28;52H^[[7;10H[28;52H  [7;11H[28;62H13,10[8C바닥[7;10H[?25h[?25l[28;52H:[7;10H[28;52H[K[28;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"gdb_hw2.c" [도스] 33L, 723C 저장 했습니다
+[?2004l[?1l>[?25h[?1049l[23;0;0t금  5월 15 19:20:50 jaeho $vim gdb_hw2.c[6Pgdb hw2vim[C[C[C[Cgdb_hw2.cls[Kcleargdb hw2gdb_hw2.c[10@cc -g -o hw2[C[C[C[C[C[C[C[C[C[C
+금  5월 15 19:20:56 jaeho $gcc hw2
+/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o: In function `_start':
+(.text+0x20): undefined reference to `main'
+collect2: error: ld returned 1 exit status
+금  5월 15 19:21:00 jaeho $gdb hw2
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from hw2...done.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw2 
+9
+[Inferior 1 (process 11020) exited normally]
+(gdb) info b
+No breakpoints or watchpoints.
+(gdb) l[Kl 30
+25	}
+26	
+27	int max_arr2(int arr[],int arr_len)
+28	{
+29		if (arr_len == 1)
+30			return arr[0];
+31		else
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+33	}
+(gdb) b 30
+Breakpoint 1 at 0x555555554764: file gdb_hw2.c, line 30.
+(gdb) b 32
+Breakpoint 2 at 0x55555555476c: file gdb_hw2.c, line 32.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw2 
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=10) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=9) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=8) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=7) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=6) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=5) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=4) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=3) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=2) at gdb_hw2.c:32
+32			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=1) at gdb_hw2.c:30
+30			return arr[0];
+(gdb) dis[K[K[Kdiks[K[Ksas max_arr2
+Dump of assembler code for function max_arr2:
+   0x000055555555474e <+0>:	push   %rbp
+   0x000055555555474f <+1>:	mov    %rsp,%rbp
+   0x0000555555554752 <+4>:	push   %rbx
+   0x0000555555554753 <+5>:	sub    $0x18,%rsp
+   0x0000555555554757 <+9>:	mov    %rdi,-0x18(%rbp)
+   0x000055555555475b <+13>:	mov    %esi,-0x1c(%rbp)
+   0x000055555555475e <+16>:	cmpl   $0x1,-0x1c(%rbp)
+   0x0000555555554762 <+20>:	jne    0x55555555476c <max_arr2+30>
+=> 0x0000555555554764 <+22>:	mov    -0x18(%rbp),%rax
+   0x0000555555554768 <+26>:	mov    (%rax),%eax
+   0x000055555555476a <+28>:	jmp    0x5555555547c6 <max_arr2+120>
+   0x000055555555476c <+30>:	mov    -0x1c(%rbp),%eax
+   0x000055555555476f <+33>:	cltq   
+   0x0000555555554771 <+35>:	shl    $0x2,%rax
+   0x0000555555554775 <+39>:	lea    -0x4(%rax),%rdx
+   0x0000555555554779 <+43>:	mov    -0x18(%rbp),%rax
+   0x000055555555477d <+47>:	add    %rdx,%rax
+   0x0000555555554780 <+50>:	mov    (%rax),%ebx
+   0x0000555555554782 <+52>:	mov    -0x1c(%rbp),%eax
+   0x0000555555554785 <+55>:	lea    -0x1(%rax),%edx
+   0x0000555555554788 <+58>:	mov    -0x18(%rbp),%rax
+   0x000055555555478c <+62>:	mov    %edx,%esi
+   0x000055555555478e <+64>:	mov    %rax,%rdi
+   0x0000555555554791 <+67>:	callq  0x55555555474e <max_arr2>
+   0x0000555555554796 <+72>:	cmp    %eax,%ebx
+   0x0000555555554798 <+74>:	jle    0x5555555547b2 <max_arr2+100>
+---Type <return> to continue, or q <return> to quit---q[Kq
+Quit
+(gdb) quit
+A debugging session is active.
+
+	Inferior 1 [process 11024] will be killed.
+
+Quit anyway? (y or n) y
+금  5월 15 19:22:35 jaeho $l[Kls
+gdb_hw1.c  gdb_hw3.c  gdb_hw5.c  [0m[01;32mhw1[0m  [01;32mhw3[0m  [01;32mhw5[0m  log.txt   log3.txt  log5.txt
+gdb_hw2.c  gdb_hw4.c  gdb_hw6.c  [01;32mhw2[0m  [01;32mhw4[0m  [01;32mhw6[0m  log2.txt  log4.txt  log6.txt
+금  5월 15 19:22:37 jaeho $vim gdb_hw2.c
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;28r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[28;1H"gdb_hw2.c" [도스] 33L, 723C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[34m//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다[2;1H.
+//배열 원소 값이 단조증가일 때에는 정상동작합니다.
+//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 [m[94m>>[m[5;1H[34m찾으세요![m
+
+[35m#include [m[31m<stdio.h>[m
+
+[35m#define max(x,y) ((x)>(y)?(x):(y))[m
+
+
+[32mint[m max_arr2([32mint[m arr[],[32mint[m arr_len);
+
+
+[32mint[m main[106m()[m
+{[17;9H[32mint[m a[[31m10[m] = { [31m0[m };[18;9H[32mint[m i;[20;9H[38;5;130mfor[m (i = [31m0[m; i < [31m10[m; i++)[21;17Ha[i] = [31m9[m - i;[23;9Hprintf([31m"[m[35m%d\n[m[31m"[m, max_arr2(a, [31m10[m));[25;9H[38;5;130mreturn[m [31m0[m;
+
+}[28;62H13,10      꼭대기[15;10H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[1;1H[96m//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다[2;1H.
+//배열 원소 값이 단조증가일 때에는 정상동작합니다.
+//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 [m[94m>>[m[5;1H[96m찾으세요![m
+
+[38;5;81m#include [m[95m<stdio.h>[m
+
+[38;5;81m#define max(x,y) ((x)>(y)?(x):(y))[m
+
+
+[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len);
+
+
+[38;5;121mint[m main[46m()[m
+{[17;9H[38;5;121mint[m a[[95m10[m] = { [95m0[m };[18;9H[38;5;121mint[m i;[20;9H[93mfor[m (i = [95m0[m; i < [95m10[m; i++)[21;17Ha[i] = [95m9[m - i;[23;9Hprintf([95m"[m[38;5;224m%d\n[m[95m"[m, max_arr2(a, [95m10[m));[25;9H[93mreturn[m [95m0[m;
+
+}[28;62H13,10      꼭대기"gdb_hw2.c" [도스] 33L, 723C[15;10H[?25h[?25l[28;52H~@k[15;10H[28;52H   [14;1H[15;9H()[28;63H2,0-1[14;1H[?25h[?25l[28;52H~@k[14;1H[28;52H   [13;1H[28;63H1,1  [13;1H[?25h[?25l[28;52H~@k[13;1H[28;52H   [12;1H[28;63H0[12;1H[?25h[?25l[28;52H~@k[12;1H[28;52H   [11;1H[28;62H9,0-1[11;1H[?25h[?25l[28;52H~@k[11;1H[28;52H   [10;1H[28;62H8,1  [10;1H[?25h[?25l[28;52H~@k[10;1H[28;52H   [9;1H[28;62H7[9;1H[?25h[?25l[28;52H~@@[9;1H[28;52H   [9;34H[9;18H[38;5;81m[46m([15C)[m[28;64H34[9;34H[?25h[?25l[28;52H~@k[9;34H[28;52H   [9;34H[28;1H[1m-- 끼워넣기 -- [m[28;15H[K[28;62H7,34[7C꼭대기[9;34H[?25h[?25l[9;34H[K[9;18H[38;5;81m([m[12C[38;5;81m[46m([1C)[m[28;65H3[9;33H[?25h[?25l[38;5;81m)[m[9;33H[K[9;32H[38;5;81m[46m)[m[28;65H2[9;32H[?25h[?25l[38;5;81m[46m)[m[9;32H[K[9;18H[38;5;81m[46m([m[28;65H1[9;31H[?25h[?25l[97m[101m)[m[9;31H[K[9;30H[97m[46m)[m[28;65H0[9;30H[?25h[?25l[9;30H[K[9;18H[38;5;81m([m[8C[38;5;81m[46m([1C)[m[28;64H29[9;29H[?25h[?25l[38;5;81m)[m[9;29H[K[9;28H[38;5;81m[46m)[m[28;65H8[9;28H[?25h[?25l[97m[46m)[m[9;28H[K[9;18H[38;5;81m[46m([m[28;65H7[9;27H[?25h[?25l[38;5;81m)[m[9;27H[K[9;26H[38;5;81m[46m)[m[28;65H6[9;26H[?25h[?25l[9;26H[K[9;18H[38;5;81m([m[4C[38;5;81m[46m([1C)[m[28;65H5[9;25H[?25h[?25l[38;5;81m)[m[9;25H[K[9;24H[38;5;81m[46m)[m[28;65H4[9;24H[?25h[?25l[38;5;81m[46m)[m[9;24H[K[9;18H[38;5;81m[46m([m[28;65H3[9;23H[?25h[?25l[38;5;81m)[m[9;23H[K[9;22H[38;5;81m[46m)[m[28;65H2[9;22H[?25h[?25l[9;22H[K[9;18H[38;5;81m([m[38;5;81m[46m([1C)[m[28;65H1[9;21H[?25h[?25l[38;5;81m)[m[9;21H[K[9;20H[38;5;81m[46m)[m[28;65H0[9;20H[?25h[?25l[38;5;81m[46m)[m[9;20H[K[9;18H[38;5;81m[46m([m[28;64H19[9;19H[?25h[?25l[97m[46m)[m[9;19H[K[9;18H[97m[101m)[m[28;65H8[9;18H[?25h[?25l[97m[101m)[m[9;18H[K[28;65H7[9;17H[?25h[?25l[9;17H[K[9;12H[38;5;81m[46m([3C)[m[28;65H6[9;16H[?25h[?25l[38;5;81m)[m[9;16H[K[9;15H[38;5;81m[46m)[m[28;65H5[9;15H[?25h[?25l[38;5;81m)[m[9;15H[K[9;14H[38;5;81m[46m)[m[28;65H4[9;14H[?25h[?25l[38;5;81m)[m[9;14H[K[9;13H[38;5;81m[46m)[m[28;65H3[9;13H[?25h[?25l[97m[46m)[m[9;13H[K[9;12H[97m[101m)[m[28;65H2[9;12H[?25h[?25l[97m[101m)[m[9;12H[K[28;65H1[9;11H[?25h[?25l[97m[101m)[m[9;11H[K[28;65H0[9;10H[?25h[?25l[97m[101m)[m[9;10H[K[28;64H9 [9;9H[?25h[?25l[97m[101m)[m[9;9H[K[28;64H8[9;8H[?25h[?25l#defin[97m[101m)[m[9;8H[K[28;64H7[9;7H[?25h[?25l[97m[101m)[m[9;7H[K[28;64H6[9;6H[?25h[?25l[97m[101m)[m[9;6H[K[28;64H5[9;5H[?25h[?25l[97m[101m)[m[9;5H[K[28;64H4[9;4H[?25h[?25l[97m[101m)[m[9;4H[K[28;64H3[9;3H[?25h[?25l[97m[101m)[m[9;3H[K[28;64H2[9;2H[?25h[?25l[97m[101m)[m[9;2H[K[28;64H1[9;1H[?25h[?25l[28;64H2[9;2H[?25h[?25l[9;1H[K[28;64H1[9;1H[?25h[?25l[28;62H8[10;1H[?25h[?25l[28;62H9[11;1H[?25h[?25l[28;62H10,1[12;1H[?25h[?25l[28;63H1[13;1H[?25h[?25l[28;63H2[14;1H[?25h[?25l[28;63H3[15;1H[?25h[?25l
+[46m{[27;1H}[m[28;63H4[16;1H[?25h[?25l{[27;1H}[28;63H5[17;1H[?25h[?25l[28;63H6[18;1H[?25h[?25l[28;63H7[19;1H[?25h[?25l[28;63H8[20;1H[?25h[?25l[28;63H9[21;1H[?25h[?25l[28;62H20[22;1H[?25h[?25l[1;27r[1;1H[2M[1;28r[27;1H[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len)[28;62H[K[28;62H21,1[10C14%[21;1H[?25h[?25l[28;63H2[22;1H[?25h[?25l[1;27r[27;1H
+[1;28r[27;1H{[28;62H[K[28;62H23,1[10C28%[22;1H[?25h[?25l[1;27r[1;1H[2M[1;28r[26;9H[93mif[m (arr_len == [95m1[m)[27;17H[93mreturn[m arr[[95m0[m];[28;62H[K[28;62H24,1[10C50%[21;1H[?25h[?25l[28;63H3[20;1H[?25h[?25l[28;63H2[19;1H[?25h[?25l[28;63H1[18;1H[?25h[?25l[28;63H0[17;1H[?25h[?25l[28;62H19[16;1H[?25h[?25l[28;63H8[15;1H[?25h[?25l[28;63H7[14;1H[?25h[?25l[28;63H6[13;1H[?25h[?25l[28;63H5[12;1H[?25h[?25l[11;1H[46m{[22;1H}[m[28;63H4[11;1H[?25h[?25l{[22;1H}[28;63H3[10;1H[?25h[?25l[28;63H2[9;1H[?25h[?25l[28;63H1[8;1H[?25h[?25li[28;65H2[8;2H[?25h[?25ln[28;65H3[8;3H[?25h[?25l[38;5;121mint[m[28;65H4[8;4H[?25h[?25l[28;65H5[8;5H[?25h[?25lm[28;65H6[8;6H[?25h[?25la[28;65H7[8;7H[?25h[?25lx[28;65H8[8;8H[?25h[?25l(
+
+
+[97m[101m{[12;21H{[3C}[m[28;65H9[8;9H[?25h[?25li[28;65H10[8;10H[?25h[?25ln[28;66H1[8;11H[?25h[?25l[38;5;121mint[m[28;66H2[8;12H[?25h[?25l[28;66H3[8;13H[?25h[?25lx[28;66H4[8;14H[?25h[?25l,[28;66H5[8;15H[?25h[?25li[28;66H6[8;16H[?25h[?25ln[28;66H7[8;17H[?25h[?25l[38;5;121mint[m[28;66H8[8;18H[?25h[?25l[28;66H9[8;19H[?25h[?25ly[28;65H20[8;20H[?25h[?25l)
+
+
+{[12;21H{[3C}[8;8H[46m([11C)[m[28;66H1[8;21H[?25h[?25l;[8;8H([11C)[28;66H2[8;22H[?25h[?25l[28;63H2,1 [9;1H[?25h[?25l[10;9H[46m()[m[28;63H3,11[10;11H[?25h[?25l()
+[46m{[22;1H}[m[28;63H4,2 [11;2H[?25h[?25l{[12;21H[46m{[3C}[m[22;1H}[28;63H5,15-22[12;22H[?25h[?25l{[3C}[28;63H6,8-15 [13;15H[?25h[?25l[28;63H7,1   [14;1H[?25h[?25l[28;63H8,15-22[15;22H[?25h[?25l[28;63H9,8-22 [16;22H[?25h[?25l[28;62H20,1   [17;1H[?25h[?25l[28;63H1,15-22[18;22H[?25h[?25l[28;63H2,1    [19;1H[?25h[?25l[28;63H3,11-18[20;18H[?25h[?25l[28;63H4,1    [21;1H[?25h[?25l[11;1H[46m{[22;1H}[m[28;63H5,2[22;2H[?25h[?25l[1;27r[27;1H
+[1;28r[27;9H[93melse[m[28;62H[K[28;62H26,1[10C66%[10;1H{[21;1H}
+[?25h[?25l[1;27r[27;1H
+[1;28r[27;17H[93mreturn[m max(arr[arr_len - [95m1[m], max_arr2(arr, arr_len - [95m1[m));[28;62H[K[28;62H27,22[9C83%[22;21H[46m[][?25h[?25l[1;27r[m[27;1H
+[1;28r[27;1H}[28;62H[K[28;62H28,2[9C바닥[21;21H[]
+[46m{[27;1H}[22;2H[?25h[?25l[m{[27;1H}[28;63H9,15-22[23;22H[?25h[?25l[28;62H30,8-22 [24;22H[?25h[?25l[28;63H1,6-13[25;13H[?25h[?25l[28;63H2,8-22[26;22H[?25h[?25l[22;1H[46m{[27;1H}[m[28;63H3,2   [27;2H[?25h[?25l[1;27r[27;1H
+[1;28r[28;62H[K[28;62H34,1[9C바닥[21;1H{[26;1H}
+[?25h[?25li[28;65H2[27;2H[?25h[?25ln[28;65H3[27;3H[?25h[?25l[38;5;121mint[m[28;65H4[27;4H[?25h[?25l[28;65H5[27;5H[?25h[?25lm[28;65H6[27;6H[?25h[?25la[28;65H7[27;7H[?25h[?25lx[28;65H8[27;8H[?25h[?25l([28;65H9[27;9H[?25h[?25li[28;65H10[27;10H[?25h[?25ln[28;66H1[27;11H[?25h[?25l[38;5;121mint[m[28;66H2[27;12H[?25h[?25l[28;66H3[27;13H[?25h[?25lx[28;66H4[27;14H[?25h[?25l,[28;66H5[27;15H[?25h[?25l[28;66H6[27;16H[?25h[?25li[28;66H7[27;17H[?25h[?25ln[28;66H8[27;18H[?25h[?25l[38;5;121mint[m[28;66H9[27;19H[?25h[?25l[28;65H20[27;20H[?25h[?25ly[28;66H1[27;21H[?25h[?25l)[27;8H[46m([12C)[m[28;66H2[27;22H[?25h[?25l;[27;8H([12C)[28;66H3[27;23H[?25h[?25l[1;27r[27;1H
+[1;28r[28;62H[K[28;62H35,1[9C바닥[27;1H[?25h[?25l[94m~                                                                              [m[28;63H4,23[26;23H[?25h[?25l[26;22H[K[26;8H[46m([12C)[m[28;66H2[26;22H[?25h[?25l{[26;8H([12C)[28;66H3[26;23H[?25h[?25l
+        [27;9H[K[28;63H5,2-9[27;9H[?25h[?25li[28;65H3-10[27;10H[?25h[?25l[93mif[m[28;65H4-11[27;11H[?25h[?25l([28;65H5-12[27;12H[?25h[?25lx[28;65H6-13[27;13H[?25h[?25l>[28;65H7-14[27;14H[?25h[?25ly[28;65H8-15[27;15H[?25h[?25l)[46m([mx>y[46m)[m[28;65H9-16[27;16H[?25h[?25l[1;27r[27;1H
+[1;28r[28;62H[K[28;62H36,3-17      바닥[26;11H(x>y)[27;17H[?25h[?25lr[28;65H4-18[27;18H[?25h[?25le[28;65H5-19[27;19H[?25h[?25lt[28;65H6-20[27;20H[?25h[?25lu[28;65H7-21[27;21H[?25h[?25lr[28;65H8-22[27;22H[?25h[?25l[93mreturn[m[28;65H9-23[27;23H[?25h[?25l[28;65H10-24[27;24H[?25h[?25lx[28;66H1-25[27;25H[?25h[?25l;[28;66H2-26[27;26H[?25h[?25l[1;27r[27;1H
+[1;28r[28;62H[K[28;62H37,2-9[7C바닥[27;9H[?25h[?25le[28;65H3-10[27;10H[?25h[?25ll[28;65H4-11[27;11H[?25h[?25ls[28;65H5-12[27;12H[?25h[?25l[93melse[m[28;65H6-13[27;13H[?25h[?25l[1;27r[27;1H
+[1;28r[28;62H[K[28;62H38,3-17      바닥[27;17H[?25h[?25lr[28;65H4-18[27;18H[?25h[?25le[28;65H5-19[27;19H[?25h[?25lt[28;65H6-20[27;20H[?25h[?25lu[28;65H7-21[27;21H[?25h[?25lr[28;65H8-22[27;22H[?25h[?25l[93mreturn[m[28;65H9-23[27;23H[?25h[?25l[28;65H10-24[27;24H[?25h[?25ly[28;66H1-25[27;25H[?25h[?25l;[28;66H2-26[27;26H[?25h[?25l[1;27r[27;1H
+[1;28r[28;62H[K[28;62H39,2-9[7C바닥[27;9H[?25h[?25l}[22;22H[46m{[27;1H}[m[28;66H  [27;2H[?25h[?25l[22;22H{[27;1H}[28;63H8,1[26;1H[?25h[?25l[28;63H7[25;1H[?25h[?25l[28;63H8[26;1H[?25h[?25l[22;22H[46m{[27;1H}[m[28;63H9,2[27;2H[?25h[?25l;[22;22H{[27;1H}[28;65H3[27;3H[?25h[?25l[28;63H8,1[26;1H[?25h[?25l[28;63H7[25;1H[?25h[?25l[28;63H6[24;1H[?25h[?25l[28;63H7[25;1H[?25h[?25l[28;63H8[26;1H[?25h[?25l[28;63H9,3[27;3H[?25h[?25l[27;2H[K[22;22H[46m{[27;1H}[m[28;65H2[27;2H[?25h[?25l[22;22H{[27;1H}[28;63H8,1[26;1H[?25h[?25l[28;63H7[25;1H[?25h[?25l[28;63H6[24;1H[?25h[?25l[28;63H5[23;1H[?25h[?25l[28;63H4,2[22;2H[?25h[?25l[16;1H[46m{[21;1H}[m[28;63H3[21;2H[?25h[?25l[16;1H{[21;1H}[28;63H2,1[20;1H[?25h[?25l[28;63H1[19;1H[?25h[?25l[28;63H0[18;1H[?25h[?25l[28;62H29[17;1H[?25h[?25l[16;1H[46m{[21;1H}[m[28;63H8,2[16;2H[?25h[?25l{[21;1H}[28;63H7[15;2H[?25h[?25l[28;63H6,1[14;1H[?25h[?25l[2;1H[46m{[13;1H}[m[28;63H5,2[13;2H[?25h[?25l[2;1H{[13;1H}[28;63H4,1[12;1H[?25h[?25l[28;63H3[11;1H[?25h[?25l[28;63H2[10;1H[?25h[?25l[28;63H1[9;1H[?25h[?25l[28;63H0[8;1H[?25h[?25l[28;62H19[7;1H[?25h[?25l[28;63H8[6;1H[?25h[?25l[1;27r[1;1H[L[1;28r[28;62H[K[28;62H17,1[10C91%[6;1H[?25h[?25l[1;27r[1;1H[L[1;28r[1;1H[38;5;121mint[m max([38;5;121mint[m x,[38;5;121mint[m y);[28;62H[K[28;62H16,1[10C83%[6;1H[?25h[?25l[1;27r[1;1H[L[1;28r[1;1H[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len);[28;62H[K[28;62H15,1[10C75%[6;1H[?25h[?25l[1;27r[1;1H[L[1;28r[28;62H[K[28;62H14,2[10C66%[6;1H[46m{[17;1H}[6;2H[?25h[?25l[1;27r[m[1;1H[L[1;28r[28;62H[K[28;62H13,2[10C58%[7;1H{[18;1H}[6;2H[?25h[?25l[1;27r[1;1H[L[1;28r[28;62H[K[28;62H12,1[10C50%[6;1H[?25h[?25l[1;27r[1;1H[L[1;28r[28;62H[K[28;62H11,2[10C41%[6;2H[?25h[?25l[1;27r[1;1H[L[1;28r[1;1H[38;5;81m#include [m[95m<stdio.h>[m[28;62H[K[28;62H10,2[10C33%[6;2H[?25h[?25l[1;27r[1;1H[L[1;28r[28;62H[K[28;62H9,1[11C25%[6;1H[?25h[?25l[1;27r[1;1H[2L[1;28r[1;1H[96m//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 [m[94m>>[m[2;1H[96m찾으세요![m[28;62H[K[28;62H8,2[11C15%[7;2H[?25h[?25l[28;62H7,1[6;1H[?25h[?25l[1;27r[1;1H[L[1;28r[1;1H[96m//배열 원소 값이 단조증가일 때에는 정상동작합니다.[m[28;62H[K[28;62H6,1[12C7%[6;1H[?25h[?25l[1;27r[1;1H[2L[1;28r[1;1H[96m//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다[2;1H.[m[28;62H[K[28;62H5,2[8C꼭대기[7;2H[?25h[?25l[28;62H4,1[6;1H[?25h[?25l[28;62H3,2[4;2H[?25h[?25l[28;62H2[3;2H[?25h[?25l[28;62H1[1;2H[?25h[?25l[28;62H2[3;2H[?25h[?25l[28;62H3[4;2H[?25h[?25l[28;62H4,1[6;1H[?25h[?25l[28;62H5,2[7;2H[?25h[?25l[28;62H6,1[8;1H[?25h[?25l[28;62H7[9;1H[?25h[?25l[28;62H8,2[10;2H[?25h[?25l[28;62H9,1[11;1H[?25h[?25l[10;27r[27;1H
+[1;28r[28;62H[K[28;62H8,2[8C꼭대기[10;2H[?25h[?25l[28;64H1[10;1H[?25h[?25l[9;27r[27;1H
+[1;28r[27;1H[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len)[28;62H[K[28;62H7,1[8C꼭대기[9;1H[?25h[?25l[8;27r[27;1H
+[1;28r[27;1H{[28;62H[K[28;62H6,1[8C꼭대기[8;1H[?25h[?25l[28;62H7[9;1H[?25h[?25l[28;62H8[10;1H[?25h[?25l[28;62H9[11;1H[?25h[?25l[28;62H8[10;1H[?25h[?25l[28;62H7[9;1H[?25h[?25l[28;62H8[10;1H[?25h[?25l[28;62H7[9;1H[?25h[?25l[28;62H8[10;1H[?25h[?25l[28;62H9[11;1H[?25h[?25l[28;62H10,1[12;1H[?25h[?25l
+[46m{[24;1H}[m[28;63H1[13;1H[?25h[?25l{[24;1H}[28;63H2[14;1H[?25h[?25l[28;63H3[15;1H[?25h[?25l[28;63H4[16;1H[?25h[?25l[28;63H5[17;1H[?25h[?25l[28;63H6[18;1H[?25h[?25l[28;63H7[19;1H[?25h[?25l[28;63H8[20;1H[?25h[?25l[28;63H9[21;1H[?25h[?25l[28;62H20[22;1H[?25h[?25l[1;27r[1;1H[2M[1;28r[26;9H[93mif[m (arr_len == [95m1[m)[27;17H[93mreturn[m arr[[95m0[m];[28;62H[K[28;62H21,1[10C10%[21;1H[?25h[?25l[11;1H[46m{[22;1H}[m[28;63H2[22;1H[?25h[?25l[1;27r[27;1H
+[1;28r[27;9H[93melse[m[28;62H[K[28;62H23,1[10C20%[10;1H{[21;1H}
+[?25h[?25l[1;27r[1;1H[2M[1;28r[26;17H[93mreturn[m max(arr[arr_len - [95m1[m], max_arr2(arr, arr_len - [95m1[m));
+}[28;62H[K[28;62H24,1[10C33%[21;1H[?25h[?25l
+[46m{[27;1H}[m[28;63H5[22;1H[?25h[?25l[1;27r[27;1H
+[1;28r[27;1H[38;5;121mint[m max([38;5;121mint[m x, [38;5;121mint[m y){[28;62H[K[28;62H26,1[10C44%[21;1H{[26;1H}[22;1H[?25h[?25l[1;27r[27;1H
+[1;28r[27;9H[93mif[m(x>y)[28;62H[K[28;62H27,1[10C55%[22;1H[?25h[?25l[1;27r[27;1H
+[1;28r[27;17H[93mreturn[m x;[28;62H[K[28;62H28,1[10C66%[22;1H[?25h[?25l[1;27r[27;1H
+[1;28r[27;9H[93melse[m[28;62H[K[28;62H29,1[10C77%[22;1H[?25h[?25l[1;27r[27;1H
+[1;28r[27;17H[93mreturn[m y;[28;62H[K[28;62H30,1[10C88%[17;1H[46m{[22;1H}[?25h[?25l[1;27r[m[27;1H
+[1;28r[27;1H}[28;62H[K[28;62H31,1[9C바닥[16;1H{[21;1H}
+[?25h[?25l[28;63H2[23;1H[?25h[?25l[28;63H3[24;1H[?25h[?25l[28;63H4[25;1H[?25h[?25l[28;63H5[26;1H[?25h[?25l[28;63H4[25;1H[?25h[?25l[28;63H3[24;1H[?25h[?25l[28;63H2[23;1H[?25h[?25l[28;63H1[22;1H[?25h[28;1H[K[22;1H[?25l[28;52H^[[22;1H[28;52H  [22;1H[28;62H31,1[9C바닥[22;1H[?25h[?25l[28;52H:[22;1H[28;52H[K[28;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"gdb_hw2.c" [도스] 36L, 773C 저장 했습니다
+[?2004l[?1l>[?25h[?1049l[23;0;0t금  5월 15 19:23:56 jaeho $vim gdb_hw2.cls[Kgdb hw2cc[C[C[C[C-g -o hw2 gdb_hw2.c
+금  5월 15 19:24:01 jaeho $gcc -g -o hw2 gdb_hw2.c[10Pvim[C[C[C[C[C[C[C[C[C[Cls[Kgdb hw2
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from hw2...done.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw2 
+9
+[Inferior 1 (process 11046) exited normally]
+(gdb) l 30
+25	{
+26		if (arr_len == 1)
+27			return arr[0];
+28		else
+29			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+30	}
+31	int max(int x, int y){
+32		if(x>y)
+33			return x;
+34		else
+(gdb) b 27
+Breakpoint 1 at 0x555555554763: file gdb_hw2.c, line 27.
+(gdb) b 29
+Breakpoint 2 at 0x55555555476b: file gdb_hw2.c, line 29.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw2 
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=10) at gdb_hw2.c:29
+29			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=9) at gdb_hw2.c:29
+29			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=8) at gdb_hw2.c:29
+29			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=7) at gdb_hw2.c:29
+29			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=6) at gdb_hw2.c:29
+29			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=5) at gdb_hw2.c:29
+29			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=4) at gdb_hw2.c:29
+29			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=3) at gdb_hw2.c:29
+29			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 2, max_arr2 (arr=0x7fffffffdfd0, arr_len=2) at gdb_hw2.c:29
+29			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=1) at gdb_hw2.c:27
+27			return arr[0];
+(gdb) disas max_arr2
+Dump of assembler code for function max_arr2:
+   0x000055555555474e <+0>:	push   %rbp
+   0x000055555555474f <+1>:	mov    %rsp,%rbp
+   0x0000555555554752 <+4>:	sub    $0x10,%rsp
+   0x0000555555554756 <+8>:	mov    %rdi,-0x8(%rbp)
+   0x000055555555475a <+12>:	mov    %esi,-0xc(%rbp)
+   0x000055555555475d <+15>:	cmpl   $0x1,-0xc(%rbp)
+   0x0000555555554761 <+19>:	jne    0x55555555476b <max_arr2+29>
+=> 0x0000555555554763 <+21>:	mov    -0x8(%rbp),%rax
+   0x0000555555554767 <+25>:	mov    (%rax),%eax
+   0x0000555555554769 <+27>:	jmp    0x5555555547a0 <max_arr2+82>
+   0x000055555555476b <+29>:	mov    -0xc(%rbp),%eax
+   0x000055555555476e <+32>:	lea    -0x1(%rax),%edx
+   0x0000555555554771 <+35>:	mov    -0x8(%rbp),%rax
+   0x0000555555554775 <+39>:	mov    %edx,%esi
+   0x0000555555554777 <+41>:	mov    %rax,%rdi
+   0x000055555555477a <+44>:	callq  0x55555555474e <max_arr2>
+   0x000055555555477f <+49>:	mov    %eax,%ecx
+   0x0000555555554781 <+51>:	mov    -0xc(%rbp),%eax
+   0x0000555555554784 <+54>:	cltq   
+   0x0000555555554786 <+56>:	shl    $0x2,%rax
+   0x000055555555478a <+60>:	lea    -0x4(%rax),%rdx
+   0x000055555555478e <+64>:	mov    -0x8(%rbp),%rax
+   0x0000555555554792 <+68>:	add    %rdx,%rax
+   0x0000555555554795 <+71>:	mov    (%rax),%eax
+   0x0000555555554797 <+73>:	mov    %ecx,%esi
+   0x0000555555554799 <+75>:	mov    %eax,%edi
+---Type <return> to continue, or q <return> to quit---Quit
+(gdb) quti[K[K[K[Kquti[K[Kit
+A debugging session is active.
+
+	Inferior 1 [process 11050] will be killed.
+
+Quit anyway? (y or n) y
+금  5월 15 19:30:12 jaeho $l[Kl[Kvim d[Kgdb_max[K[K[Khw[K[K[K[K[K[K[K[K[K[Kls
+gdb_hw1.c  gdb_hw3.c  gdb_hw5.c  [0m[01;32mhw1[0m  [01;32mhw3[0m  [01;32mhw5[0m  log.txt   log3.txt  log5.txt
+gdb_hw2.c  gdb_hw4.c  gdb_hw6.c  [01;32mhw2[0m  [01;32mhw4[0m  [01;32mhw6[0m  log2.txt  log4.txt  log6.txt
+금  5월 15 19:30:36 jaeho $gdb_h[K[K[K[K[Kvim gdb_hw2.c
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;28r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[28;1H"gdb_hw2.c" [도스] 36L, 773C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[32mint[m main()
+{[3;9H[32mint[m a[[31m10[m] = { [31m0[m };[4;9H[32mint[m i;[6;9H[38;5;130mfor[m (i = [31m0[m; i < [31m10[m; i++)[7;17Ha[i] = [31m9[m - i;[9;9Hprintf([31m"[m[35m%d\n[m[31m"[m, max_arr2(a, [31m10[m));[11;9H[38;5;130mreturn[m [31m0[m;
+
+}
+
+[32mint[m max_arr2([32mint[m arr[],[32mint[m arr_len)
+{[17;9H[38;5;130mif[m (arr_len == [31m1[m)[18;17H[38;5;130mreturn[m arr[[31m0[m];[19;9H[38;5;130melse[20;17Hreturn[m max(arr[arr_len - [31m1[m], max_arr2(arr, arr_len - [31m1[m));
+}
+[32mint[m max([32mint[m x, [32mint[m y){[23;9H[38;5;130mif[m(x>y)[24;17H[38;5;130mreturn[m x;[25;9H[38;5;130melse[26;17Hreturn[m y;
+}[28;62H31,1[9C바닥[22;1H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[1;1H[38;5;121mint[m main()
+{[3;9H[38;5;121mint[m a[[95m10[m] = { [95m0[m };[4;9H[38;5;121mint[m i;[6;9H[93mfor[m (i = [95m0[m; i < [95m10[m; i++)[7;17Ha[i] = [95m9[m - i;[9;9Hprintf([95m"[m[38;5;224m%d\n[m[95m"[m, max_arr2(a, [95m10[m));[11;9H[93mreturn[m [95m0[m;
+
+}
+
+[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len)
+{[17;9H[93mif[m (arr_len == [95m1[m)[18;17H[93mreturn[m arr[[95m0[m];[19;9H[93melse[20;17Hreturn[m max(arr[arr_len - [95m1[m], max_arr2(arr, arr_len - [95m1[m));
+}
+[38;5;121mint[m max([38;5;121mint[m x, [38;5;121mint[m y){[23;9H[93mif[m(x>y)[24;17H[93mreturn[m x;[25;9H[93melse[26;17Hreturn[m y;
+}[28;62H31,1[9C바닥"gdb_hw2.c" [도스] 36L, 773C[22;1H[?25h[?25l[28;52H~@k[22;1H[28;52H   [23;8H[28;63H2,1-8[23;8H[?25h[?25l[28;52H~@k[23;8H[28;52H   [24;8H[28;63H3[24;8H[?25h[?25l[28;52H~@k[24;8H[28;52H   [25;8H[28;63H4[25;8H[?25h[?25l[28;52H~@k[25;8H[28;52H   [26;8H[28;63H5[26;8H[?25h[?25l[28;52H~@k[26;8H[28;52H   [27;1H[22;22H[46m{[27;1H}[m[28;63H6,1  [27;1H[?25h[?25l[28;52H~@k[27;1H[28;52H   [27;1H
+[1m-- 끼워넣기 -- [m[28;15H[K[28;62H36,1[9C바닥[27;1H[?25h[?25l[26;26H}
+[94m~                                                                              [m[26;26H[46m}[m[28;63H5,12-26[26;26H[?25h[?25l}[26;26H[K[26;25H[46m}[m[28;66H1-25[26;25H[?25h[?25l}[26;25H[K[26;24H[46m}[m[28;66H0-24[26;24H[?25h[?25l}[26;24H[K[26;23H[46m}[m[28;65H9-23 [26;23H[?25h[?25lretur}[26;23H[K[26;22H[46m}[m[28;65H8-22[26;22H[?25h[?25l}[26;22H[K[26;21H[46m}[m[28;65H7-21[26;21H[?25h[?25l}[26;21H[K[26;20H[46m}[m[28;65H6-20[26;20H[?25h[?25l}[26;20H[K[26;19H[46m}[m[28;65H5-19[26;19H[?25h[?25l}[26;19H[K[26;18H[46m}[m[28;65H4-18[26;18H[?25h[?25l}[26;18H[K[26;17H[46m}[m[28;65H3-17[26;17H[?25h[?25l[26;9H}[26;17H[K[26;9H[46m}[m[28;65H2-9 [26;9H[?25h[?25l}[26;9H[K[26;1H[46m}[m[28;65H1  [26;1H[?25h[?25l[25;13H}
+[94m~                                                                              [m[25;13H[46m}[m[28;63H4,6-13[25;13H[?25h[?25lels}[25;13H[K[25;12H[46m}[m[28;65H5-12[25;12H[?25h[?25l}[25;12H[K[25;11H[46m}[m[28;65H4-11[25;11H[?25h[?25l}[25;11H[K[25;10H[46m}[m[28;65H3-10[25;10H[?25h[?25l}[25;10H[K[25;9H[46m}[m[28;65H2-9 [25;9H[?25h[?25l}[25;9H[K[25;1H[46m}[m[28;65H1  [25;1H[?25h[?25l[24;26H}
+[94m~                                                                              [m[24;26H[46m}[m[28;63H3,12-26[24;26H[?25h[?25l}[24;26H[K[24;25H[46m}[m[28;66H1-25[24;25H[?25h[?25l}[24;25H[K[24;24H[46m}[m[28;66H0-24[24;24H[?25h[?25l}[24;24H[K[24;23H[46m}[m[28;65H9-23 [24;23H[?25h[?25lretur}[24;23H[K[24;22H[46m}[m[28;65H8-22[24;22H[?25h[?25l}[24;22H[K[24;21H[46m}[m[28;65H7-21[24;21H[?25h[?25l}[24;21H[K[24;20H[46m}[m[28;65H6-20[24;20H[?25h[?25l}[24;20H[K[24;19H[46m}[m[28;65H5-19[24;19H[?25h[?25l}[24;19H[K[24;18H[46m}[m[28;65H4-18[24;18H[?25h[?25l}[24;18H[K[24;17H[46m}[m[28;65H3-17[24;17H[?25h[?25l[24;9H}[24;17H[K[24;9H[46m}[m[28;65H2-9 [24;9H[?25h[?25l}[24;9H[K[24;1H[46m}[m[28;65H1  [24;1H[?25h[?25l[23;16H}
+[94m~                                                                              [m[23;16H[46m}[m[28;63H2,9-16[23;16H[?25h[?25l}[23;16H[K[23;15H[46m}[m[28;65H8-15[23;15H[?25h[?25l}[23;15H[K[23;14H[46m}[m[28;65H7-14[23;14H[?25h[?25l}[23;14H[K[23;13H[46m}[m[28;65H6-13[23;13H[?25h[?25l}[23;13H[K[23;12H[46m}[m[28;65H5-12[23;12H[?25h[?25l}[23;12H[K[23;11H[46m}[m[28;65H4-11[23;11H[?25h[?25li}[23;11H[K[23;10H[46m}[m[28;65H3-10[23;10H[?25h[?25l}[23;10H[K[23;9H[46m}[m[28;65H2-9 [23;9H[?25h[?25l}[23;9H[K[23;1H[46m}[m[28;65H1  [23;1H[?25h[?25l[22;23H}
+[94m~                                                                              [m[22;23H[46m}[m[28;63H1,23[22;23H[?25h[?25l[46m}[m[22;23H[K[22;22H}[28;66H2[22;22H[?25h[?25l}[22;22H[K[28;66H1[22;21H[?25h[?25l}[22;21H[K[28;66H0[22;20H[?25h[?25l}[22;20H[K[28;65H19[22;19H[?25h[?25lin}[22;19H[K[28;66H8[22;18H[?25h[?25l}[22;18H[K[28;66H7[22;17H[?25h[?25l}[22;17H[K[28;66H6[22;16H[?25h[?25l}[22;16H[K[28;66H5[22;15H[?25h[?25l}[22;15H[K[28;66H4[22;14H[?25h[?25l}[22;14H[K[28;66H3[22;13H[?25h[?25l}[22;13H[K[28;66H2[22;12H[?25h[?25lin}[22;12H[K[28;66H1[22;11H[?25h[?25l}[22;11H[K[28;66H0[22;10H[?25h[?25l}[22;10H[K[28;65H9 [22;9H[?25h[?25l}[22;9H[K[28;65H8[22;8H[?25h[?25l}[22;8H[K[28;65H7[22;7H[?25h[?25l}[22;7H[K[28;65H6[22;6H[?25h[?25l}[22;6H[K[28;65H5[22;5H[?25h[?25l}[22;5H[K[28;65H4[22;4H[?25h[?25lin}[22;4H[K[28;65H3[22;3H[?25h[?25l}[22;3H[K[28;65H2[22;2H[?25h[?25l[28;65H3[22;3H[?25h[?25l[22;2H[K[28;65H2[22;2H[?25h[?25l[22;1H[K[28;65H1[22;1H[?25h[?25l[16;1H[46m{[21;1H}[m[28;63H0[21;1H[?25h[?25l[16;1H{[21;1H}[28;63H1[22;1H[?25h[?25l[94m~                                                                              [m[16;1H[46m{[21;1H}[m[28;63H0,2[21;2H[?25h[?25l[16;1H{[21;1H}[28;62H29,1[20;1H[?25h[?25l[28;63H8[19;1H[?25h[?25l[28;63H7[18;1H[?25h[?25l[28;63H6[17;1H[?25h[?25l[16;1H[46m{[21;1H}[m[28;63H5,2[16;2H[?25h[?25l{[21;1H}[28;63H4[15;2H[?25h[?25l[28;63H3,1[14;1H[?25h[?25l[2;1H[46m{[13;1H}[m[28;63H2,2[13;2H[?25h[?25l[2;1H{[13;1H}[28;63H1,1[12;1H[?25h[?25l[28;63H0[11;1H[?25h[?25l[28;62H19[10;1H[?25h[?25l[28;63H8[9;1H[?25h[?25l[28;63H7[8;1H[?25h[?25l[28;63H6[7;1H[?25h[?25l[28;63H5[6;1H[?25h[?25l[1;27r[1;1H[L[1;28r[28;62H[K[28;62H14,1[9C바닥[6;1H[?25h[?25l[1;27r[1;1H[L[1;28r[1;1H[38;5;121mint[m max([38;5;121mint[m x,[38;5;121mint[m y);[28;62H[K[28;62H13,1[9C바닥[6;1H[?25h[?25l[1;27r[1;1H[L[1;28r[1;1H[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len);[28;62H[K[28;62H12,1[9C바닥[6;1H[?25h[?25l[1;27r[1;1H[L[1;28r[28;62H[K[28;62H11,2[9C바닥[6;1H[46m{[17;1H}[6;2H[?25h[?25l[1;27r[m[1;1H[L[1;28r[1;1H[38;5;81m#include [m[95m<stdio.h>[m[28;62H[K[28;62H10,2[9C바닥[7;1H{[18;1H}[6;2H[?25h[?25l[1;27r[1;1H[L[1;28r[28;62H[K[28;62H9,1[10C바닥[6;1H[?25h[?25l[1;27r[1;1H[2L[1;28r[1;1H[96m//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 [m[94m>>[m[2;1H[96m찾으세요![m[28;62H[K[28;62H8,2[11C50%[7;2H[?25h[?25l[28;62H7[6;2H[?25h[?25l[1;27r[1;1H[L[1;28r[1;1H[96m//배열 원소 값이 단조증가일 때에는 정상동작합니다.[m[28;62H[K[28;62H6,1[11C25%[6;1H[?25h[?25l[1;27r[1;1H[2L[1;28r[1;1H[96m//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다 [2;1H.[m[28;62H[K[28;62H5,2[8C꼭대기[7;2H[?25h[?25l[28;62H4,1[6;1H[?25h[?25l[28;62H3,2[4;2H[?25h[?25l[28;62H2[3;2H[?25h[?25l[28;62H1[1;2H[?25h[?25l[28;62H2[3;2H[?25h[?25l[28;62H3[4;2H[?25h[?25l[28;62H4,1[6;1H[?25h[?25l[28;62H5,2[7;2H[?25h[?25l[28;62H6,1[8;1H[?25h[?25l[28;62H7,2[9;2H[?25h[?25l[28;62H8[10;2H[?25h[?25l[28;65H3[10;23H[?25h[?25l[28;65H2[10;22H[?25h[?25l[10;21H[K[10;8H[46m([11C)[m[28;65H1[10;21H[?25h[?25l[10;20H[K[13;1H[97m[101m{[14;21H{[3C}[m[10;8H([28;65H0[10;20H[?25h[?25l[10;19H[K[28;64H19[10;19H[?25h[?25l[28;65H8[10;18H[?25h[?25lin[10;17H[K[28;65H7[10;17H[?25h[?25l[10;16H[K[28;65H6[10;16H[?25h[?25l[10;15H[K[28;65H5[10;15H[?25h[?25l[10;14H[K[28;65H4[10;14H[?25h[?25l[10;13H[K[28;65H3[10;13H[?25h[?25l[28;65H2[10;12H[?25h[?25lin[10;11H[K[28;65H1[10;11H[?25h[?25l[10;10H[K[28;65H0[10;10H[?25h[?25l[10;9H[K[28;64H9 [10;9H[?25h[?25l[10;8H[K[13;1H{[14;21H{[3C}[28;64H8[10;8H[?25h[?25l[10;7H[K[28;64H7[10;7H[?25h[?25l[10;6H[K[28;64H6[10;6H[?25h[?25l[10;5H[K[28;64H5[10;5H[?25h[?25l[28;64H4[10;4H[?25h[?25lin[10;3H[K[28;64H3[10;3H[?25h[?25l[10;2H[K[28;64H2[10;2H[?25h[?25l[10;1H[K[28;64H1[10;1H[?25h[?25l[28;62H7[9;1H[?25h[?25l[28;62H6[8;1H[?25h[?25l\[28;64H2[8;2H[?25h[?25l[8;1H[K[28;64H1[8;1H[?25h[?25l[9;27r[9;1H[L[1;28r[28;62H[K[28;62H7,1[8C꼭대기[9;1H[?25h[?25l[28;62H6[8;1H[?25h[?25l#[28;64H2[8;2H[?25h[?25ld[28;64H3[8;3H[?25h[?25le[28;64H4[8;4H[?25h[?25lf[28;64H5[8;5H[?25h[?25li[28;64H6[8;6H[?25h[?25ln[28;64H7[8;7H[?25h[?25l[38;5;81m#define[m[28;64H8[8;8H[?25h[?25l[38;5;81m [m[28;64H9[8;9H[?25h[?25l[38;5;81mm[m[28;64H10[8;10H[?25h[?25l[38;5;81ma[m[28;65H1[8;11H[?25h[?25l[38;5;81mx[m[28;65H2[8;12H[?25h[?25l[38;5;81m([m[28;65H3[8;13H[?25h[?25l[38;5;81mx[m[28;65H4[8;14H[?25h[?25l[38;5;81m,[m[28;65H5[8;15H[?25h[?25l[38;5;81my[m[28;65H6[8;16H[?25h[?25l[38;5;81m)[m[38;5;81m[46m([3C)[m[28;65H7[8;17H[?25h[?25l[38;5;81m (x,y)[m[28;65H8[8;18H[?25h[?25l[38;5;81m([m[28;65H9[8;19H[?25h[?25l[38;5;81mx[m[28;64H20[8;20H[?25h[?25l[38;5;81m)[m[38;5;81m[46m([1C)[m[28;65H1[8;21H[?25h[?25l[38;5;81m>(x)[m[28;65H2[8;22H[?25h[?25l[38;5;81m([m[28;65H3[8;23H[?25h[?25l[38;5;81mu[m[28;65H4[8;24H[?25h[?25l[8;23H[K[28;65H3[8;23H[?25h[?25l[38;5;81my[m[28;65H4[8;24H[?25h[?25l[38;5;81m)[m[38;5;81m[46m([1C)[m[28;65H5[8;25H[?25h[?25l[38;5;81m?(y)[m[28;65H6[8;26H[?25h[?25l[38;5;81m([m[28;65H7[8;27H[?25h[?25l[38;5;81mx[m[28;65H8[8;28H[?25h[?25l[38;5;81m)[m[38;5;81m[46m([1C)[m[28;65H9[8;29H[?25h[?25l[38;5;81m>(x)[m[28;64H30[8;30H[?25h[?25l[8;29H[K[8;26H[38;5;81m[46m([1C)[m[28;64H29[8;29H[?25h[?25l[38;5;81m:(x)[m[28;64H30[8;30H[?25h[?25l[38;5;81m([m[28;65H1[8;31H[?25h[?25l[38;5;81my[m[28;65H2[8;32H[?25h[?25l[38;5;81m)[m[38;5;81m[46m([1C)[m[28;65H3[8;33H[?25h[?25l[38;5;81m_(y)[m[28;65H4[8;34H[?25h[?25l[8;33H[K[8;30H[38;5;81m[46m([1C)[m[28;65H3[8;33H[?25h[?25l[97m[101m)[m[38;5;81m(y)[m[28;65H4[8;34H[?25h[?25l[28;65H3[8;33H[?25h[?25l[38;5;81m[46m([1C)[m[28;65H2[8;32H[?25h[?25l[28;65H1[8;31H[?25h[?25l[28;65H0[8;30H[?25h[?25l[38;5;81m[46m([1C)[m[1C[38;5;81m(y)[m[28;64H29[8;29H[?25h[?25l[28;65H8[8;28H[?25h[?25l[28;65H7[8;27H[?25h[?25l[28;65H6[8;26H[?25h[?25l[38;5;81m[46m([1C)[m[1C[38;5;81m(x)[m[28;65H5[8;25H[?25h[?25l[28;65H4[8;24H[?25h[?25l[28;65H3[8;23H[?25h[?25l[28;65H2[8;22H[?25h[?25l[38;5;81m[46m([1C)[m[1C[38;5;81m(y)[m[28;65H1[8;21H[?25h[?25l[28;65H0[8;20H[?25h[?25l[28;64H19[8;19H[?25h[?25l[28;65H8[8;18H[?25h[?25l[1C[38;5;81m([m[38;5;81m[46mx[m[38;5;81m)>(y)?(x):(y))[8;18H([m[38;5;81m[46m([m[38;5;81mx[m[38;5;81m[46m)[m[28;65H9[8;19H[?25h[?25l[38;5;81m[46m([m[38;5;81m(x)[m[12C[38;5;81m[46m)[m[28;64H35[8;35H[?25h[?25l[8;18H[38;5;81m([15C)[m[28;62H5,19[7;19H[?25h[?25l[8;27r[8;1H[L[1;28r[28;62H[K[28;62H6,1[8C꼭대기[8;1H[?25h[?25l[28;62H7[9;1H[?25h[?25l[28;62H8[10;1H[?25h[?25l[28;62H9[11;1H[?25h[?25l[28;62H10,1[12;1H[?25h[?25l[28;63H1[13;1H[?25h[?25l[28;63H2[14;1H[?25h[?25l
+[46m{[26;1H}[m[28;63H3[15;1H[?25h[?25l{[26;1H}[28;63H4[16;1H[?25h[?25l[28;63H5[17;1H[?25h[?25l[28;63H6[18;1H[?25h[?25l[28;63H7[19;1H[?25h[?25l[28;63H8[20;1H[?25h[?25l[28;63H9[21;1H[?25h[?25l[28;62H20[22;1H[?25h[?25l[1;27r[1;1H[2M[1;28r[26;1H[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len)
+{[28;62H[K[28;62H21,1[10C16%[21;1H[?25h[?25l[28;63H2[22;1H[?25h[?25l[1;27r[27;1H
+[1;28r[27;9H[93mif[m (arr_len == [95m1[m)[28;62H[K[28;62H23,1[10C33%[22;1H[?25h[?25l[1;27r[1;1H[2M[1;28r[26;17H[93mreturn[m arr[[95m0[m];[27;9H[93melse[m[28;62H[K[28;62H24,1[10C60%[10;1H[46m{[21;1H}[?25h[?25l[m[10;1H{[21;1H}[28;63H5[22;1H[?25h[?25l[1;27r[27;1H
+[1;28r[27;17H[93mreturn[m max(arr[arr_len - [95m1[m], max_arr2(arr, arr_len - [95m1[m));[28;62H[K[28;62H26,1[10C80%[22;1H[?25h[?25l[1;27r[27;1H
+[1;28r[27;1H}[28;62H[K[28;62H27,1[9C바닥[22;1H[46m{[27;1H}[22;1H[?25h[?25l[m{[27;1H}[28;63H8[23;1H[?25h[?25l[28;63H9[24;1H[?25h[?25l[28;62H30[25;1H[?25h[?25l[28;63H1[26;1H[?25h[?25l[22;1H[46m{[27;1H}[m[28;63H2[27;1H[?25h[?25l[22;1H{[27;1H}[28;63H1[26;1H[?25h[?25l[28;63H0[25;1H[?25h[?25l[28;62H29[24;1H[?25h[28;1H[K[24;1H[?25l[28;52H^[[24;1H[28;52H  [24;1H[28;62H29,1-8[7C바닥[24;8H[?25h[?25l[28;52H;[24;8H[28;52H [24;8H[?25h[?25l[28;52H:[24;8H[28;52H[K[28;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"gdb_hw2.c" [도스] 32L, 719C 저장 했습니다
+[?2004l[?1l>[?25h[?1049l[23;0;0t금  5월 15 19:32:05 jaeho $vim gdb_hw2.cls[Kgdb hw2cc -g -o hw2 gdb_hw2.c
+금  5월 15 19:32:08 jaeho $gdb hw2
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from hw2...done.
+(gdb) l 30
+25	
+26	int max_arr2(int arr[],int arr_len)
+27	{
+28		if (arr_len == 1)
+29			return arr[0];
+30		else
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+32	}
+(gdb) l[Kl 15
+10	
+11	
+12	int main()
+13	{
+14		int a[10] = { 0 };
+15		int i;
+16	
+17		for (i = 0; i < 10; i++)
+18			a[i] = 9 - i; 
+19	
+(gdb) l 30
+25	
+26	int max_arr2(int arr[],int arr_len)
+27	{
+28		if (arr_len == 1)
+29			return arr[0];
+30		else
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+32	}
+(gdb) b 31
+Breakpoint 1 at 0x76c: file gdb_hw2.c, line 31.
+(gdb) c[Kr
+Starting program: /home/jaeho/gdb_hw/hw2 
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=10) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=9) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=8) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=7) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=6) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=5) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=4) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=3) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=2) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=2) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=3) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=2) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=2) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=4) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=3) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) quit
+A debugging session is active.
+
+	Inferior 1 [process 11066] will be killed.
+
+Quit anyway? (y or n) y
+금  5월 15 20:41:39 jaeho $l[Kls
+gdb_hw1.c  gdb_hw3.c  gdb_hw5.c  [0m[01;32mhw1[0m  [01;32mhw3[0m  [01;32mhw5[0m  log.txt   log3.txt  log5.txt
+gdb_hw2.c  gdb_hw4.c  gdb_hw6.c  [01;32mhw2[0m  [01;32mhw4[0m  [01;32mhw6[0m  log2.txt  log4.txt  log6.txt
+금  5월 15 20:42:27 jaeho $vim gdb_hw[K[Khw2.c
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;28r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[28;1H"gdb_hw2.c" [도스] 32L, 719C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[2;1H[35m#define max(x,y) ((x)>(y)?(x):(y))[m
+
+[32mint[m max_arr2([32mint[m arr[],[32mint[m arr_len);
+
+
+[32mint[m main()
+{[9;9H[32mint[m a[[31m10[m] = { [31m0[m };[10;9H[32mint[m i;[12;9H[38;5;130mfor[m (i = [31m0[m; i < [31m10[m; i++)[13;17Ha[i] = [31m9[m - i;[15;9Hprintf([31m"[m[35m%d\n[m[31m"[m, max_arr2(a, [31m10[m));[17;9H[38;5;130mreturn[m [31m0[m;
+
+}
+
+[32mint[m max_arr2([32mint[m arr[],[32mint[m arr_len)
+{[23;9H[38;5;130mif[m (arr_len == [31m1[m)[24;17H[38;5;130mreturn[m arr[[31m0[m];[25;9H[38;5;130melse[26;17Hreturn[m max(arr[arr_len - [31m1[m], max_arr2(arr, arr_len - [31m1[m));
+}[28;62H29,1-8[7C바닥[24;8H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[2;1H[38;5;81m#define max(x,y) ((x)>(y)?(x):(y))[m
+
+[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len);
+
+
+[38;5;121mint[m main()
+{[9;9H[38;5;121mint[m a[[95m10[m] = { [95m0[m };[10;9H[38;5;121mint[m i;[12;9H[93mfor[m (i = [95m0[m; i < [95m10[m; i++)[13;17Ha[i] = [95m9[m - i;[15;9Hprintf([95m"[m[38;5;224m%d\n[m[95m"[m, max_arr2(a, [95m10[m));[17;9H[93mreturn[m [95m0[m;
+
+}
+
+[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len)
+{[23;9H[93mif[m (arr_len == [95m1[m)[24;17H[93mreturn[m arr[[95m0[m];[25;9H[93melse[26;17Hreturn[m max(arr[arr_len - [95m1[m], max_arr2(arr, arr_len - [95m1[m));
+}[28;62H29,1-8[7C바닥"gdb_hw2.c" [도스] 32L, 719C[24;8H[?25h[?25l[28;52H~@k[24;8H[28;52H   [23;8H[28;63H8[23;8H[?25h[?25l[28;52H~@k[23;8H[28;52H   [22;1H[46m{[27;1H}[m[28;63H7,1  [22;1H[?25h[?25l[28;52H~@k[22;1H[28;52H   [21;8H
+{[27;1H}[28;63H6,8[21;8H[?25h[?25l[28;52H~@k[21;8H[28;52H   [20;1H[28;63H5,0-1[20;1H[?25h[?25l[28;52H~@k[20;1H[28;52H   [19;1H[8;1H[46m{[19;1H}[m[28;63H4,1  [19;1H[?25h[?25l[28;52H~@k[19;1H[28;52H   [18;1H[8;1H{[19;1H}[28;63H3,0-1[18;1H[?25h[?25l[28;52H~@k[18;1H[28;52H   [17;8H[28;63H2,1-8[17;8H[?25h[?25l[28;52H~@k[17;8H[28;52H   [16;1H[28;63H1,0-1[16;1H[?25h[?25l[28;52H~@k[16;1H[28;52H   [15;8H[28;63H0,1-8[15;8H[?25h[?25l[28;52H~@k[15;8H[28;52H   [14;1H[28;62H19,0-1[14;1H[?25h[?25l[28;52H~@k[14;1H[28;52H   [13;8H[28;63H8,1-8[13;8H[?25h[?25l[28;52H~@k[13;8H[28;52H   [12;8H[28;63H7[12;8H[?25h[?25l[28;52H~@k[12;8H[28;52H   [11;1H[28;63H6,0-1[11;1H[?25h[?25l[28;52H~@k[11;1H[28;52H   [10;8H[28;63H5,1-8[10;8H[?25h[?25l[28;52H~@k[10;8H[28;52H   [9;8H[28;63H4[9;8H[?25h[?25l[28;52H~@k[9;8H[28;52H   [9;9H[28;65H2-9[9;9H[?25h[?25l[28;52H~@k[9;9H[28;52H   [9;10H[28;65H3-10[9;10H[?25h[?25l[28;52H~@k[9;10H[28;52H   [9;11H[28;65H4-11[9;11H[?25h[?25l[28;52H~@k[9;11H[28;52H   [9;12H[28;65H5-12[9;12H[?25h[?25l[28;52H~@k[9;12H[28;52H   [9;13H[28;65H6-13[9;13H[?25h[?25l[28;52H~@k[9;13H[28;52H   [10;13H[28;63H5[10;13H[?25h[?25l[28;52H~@k[10;13H[28;52H   [11;1H[28;63H6,0-1 [11;1H[?25h[?25l[28;52H~@k[11;1H[28;52H   [12;13H[46m([18C)[m[28;63H7,6-13[12;13H[?25h[?25l[28;52H~@k[12;13H[28;52H   [13;16H[12;13H([18C)[28;63H8,2-16[13;16H[?25h[?25l[28;52H~@k[13;16H[28;52H   [14;1H[28;63H9,0-1 [14;1H[?25h[?25l[28;52H^[[14;1H[28;52H  [14;1H[28;52H^[[14;1H[28;52H  [14;1H[?25h[?25l[28;52H:[14;1H[28;1H[K[28;1H:[?2004h[?25hq[?25l[?25hw[?25l[?25h[?25l[28;3H[K[28;3H[?25h[?25l[28;2H[K[28;2H[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"gdb_hw2.c" [도스] 32L, 719C 저장 했습니다
+[?2004l[?1l>[?25h[?1049l[23;0;0t금  5월 15 20:44:59 jaeho $vlrea[K[K[K[K[Kclear
+[3J[H[2J금  5월 15 20:45:03 jaeho $clearvim gdb_hw2.cls[Kvim gdb_hw2.cls[Kgdb hw2cc -g -o hw2 gdb_hw2.cdb hw2[K
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from hw2...done.
+(gdb) l
+warning: Source file is more recent than executable.
+1	//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다.
+2	//배열 원소 값이 단조증가일 때에는 정상동작합니다.
+3	//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 찾으세요!
+4	
+5	#include <stdio.h>
+6	
+7	#define max(x,y) ((x)>(y)?(x):(y))
+8	
+9	int max_arr2(int arr[],int arr_len);
+10	
+(gdb) l[Kl30
+Undefined command: "l30".  Try "help".
+(gdb) l 30
+25	
+26	int max_arr2(int arr[],int arr_len)
+27	{
+28		if (arr_len == 1)
+29			return arr[0];
+30		else
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+32	}
+(gdb) b 31
+Breakpoint 1 at 0x76c: file gdb_hw2.c, line 31.
+(gdb) r[Kr c[K[K[Kc
+The program is not being run.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw2 
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=10) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=9) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=8) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=7) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=6) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=5) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=4) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=3) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=2) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=2) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=3) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=2) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=2) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=4) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) quit
+A debugging session is active.
+
+	Inferior 1 [process 11139] will be killed.
+
+Quit anyway? (y or n) y
+금  5월 15 20:52:33 jaeho $ls
+gdb_hw1.c  gdb_hw3.c  gdb_hw5.c  [0m[01;32mhw1[0m  [01;32mhw3[0m  [01;32mhw5[0m  log.txt   log3.txt  log5.txt
+gdb_hw2.c  gdb_hw4.c  gdb_hw6.c  [01;32mhw2[0m  [01;32mhw4[0m  [01;32mhw6[0m  log2.txt  log4.txt  log6.txt
+금  5월 15 20:52:34 jaeho $ls[K[Kvimt[K gdb_hw2.c
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;28r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[28;1H"gdb_hw2.c" [도스] 32L, 719C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[34m//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다[2;1H.
+//배열 원소 값이 단조증가일 때에는 정상동작합니다.
+//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 [m[94m>>[m[5;1H[34m찾으세요![m
+
+[35m#include [m[31m<stdio.h>[m
+
+[35m#define max(x,y) ((x)>(y)?(x):(y))[m
+
+[32mint[m max_arr2([32mint[m arr[],[32mint[m arr_len);
+
+
+[32mint[m main()
+{[16;9H[32mint[m a[[31m10[m] = { [31m0[m };[17;9H[32mint[m i;[19;9H[38;5;130mfor[m (i = [31m0[m; i < [31m10[m; i++)[20;17Ha[i] = [31m9[m - i;[22;9Hprintf([31m"[m[35m%d\n[m[31m"[m, max_arr2(a, [31m10[m));[24;9H[38;5;130mreturn[m [31m0[m;
+
+}[28;62H19,0-1     꼭대기[21;1H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[1;1H[96m//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다[2;1H.
+//배열 원소 값이 단조증가일 때에는 정상동작합니다.
+//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 [m[94m>>[m[5;1H[96m찾으세요![m
+
+[38;5;81m#include [m[95m<stdio.h>[m
+
+[38;5;81m#define max(x,y) ((x)>(y)?(x):(y))[m
+
+[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len);
+
+
+[38;5;121mint[m main()
+{[16;9H[38;5;121mint[m a[[95m10[m] = { [95m0[m };[17;9H[38;5;121mint[m i;[19;9H[93mfor[m (i = [95m0[m; i < [95m10[m; i++)[20;17Ha[i] = [95m9[m - i;[22;9Hprintf([95m"[m[38;5;224m%d\n[m[95m"[m, max_arr2(a, [95m10[m));[24;9H[93mreturn[m [95m0[m;
+
+}[28;62H19,0-1     꼭대기"gdb_hw2.c" [도스] 32L, 719C[21;1H[?25h[?25l[28;52H~@k[21;1H[28;52H   [20;8H[28;63H8,1-8[20;8H[?25h[?25l[28;52H~@k[20;8H[28;52H   [20;16H[28;65H2-16[20;16H[?25h[?25l[28;52H~@k[20;16H[28;52H   [20;17H[28;65H3-17[20;17H[?25h[?25l[28;52H~@k[20;17H[28;52H   [20;18H[46m[[mi[46m][m[28;65H4-18[20;18H[?25h[?25l[28;52H~@k[20;18H[28;52H   [20;19H[i][28;65H5-19[20;19H[?25h[?25l[28;52H~@k[20;19H[28;52H   [20;20H[46m[[mi[46m][m[28;65H6-20[20;20H[?25h[?25l[28;52H~@k[20;20H[28;52H   [20;21H[i][28;65H7-21[20;21H[?25h[?25l[28;52H~@k[20;21H[28;52H   [20;22H[28;65H8-22[20;22H[?25h[?25l[28;52H~@k[20;22H[28;52H   [20;23H[28;65H9-23[20;23H[?25h[?25l[28;52H~@k[20;23H[28;52H   [20;23H[28;1H[1m-- 끼워넣기 -- [m[28;15H[K[28;62H18,9-23    꼭대기[20;23H[?25h[?25l[28;65H10-24[20;24H[?25h[?25l[28;66H1-25[20;25H[?25h[?25l[28;66H2-26[20;26H[?25h[?25l[28;66H3-27[20;27H[?25h[?25l i; [28;66H2-26[20;26H[?25h[?25li; [28;66H1-25[20;25H[?25h[?25l i; [28;66H0-24[20;24H[?25h[?25l[1;27r[1;1H[2M[1;28r[26;1H[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len)
+{[28;62H[K[28;62H21,1[10C16%[21;1H[?25h[?25l[28;62H18,10-24[18;24H[?25h[?25l[28;63H5,8-15 [15;15H[?25h[?25l[12;9H[46m()[m[28;63H2,11  [12;11H[?25h[?25l:()[28;66H2[12;12H[?25h[?25l[12;11H[K[12;9H[46m()[m[28;66H1[12;11H[?25h[28;1H[K[12;10H[?25l[28;52H^[[12;10H[28;52H  [12;11H[28;62H12,10[9C16%[12;10H[?25h[?25l[28;52H:[12;10H[28;52H[K[28;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"gdb_hw2.c" [도스] 32L, 716C 저장 했습니다
+[?2004l[?1l>[?25h[?1049l[23;0;0t금  5월 15 20:53:51 jaeho $vim gdb_hw2.cls[Kvim gdb_hw2.cls[Kgdb hw2[2Pclearvim gdb_hw2.cls[Kgdb hw2cc -g -o hw2 gdb_hw2.c
+금  5월 15 20:53:58 jaeho $gcc -g -o hw2 gdb_hw2.c[10Pvim[C[C[C[C[C[C[C[C[C[Cls[Kgdb hw2
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from hw2...done.
+(gdb) r[Kl
+1	//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다.
+2	//배열 원소 값이 단조증가일 때에는 정상동작합니다.
+3	//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 찾으세요!
+4	
+5	#include <stdio.h>
+6	
+7	#define max(x,y) ((x)>(y)?(x):(y))
+8	
+9	int max_arr2(int arr[],int arr_len);
+10	
+(gdb) l[Kl30
+Undefined command: "l30".  Try "help".
+(gdb) ; [K[Kl 30
+25	
+26	int max_arr2(int arr[],int arr_len)
+27	{
+28		if (arr_len == 1)
+29			return arr[0];
+30		else
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+32	}
+(gdb) b 31
+Breakpoint 1 at 0x765: file gdb_hw2.c, line 31.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw2 
+c
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=10) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=9) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=8) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=7) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=6) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=5) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=4) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=3) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=2) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+9
+[Inferior 1 (process 11159) exited normally]
+(gdb) r[Kquit
+금  5월 15 20:56:43 jaeho $gdb hw2cc -g -o hw2 gdb_hw2.c[10Pvim[C[C[C[C[C[C[C[C[C[C
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;28r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[28;1H"gdb_hw2.c" [도스] 32L, 716C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[34m//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다[2;1H.
+//배열 원소 값이 단조증가일 때에는 정상동작합니다.
+//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 [m[94m>>[m[5;1H[34m찾으세요![m
+
+[35m#include [m[31m<stdio.h>[m
+
+[35m#define max(x,y) ((x)>(y)?(x):(y))[m
+
+[32mint[m max_arr2([32mint[m arr[],[32mint[m arr_len);
+
+
+[32mint[m main[106m()[m
+{[16;9H[32mint[m a[[31m10[m] = { [31m0[m };[17;9H[32mint[m i;[19;9H[38;5;130mfor[m (i = [31m0[m; i < [31m10[m; i++)[20;17Ha[i] =  i;[22;9Hprintf([31m"[m[35m%d\n[m[31m"[m, max_arr2(a, [31m10[m));[24;9H[38;5;130mreturn[m [31m0[m;
+
+}[28;62H12,10      꼭대기[14;10H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[1;1H[96m//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다[2;1H.
+//배열 원소 값이 단조증가일 때에는 정상동작합니다.
+//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 [m[94m>>[m[5;1H[96m찾으세요![m
+
+[38;5;81m#include [m[95m<stdio.h>[m
+
+[38;5;81m#define max(x,y) ((x)>(y)?(x):(y))[m
+
+[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len);
+
+
+[38;5;121mint[m main[46m()[m
+{[16;9H[38;5;121mint[m a[[95m10[m] = { [95m0[m };[17;9H[38;5;121mint[m i;[19;9H[93mfor[m (i = [95m0[m; i < [95m10[m; i++)[20;17Ha[i] =  i;[22;9Hprintf([95m"[m[38;5;224m%d\n[m[95m"[m, max_arr2(a, [95m10[m));[24;9H[93mreturn[m [95m0[m;
+
+}[28;62H12,10      꼭대기"gdb_hw2.c" [도스] 32L, 716C[14;10H[?25h[?25l()
+[46m{[26;1H}[m[28;63H3,1 [15;1H[?25h[?25l{[26;1H}[28;63H4,1-8[16;8H[?25h[?25l[28;52H~@k[16;8H[28;52H   [17;8H[28;63H5[17;8H[?25h[?25l[28;63H6,0-1[18;1H[?25h[?25l[28;63H7,1-8[19;8H[?25h[?25l[28;52H~@k[19;8H[28;52H   [20;8H[28;63H8[20;8H[?25h[?25l[28;63H9,0-1[21;1H[?25h[?25l[28;62H20,1-8[22;8H[?25h[?25l[28;52H~@k[22;8H[28;52H   [21;1H[1;27r[1;1H[2M[1;28r[26;1H[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len)
+{[28;1H[K[28;62H21,0-1[8C16%[21;1H[?25h[?25l[28;63H2,1-8[22;8H[?25h[?25l[1;27r[27;1H
+[1;28r[27;9H[93mif[m (arr_len == [95m1[m)[28;62H[K[28;62H23,0-1[8C33%[22;1H[?25h[?25l[28;52H~@k[22;1H[28;52H   [21;1H[1;27r[1;1H[2M[1;28r[10;1H[46m{[21;1H}[m[26;17H[93mreturn[m arr[[95m0[m];[27;9H[93melse[m[28;62H[K[28;62H24,1[10C60%[21;1H[?25h[?25l[10;1H{[21;1H}[28;63H5,0-1[22;1H[?25h[?25l[1;27r[27;1H
+[1;28r[27;17H[93mreturn[m max(arr[arr_len - [95m1[m], max_arr2(arr, arr_len - [95m1[m));[28;62H[K[28;62H26,1[10C80%[22;1H[?25h[?25l[28;52H~@k[22;1H[28;52H   [22;1H[1;27r[27;1H
+[1;28r[22;1H[46m{[27;1H}[m[28;62H[K[28;62H27,1[9C바닥[22;1H[?25h[?25l{[27;1H}[28;63H8,1-8[23;8H[?25h[?25l[28;63H9[24;8H[?25h[?25l[28;52H~@k[24;8H[28;52H   [25;8H[28;62H30[25;8H[?25h[?25l[28;52H~@k[25;8H[28;52H   [24;8H[28;62H29[24;8H[?25h[?25l[28;52H~@k[24;8H[28;52H   [23;8H[28;63H8[23;8H[?25h[?25l[28;52H~@k[23;8H[28;52H   [22;1H[46m{[27;1H}[m[28;63H7,1  [22;1H[?25h[?25l[28;52H~@k[22;1H[28;52H   [21;1H
+{[27;1H}[28;63H6[21;1H[?25h[?25l[28;52H~@k[21;1H[28;52H   [20;1H[28;63H5,0-1[20;1H[?25h[?25l[28;52H~@k[20;1H[28;52H   [19;1H[8;1H[46m{[19;1H}[m[28;63H4,1  [19;1H[?25h[?25l[28;52H~@k[19;1H[28;52H   [18;1H[8;1H{[19;1H}[28;63H3,0-1[18;1H[?25h[?25l[28;52H~@k[18;1H[28;52H   [17;8H[28;63H2,1-8[17;8H[?25h[?25l[28;52H~@k[17;8H[28;52H   [16;1H[28;63H1,0-1[16;1H[?25h[?25l[28;52H~@k[16;1H[28;52H   [15;8H[28;63H0,1-8[15;8H[?25h[?25l[28;52H~@k[15;8H[28;52H   [14;1H[28;62H19,0-1[14;1H[?25h[?25l[28;52H~@k[14;1H[28;52H   [13;8H[28;63H8,1-8[13;8H[?25h[?25l[28;52H~@k[13;8H[28;52H   [12;8H[28;63H7[12;8H[?25h[?25l[28;52H~@k[12;8H[28;52H   [11;1H[28;63H6,0-1[11;1H[?25h[?25l[28;52H~@k[11;1H[28;52H   [10;8H[28;63H5,1-8[10;8H[?25h[?25l[28;52H~@k[10;8H[28;52H   [9;8H[28;63H4[9;8H[?25h[?25l[28;52H~@k[9;8H[28;52H   [8;1H[46m{[19;1H}[m[28;63H3,1  [8;1H[?25h[?25l[28;52H~@k[8;1H[28;52H   [7;1H
+{[19;1H}[28;63H2[7;1H[?25h[?25l[28;52H~@k[7;1H[28;52H   [6;1H[28;63H1,0-1[6;1H[?25h[?25l[28;52H~@k[6;1H[28;52H   [6;1H[1;27r[1;1H[L[1;28r[1;1H[38;5;81m#include [m[95m<stdio.h>[m[28;62H[K[28;62H10,0-1[8C80%[6;1H[?25h[?25l[28;52H~@k[6;1H[28;52H   [6;1H[1;27r[1;1H[L[1;28r[28;62H[K[28;62H9,1[11C60%[6;1H[?25h[?25l[28;52H~@k[6;1H[28;52H   [7;1H[1;27r[1;1H[2L[1;28r[1;1H[96m//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 [m[94m>>[m[2;1H[96m찾으세요![m[28;62H[K[28;62H8,0-1[9C33%[7;1H[?25h[?25l[28;52H~@k[7;1H[28;52H   [6;1H[28;62H7,1  [6;1H[?25h[?25l[28;52H~@k[6;1H[28;52H   [6;1H[1;27r[1;1H[L[1;28r[1;1H[96m//배열 원소 값이 단조증가일 때에는 정상동작합니다.[m[28;62H[K[28;62H6,0-1[9C16%[6;1H[?25h[?25l[28;52H~@k[6;1H[28;52H   [7;1H[1;27r[1;1H[2L[1;28r[1;1H[96m//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다[2;1H.[m[28;62H[K[28;62H5,1[8C꼭대기[7;1H[?25h[?25l[28;52H~@k[7;1H[28;52H   [6;1H[28;62H4,0-1[6;1H[?25h[?25l[28;52H~@k[6;1H[28;52H   [4;1H[28;62H3,1  [4;1H[?25h[?25l[28;52H~@k[4;1H[28;52H   [3;1H[28;62H2[3;1H[?25h[?25l[28;52H~@k[3;1H[28;52H   [1;1H[28;62H1[1;1H[?25h[?25l[28;52H~@k[1;1H[28;52H   [1;1H[?25h[?25l[28;52H~@k[1;1H[28;52H   [3;1H[28;62H2[3;1H[?25h[?25l[28;52H~@k[3;1H[28;52H   [4;1H[28;62H3[4;1H[?25h[?25l[28;52H~@k[4;1H[28;52H   [6;1H[28;62H4,0-1[6;1H[?25h[?25l[28;52H~@k[6;1H[28;52H   [7;1H[28;62H5,1  [7;1H[?25h[?25l[28;52H~@k[7;1H[28;52H   [8;1H[28;62H6,0-1[8;1H[?25h[?25l[28;52H~@k[8;1H[28;52H   [9;1H[28;62H7,1  [9;1H[?25h[?25l[28;52H~@@[9;1H[28;52H   [9;34H[9;18H[38;5;81m[46m([15C)[m[28;64H34[9;34H[?25h[?25l[28;52H~@k[9;34H[28;52H   [9;33H[9;18H[38;5;81m([m[12C[38;5;81m[46m([1C)[m[38;5;81m)[m[28;65H3[9;33H[?25h[?25l[28;52H~@@[9;33H[28;52H   [9;34H[9;18H[38;5;81m[46m([m[12C[38;5;81m(y)[m[38;5;81m[46m)[m[28;65H4[9;34H[?25h[?25l[28;52H~@k[9;34H[28;52H   [9;34H[28;1H[1m-- 끼워넣기 --[m[28;62H[K[28;62H7,34[7C꼭대기[9;34H[?25h[?25l[9;34H[K[9;18H[38;5;81m([m[12C[38;5;81m[46m([1C)[m[28;65H3[9;33H[?25h[?25l[38;5;81m)[m[9;33H[K[9;32H[38;5;81m[46m)[m[28;65H2[9;32H[?25h[?25l[38;5;81m[46m)[m[9;32H[K[9;18H[38;5;81m[46m([m[28;65H1[9;31H[?25h[?25l[97m[101m)[m[9;31H[K[9;30H[97m[46m)[m[28;65H0[9;30H[?25h[?25l[9;30H[K[9;18H[38;5;81m([m[8C[38;5;81m[46m([1C)[m[28;64H29[9;29H[?25h[?25l[38;5;81m)[m[9;29H[K[9;28H[38;5;81m[46m)[m[28;65H8[9;28H[?25h[?25l[97m[46m)[m[9;28H[K[9;18H[38;5;81m[46m([m[28;65H7[9;27H[?25h[?25l[38;5;81m)[m[9;27H[K[9;26H[38;5;81m[46m)[m[28;65H6[9;26H[?25h[?25l[9;26H[K[9;18H[38;5;81m([m[4C[38;5;81m[46m([1C)[m[28;65H5[9;25H[?25h[?25l[38;5;81m)[m[9;25H[K[9;24H[38;5;81m[46m)[m[28;65H4[9;24H[?25h[?25l[38;5;81m[46m)[m[9;24H[K[9;18H[38;5;81m[46m([m[28;65H3[9;23H[?25h[?25l[38;5;81m)[m[9;23H[K[9;22H[38;5;81m[46m)[m[28;65H2[9;22H[?25h[?25l[9;22H[K[9;18H[38;5;81m([m[38;5;81m[46m([1C)[m[28;65H1[9;21H[?25h[?25l[38;5;81m)[m[9;21H[K[9;20H[38;5;81m[46m)[m[28;65H0[9;20H[?25h[?25l[38;5;81m[46m)[m[9;20H[K[9;18H[38;5;81m[46m([m[28;64H19[9;19H[?25h[?25l[97m[46m)[m[9;19H[K[9;18H[97m[101m)[m[28;65H8[9;18H[?25h[?25l[97m[101m)[m[9;18H[K[28;65H7[9;17H[?25h[?25l[9;17H[K[9;12H[38;5;81m[46m([3C)[m[28;65H6[9;16H[?25h[?25l[38;5;81m)[m[9;16H[K[9;15H[38;5;81m[46m)[m[28;65H5[9;15H[?25h[?25l[38;5;81m)[m[9;15H[K[9;14H[38;5;81m[46m)[m[28;65H4[9;14H[?25h[?25l[38;5;81m)[m[9;14H[K[9;13H[38;5;81m[46m)[m[28;65H3[9;13H[?25h[?25l[97m[46m)[m[9;13H[K[9;12H[97m[101m)[m[28;65H2[9;12H[?25h[?25l[97m[101m)[m[9;12H[K[28;65H1[9;11H[?25h[?25l[97m[101m)[m[9;11H[K[28;65H0[9;10H[?25h[?25l[97m[101m)[m[9;10H[K[28;64H9 [9;9H[?25h[?25l[97m[101m)[m[9;9H[K[28;64H8[9;8H[?25h[?25l#defin[97m[101m)[m[9;8H[K[28;64H7[9;7H[?25h[?25l[97m[101m)[m[9;7H[K[28;64H6[9;6H[?25h[?25l[97m[101m)[m[9;6H[K[28;64H5[9;5H[?25h[?25l[97m[101m)[m[9;5H[K[28;64H4[9;4H[?25h[?25l[97m[101m)[m[9;4H[K[28;64H3[9;3H[?25h[?25l[97m[101m)[m[9;3H[K[28;64H2[9;2H[?25h[?25l[97m[101m)[m[9;2H[K[28;64H1[9;1H[?25h[?25l[28;64H2[9;2H[?25h[?25l[9;1H[K[28;64H1[9;1H[?25h[?25l[28;62H8[10;1H[?25h[?25li[28;64H2[10;2H[?25h[?25ln[28;64H3[10;3H[?25h[?25l[38;5;121mint[m[28;64H4[10;4H[?25h[?25l[28;64H5[10;5H[?25h[?25lm[28;64H6[10;6H[?25h[?25la[28;64H7[10;7H[?25h[?25lx[28;64H8[10;8H[?25h[?25l([15;1H[97m[101m{[16;21H{[3C}[m[28;64H9[10;9H[?25h[?25li[28;64H10[10;10H[?25h[?25ln[28;65H1[10;11H[?25h[?25l[38;5;121mint[m[28;65H2[10;12H[?25h[?25l[28;65H3[10;13H[?25h[?25lx[28;65H4[10;14H[?25h[?25l,[28;65H5[10;15H[?25h[?25l[28;65H6[10;16H[?25h[?25li[28;65H7[10;17H[?25h[?25ln[28;65H8[10;18H[?25h[?25l[38;5;121mint[m[28;65H9[10;19H[?25h[?25l[28;64H20[10;20H[?25h[?25ly[28;65H1[10;21H[?25h[?25l)[15;1H{[16;21H{[3C}[10;8H[46m([12C)[m[28;65H2[10;22H[?25h[?25l;[10;8H([12C)[28;65H3[10;23H[?25h[?25l[11;21H[46m[][m[28;62H9[11;23H[?25h[?25l[][28;62H10,1[12;1H[?25h[?25l[28;63H1[13;1H[?25h[?25l[14;9H[46m()[m[28;63H2,11[14;11H[?25h[?25l()
+[46m{[26;1H}[m[28;63H3,2 [15;2H[?25h[?25l{[26;1H}[28;63H4,16-23[16;23H[?25h[?25l[28;63H5,8-15 [17;15H[?25h[?25l[28;63H6,1   [18;1H[?25h[?25l[28;63H7,16-23[19;23H[?25h[?25l[28;63H8,9-23 [20;23H[?25h[?25l[28;63H9,1   [21;1H[?25h[?25l[28;62H20,16-23[22;23H[?25h[?25l[1;27r[1;1H[2M[1;28r[26;1H[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len)
+{[28;62H[K[28;62H21,1[10C16%[21;1H[?25h[?25l[28;63H2,11-18[22;18H[?25h[?25l[1;27r[27;1H
+[1;28r[27;9H[93mif[m (arr_len == [95m1[m)[28;62H[K[28;62H23,1[10C33%[22;1H[?25h[?25l[1;27r[1;1H[2M[1;28r[26;17H[93mreturn[m arr[[95m0[m];[27;9H[93melse[m[28;62H[K[28;62H24,2[10C60%[10;1H[46m{[21;1H}[?25h[?25l[m[10;1H{[21;1H}[28;63H5,1[22;1H[?25h[?25l[1;27r[27;1H
+[1;28r[27;17H[93mreturn[m max(arr[arr_len - [95m1[m], max_arr2(arr, arr_len - [95m1[m));[28;62H[K[28;62H26,23[9C80%[22;21H[46m[][?25h[?25l[1;27r[m[27;1H
+[1;28r[27;1H}[28;62H[K[28;62H27,2[9C바닥[21;21H[]
+[46m{[27;1H}[22;2H[?25h[?25l[m{[27;1H}[28;63H8,16-23[23;23H[?25h[?25l[28;63H9,9-23 [24;23H[?25h[?25l[28;62H30,6-1[25;13H[?25h[?25l[28;63H1,9-2[26;23H[?25h[?25l[22;1H[46m{[27;1H}[m[28;63H2,2   [27;2H[?25h[?25l[22;1H{[27;1H}[28;63H1,9-23[26;23H[?25h[?25l[28;65H10-24[26;24H[?25h[?25l[28;63H0,6-13 [25;13H[?25h[?25l[28;62H29,10-24[24;24H[?25h[?25l[28;63H8,17[23;24H[?25h[?25l[22;1H[46m{[27;1H}[m[28;63H7,2    [22;2H[?25h[?25l{[27;1H}[28;63H8,17-24[23;24H[?25h[?25l[28;63H9,10[24;24H[?25h[?25l[28;62H30,6-13 [25;13H[?25h[?25l[28;63H1,10-24[26;24H[?25h[?25l[22;1H[46m{[27;1H}[m[28;63H2,2    [27;2H[?25h[?25l[1;27r[27;1H
+[1;28r[28;62H[K[28;62H33,1[9C바닥[21;1H{[26;1H}
+[?25h[?25li[28;65H2[27;2H[?25h[?25ln[28;65H3[27;3H[?25h[?25l[38;5;121mint[m[28;65H4[27;4H[?25h[?25l[28;65H5[27;5H[?25h[?25lm[28;65H6[27;6H[?25h[?25la[28;65H7[27;7H[?25h[?25lx[28;65H8[27;8H[?25h[?25l([28;65H9[27;9H[?25h[?25li[28;65H10[27;10H[?25h[?25ln[28;66H1[27;11H[?25h[?25l[38;5;121mint[m[28;66H2[27;12H[?25h[?25l[28;66H3[27;13H[?25h[?25lx[28;66H4[27;14H[?25h[?25l,[28;66H5[27;15H[?25h[?25l[28;66H6[27;16H[?25h[?25li[28;66H7[27;17H[?25h[?25ln[28;66H8[27;18H[?25h[?25l[38;5;121mint[m[28;66H9[27;19H[?25h[?25l[28;65H20[27;20H[?25h[?25ly[28;66H1[27;21H[?25h[?25l)[27;8H[46m([12C)[m[28;66H2[27;22H[?25h[?25l[1;27r[27;1H
+[1;28r[28;62H[K[28;62H34,2-9[7C바닥[26;8H([12C)[27;9H[?25h[?25l{[28;66H  [27;2H[?25h[?25l[1;27r[27;1H
+[1;28r[28;62H[K[28;62H35,2-9[7C바닥[27;9H[?25h[?25l}[26;1H[46m{
+}[m[28;66H  [27;2H[?25h[?25l[28;63H4[26;2H[?25h[?25l[1;27r[27;1H
+[1;28r[26;1H[46m        [m
+}[28;62H[K[28;62H35,2-9[7C바닥[25;1H{
+        [?25h[?25li[28;65H3-10[26;10H[?25h[?25l[93mif[m[28;65H4-11[26;11H[?25h[?25l([28;65H5-12[26;12H[?25h[?25lx[28;65H6-13[26;13H[?25h[?25l<[28;65H7-14[26;14H[?25h[?25l[26;13H[K[28;65H6-13[26;13H[?25h[?25l>[28;65H7-14[26;14H[?25h[?25ly[28;65H8-15[26;15H[?25h[?25l)[46m([mx>y[46m)[m[28;65H9-16[26;16H[?25h[?25l[1;27r[27;1H
+[1;28r[26;1H 
+}[28;62H[K[28;62H36,3-17      바닥[25;11H(x>y)[26;17H[?25h[?25lr[28;65H4-18[26;18H[?25h[?25l[26;17H[K[28;65H3-17[26;17H[?25h[?25l[28;65H2-9 [26;9H[?25h[?25lr[28;65H3-10[26;10H[?25h[?25le[28;65H4-11[26;11H[?25h[?25lt[28;65H5-12[26;12H[?25h[?25lu[28;65H6-13[26;13H[?25h[?25lr[28;65H7-14[26;14H[?25h[?25l[93mreturn[m[28;65H8-15[26;15H[?25h[?25lretur[26;14H[K[28;65H7-14[26;14H[?25h[?25l[93mreturn[m[28;65H8-15[26;15H[?25h[?25l[28;65H9-16[26;16H[?25h[?25lx[28;65H10-17[26;17H[?25h[?25l;[28;66H1-18[26;18H[?25h[?25l[1;27r[27;1H
+[1;28r[26;1H 
+}[28;62H[K[28;62H37,2-9[7C바닥[26;9H[?25h[?25le[28;65H3-10[26;10H[?25h[?25ll[28;65H4-11[26;11H[?25h[?25ls[28;65H5-12[26;12H[?25h[?25l[93melse[m[28;65H6-13[26;13H[?25h[?25l[1;27r[27;1H
+[1;28r[26;1H 
+}[28;62H[K[28;62H38,3-17      바닥[26;17H[?25h[?25l[28;65H2-9 [26;9H[?25h[?25lr[28;65H3-10[26;10H[?25h[?25le[28;65H4-11[26;11H[?25h[?25lt[28;65H5-12[26;12H[?25h[?25lu[28;65H6-13[26;13H[?25h[?25lr[28;65H7-14[26;14H[?25h[?25l[93mreturn[m[28;65H8-15[26;15H[?25h[?25l[28;65H9-16[26;16H[?25h[?25ly[28;65H10-17[26;17H[?25h[?25l;[28;66H1-18[26;18H[?25h[?25l[22;1H[46m{[27;1H}[m[28;63H9,2    [27;2H[?25h[?25l[22;1H{[27;1H}[28;63H8,11-18[26;18H[?25h[?25l[28;63H7,6-13 [25;13H[?25h[?25l[28;63H6,11-18[24;18H[?25h[?25l[23;11H[46m([mx>y[46m)[m[28;63H5,9-16 [23;16H[?25h[?25l[22;1H[46m{[m[23;11H(x>y)[27;1H[46m}[m[28;63H4,2   [22;2H[?25h[?25l{[27;1H}[28;63H3,18[21;18H[?25h[?25l[15;1H[46m{[20;1H}[m[28;63H2,2 [20;2H[?25h[?25l[15;1H{[20;1H}[28;63H1,4-18[19;18H[?25h[?25l[28;63H0,6-13[18;13H[?25h[?25l[28;62H29,4-18[17;18H[?25h[?25l[28;63H8,11-18[16;18H[?25h[?25l[15;1H[46m{[20;1H}[m[28;63H7,2    [15;2H[?25h[?25l{[20;1H}[28;63H6,18[14;18H[?25h[?25l[28;63H5,1 [13;1H[?25h[?25l[1;1H[46m{[12;1H}[m[28;63H4,2[12;2H[?25h[?25l[1;1H{[12;1H}[28;63H3,1[11;1H[?25h[?25l[28;63H2,11-18[10;18H[?25h[?25l[28;63H1,1    [9;1H[?25h[?25l[28;63H0,11-18[8;18H[?25h[?25l[28;62H19,1    [7;1H[?25h[?25l[6;18H[46m[[mi[46m][m[28;63H8,4-18[6;18H[?25h[?25l[1;27r[1;1H[L[1;28r[1;1H[38;5;121mint[m main()[28;62H[K[28;62H17,11-18      91%[7;18H[i][6;18H[?25h[?25l[1;27r[1;1H[L[1;28r[28;62H[K[28;62H16,1[10C83%[6;1H[?25h[?25l[1;27r[1;1H[L[1;28r[28;62H[K[28;62H15,8-15[7C75%[6;15H[?25h[?25l[1;27r[1;1H[L[1;28r[1;1H[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len);[28;62H[K[28;62H14,11-18      66%[6;14H[46m[[2C][?25h[?25l[1;27r[m[1;1H[L[1;28r[1;1H[38;5;121mint[m max([38;5;121mint[m x, [38;5;121mint[m y);[28;62H[K[28;62H13,2[10C58%[6;1H[46m{[m[7;14H[[2C][17;1H[46m}[6;2H[?25h[?25l[1;27r[m[1;1H[L[1;28r[28;62H[K[28;62H12,11[9C50%[6;9H[46m()[m
+{[18;1H}[6;11H[?25h[?25l[1;27r[1;1H[L[1;28r[28;62H[K[28;62H11,1[10C41%[7;9H()[6;1H[?25h[?25l[1;27r[1;1H[L[1;28r[1;1H[38;5;81m#include [m[95m<stdio.h>[m[28;62H[K[28;62H10,1[10C33%[6;1H[?25h[?25l[1;27r[1;1H[L[1;28r[28;62H[K[28;62H9,18[10C25%[6;18H[?25h[?25l[1;27r[1;1H[2L[1;28r[1;1H[96m//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 [m[94m>>[m[2;1H[96m찾으세요![m[28;62H[K[28;62H8,18[10C15%[7;18H[?25h[?25l[28;62H7,1 [6;1H[?25h[?25l[1;27r[1;1H[L[1;28r[1;1H[96m//배열 원소 값이 단조증가일 때에는 정상동작합니다.[m[28;62H[K[28;62H6,1[12C7%[6;1H[?25h[?25l[1;27r[1;1H[2L[1;28r[1;1H[96m//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다[2;1H.[m[28;62H[K[28;62H5,18[7C꼭대기[7;18H[?25h[?25l[28;62H4,1 [6;1H[?25h[?25l[28;62H3,24-18[4;18H[?25h[?25l[28;62H2[3;18H[?25h[?25l[28;62H1[1;18H[?25h[?25l[28;62H2[3;18H[?25h[?25l[28;62H3[4;18H[?25h[?25l[28;62H4,1    [6;1H[?25h[?25l[28;62H5,18[7;18H[?25h[?25l[28;62H6,1 [8;1H[?25h[?25l[28;62H7[9;1H[?25h[?25l[28;62H8,18[10;18H[?25h[?25l[28;62H9[11;18H[?25h[?25l[28;62H10,1[12;1H[?25h[?25l[28;63H1[13;1H[?25h[?25l[14;9H[46m()[m[28;63H2,11[14;11H[?25h[?25l()
+[46m{[26;1H}[m[28;63H3,2 [15;2H[?25h[?25l{[16;14H[46m[[2C][m[26;1H}[28;63H4,11-18[16;18H[?25h[?25l[[2C][28;63H5,8-15 [17;15H[?25h[?25l[28;63H6,1   [18;1H[?25h[?25l[28;63H7,11-18[19;18H[?25h[?25l[20;18H[46m[[mi[46m][m[28;63H8,4-18 [20;18H[?25h[?25l[i][28;63H9,1   [21;1H[?25h[?25l[28;62H20,11-18[22;18H[?25h[?25l[1;27r[1;1H[2M[1;28r[26;1H[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len)
+{[28;62H[K[28;62H21,1[11C7%[21;1H[?25h[?25l[28;63H2,11-18[22;18H[?25h[?25l[1;27r[27;1H
+[1;28r[27;9H[93mif[m (arr_len == [95m1[m)[28;62H[K[28;62H23,1[10C15%[22;1H[?25h[?25l[1;27r[1;1H[2M[1;28r[26;17H[93mreturn[m arr[[95m0[m];[27;9H[93melse[m[28;62H[K[28;62H24,2[10C25%[10;1H[46m{[21;1H}[?25h[?25l[m[10;1H{[21;1H}[28;63H5,1[22;1H[?25h[?25l[1;27r[27;1H
+[1;28r[27;17H[93mreturn[m max(arr[arr_len - [95m1[m], max_arr2(arr, arr_len - [95m1[m));[28;62H[K[28;62H26,18[9C33%[22;18H[?25h[?25l[1;27r[27;1H
+[1;28r[27;1H}[28;62H[K[28;62H27,2[10C41%[22;1H[46m{[27;1H}[22;2H[?25h[?25l[1;27r[m[27;1H
+[1;28r[27;1H[38;5;121mint[m max([38;5;121mint[m x, [38;5;121mint[m y)[28;62H[K[28;62H28,11-18      50%[21;1H{[26;1H}[22;18H[?25h[?25l[1;27r[27;1H
+[1;28r[27;1H{[28;62H[K[28;62H29,4-18[7C58%[22;18H[?25h[?25l[1;27r[27;1H
+[1;28r[27;9H[93mif[m(x>y)[28;62H[K[28;62H30,6-13[7C66%[22;13H[?25h[?25l[1;27r[27;1H
+[1;28r[27;9H[93mreturn[m x;[28;62H[K[28;62H31,4-18[7C75%[22;18H[?25h[?25l[1;27r[27;1H
+[1;28r[27;9H[93melse[m[28;62H[K[28;62H32,2[10C83%[17;1H[46m{[22;1H}[?25h[?25l[1;27r[m[27;1H
+[1;28r[27;9H[93mreturn[m y;[28;62H[K[28;62H33,18[9C91%[16;1H{[21;1H}[22;18H[?25h[?25l[1;27r[27;1H
+[1;28r[27;1H}[28;62H[K[28;62H34,2[9C바닥[22;1H[46m{[27;1H}[22;2H[?25h[?25l[m{[23;11H[46m([mx>y[46m)[m[27;1H}[28;63H5,9-16[23;16H[?25h[?25l(x>y)[28;63H6,11-18[24;18H[?25h[?25l[28;63H7,6-13 [25;13H[?25h[?25l[28;63H8,11-18[26;18H[?25h[?25l[22;1H[46m{[27;1H}[m[28;63H9,2    [27;2H[?25h[28;1H[K[27;1H[?25l[28;52H^[[27;1H[28;52H  [27;2H[28;62H39,1[9C바닥[27;1H[?25h[?25l[28;52H:[27;1H[28;52H[K[28;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"gdb_hw2.c" [도스] 39L, 774C 저장 했습니다
+[?2004l[?1l>[?25h[?1049l[23;0;0t금  5월 15 21:05:19 jaeho $vim gdb_hw2.c[6Pgdb hw2cc -g -o hw2 gdb_hw2.cdb hw2[Kcc -g -o hw2 gdb_hw2.c
+금  5월 15 21:05:26 jaeho $gcc -g -o hw2 gdb_hw2.c[10Pvim[C[C[C[C[C[C[C[C[C[C[6Pgdb hw2
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from hw2...done.
+(gdb) l 30
+25	
+26	int max_arr2(int arr[],int arr_len)
+27	{
+28		if (arr_len == 1)
+29			return arr[0];
+30		else
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+32	}
+33	int max(int x, int y)
+34	{
+(gdb) b 31
+Breakpoint 1 at 0x764: file gdb_hw2.c, line 31.
+(gdb) l[Kl 20
+15		int i;
+16	
+17		for (i = 0; i < 10; i++)
+18			a[i] =  i; 
+19	
+20		printf("%d\n", max_arr2(a, 10));	 
+21	
+22		return 0;
+23	
+24	}
+(gdb) r[Kquit
+금  5월 15 21:05:51 jaeho $l[Kgdb hw2cc -g -o hw2 gdb_hw2.c[10Pvim[C[C[C[C[C[C[C[C[C[C
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;28r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[28;1H"gdb_hw2.c" [도스] 39L, 774C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H{[2;9H[32mint[m a[[31m10[m] = { [31m0[m };[3;9H[32mint[m i;[5;9H[38;5;130mfor[m (i = [31m0[m; i < [31m10[m; i++)[6;17Ha[i] =  i;[8;9Hprintf([31m"[m[35m%d\n[m[31m"[m, max_arr2(a, [31m10[m));[10;9H[38;5;130mreturn[m [31m0[m;
+
+}
+
+[32mint[m max_arr2([32mint[m arr[],[32mint[m arr_len)
+{[16;9H[38;5;130mif[m (arr_len == [31m1[m)[17;17H[38;5;130mreturn[m arr[[31m0[m];[18;9H[38;5;130melse[19;17Hreturn[m max(arr[arr_len - [31m1[m], max_arr2(arr, arr_len - [31m1[m));
+}
+[32mint[m max([32mint[m x, [32mint[m y)
+[106m{[m[23;9H[38;5;130mif[m(x>y)[24;9H[38;5;130mreturn[m x;[25;9H[38;5;130melse[26;9Hreturn[m y;
+[106m}[m[28;62H39,1[9C바닥[27;1H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[1;1H{[2;9H[38;5;121mint[m a[[95m10[m] = { [95m0[m };[3;9H[38;5;121mint[m i;[5;9H[93mfor[m (i = [95m0[m; i < [95m10[m; i++)[6;17Ha[i] =  i;[8;9Hprintf([95m"[m[38;5;224m%d\n[m[95m"[m, max_arr2(a, [95m10[m));[10;9H[93mreturn[m [95m0[m;
+
+}
+
+[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len)
+{[16;9H[93mif[m (arr_len == [95m1[m)[17;17H[93mreturn[m arr[[95m0[m];[18;9H[93melse[19;17Hreturn[m max(arr[arr_len - [95m1[m], max_arr2(arr, arr_len - [95m1[m));
+}
+[38;5;121mint[m max([38;5;121mint[m x, [38;5;121mint[m y)
+[46m{[m[23;9H[93mif[m(x>y)[24;9H[93mreturn[m x;[25;9H[93melse[26;9Hreturn[m y;
+[46m}[m[28;62H39,1[9C바닥"gdb_hw2.c" [도스] 39L, 774C[27;1H[?25h[?25l[28;52H~@k[27;1H[28;52H   [26;8H[22;1H{[27;1H}[28;63H8,1-8[26;8H[?25h[?25l[28;52H~@k[26;8H[28;52H   [25;8H[28;63H7[25;8H[?25h[?25l[28;52H~@k[25;8H[28;52H   [24;8H[28;63H6[24;8H[?25h[?25l[28;52H~@k[24;8H[28;52H   [23;8H[28;63H5[23;8H[?25h[?25l[28;52H~@k[23;8H[28;52H   [22;1H[46m{[27;1H}[m[28;63H4,1  [22;1H[?25h[?25l[28;52H~@k[22;1H[28;52H   [21;8H[46m([12C)[m
+{[27;1H}[28;63H3,8[21;8H[?25h[?25l[28;52H~@k[21;8H[28;52H   [20;1H[15;1H[46m{[20;1H}[m[21;8H([12C)[28;63H2,1[20;1H[?25h[?25l[28;52H~@k[20;1H[28;52H   [19;8H[15;1H{[20;1H}[28;63H1,1-8[19;8H[?25h[?25l[28;52H~@k[19;8H[28;52H   [18;8H[28;63H0[18;8H[?25h[?25l[28;52H~@k[18;8H[28;52H   [17;8H[28;62H29[17;8H[?25h[?25l[28;52H~@k[17;8H[28;52H   [16;8H[28;63H8[16;8H[?25h[?25l[28;52H~@k[16;8H[28;52H   [15;1H[46m{[20;1H}[m[28;63H7,1  [15;1H[?25h[?25l[28;52H~@k[15;1H[28;52H   [14;8H
+{[20;1H}[28;63H6,8[14;8H[?25h[?25l[28;52H~@k[14;8H[28;52H   [13;1H[28;63H5,0-1[13;1H[?25h[?25l[28;52H~@k[13;1H[28;52H   [12;1H[1;1H[46m{[12;1H}[m[28;63H4,1  [12;1H[?25h[?25l[28;52H~@k[12;1H[28;52H   [11;1H[1;1H{[12;1H}[28;63H3,0-1[11;1H[?25h[?25l[28;52H~@k[11;1H[28;52H   [10;8H[28;63H2,1-8[10;8H[?25h[?25l[28;52H~@k[10;8H[28;52H   [9;1H[28;63H1,0-1[9;1H[?25h[?25l[28;52H~@k[9;1H[28;52H   [8;8H[28;63H0,1-8[8;8H[?25h[?25l[28;52H~@k[8;8H[28;52H   [7;1H[28;62H19,0-1[7;1H[?25h[?25l[28;52H~@k[7;1H[28;52H   [6;8H[28;63H8,1-8[6;8H[?25h[?25l[28;52H~@@[6;8H[28;52H   [6;27H[28;66H3-27[6;27H[?25h[?25l[28;52H~@k[6;27H[28;52H   [6;26H[28;66H2-26[6;26H[?25h[?25l[28;52H~@k[6;26H[28;52H   [6;27H[28;66H3-27[6;27H[?25h[?25l[28;52H~@k[6;27H[28;52H   [6;26H[28;66H2-26[6;26H[?25h[?25l[28;52H~@@[6;26H[28;52H   [6;27H[28;66H3-27[6;27H[?25h[?25l[28;52H~@k[6;27H[28;52H   [6;27H[28;1H[1m-- 끼워넣기 -- [m[28;15H[K[28;62H18,13-27     바닥[6;27H[?25h[?25l [28;66H2-26[6;26H[?25h[?25l [28;66H1-25[6;25H[?25h[?25l[95m9[m[28;66H2-26[6;26H[?25h[?25l-[28;66H3-27[6;27H[?25h[?25l[95m1[m[28;66H4-28[6;28H[?25h[?25l [28;66H3-27[6;27H[?25h[?25li[28;66H4-28[6;28H[?25h[?25l;[28;66H5-29[6;29H[?25h[28;1H[K[6;28H[?25l[28;52H^[[6;28H[28;52H  [6;29H[28;62H18,14-28     바닥[6;28H[?25h[?25l[28;52H:[6;28H[28;52H[K[28;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"gdb_hw2.c" [도스] 39L, 776C 저장 했습니다
+[?2004l[?1l>[?25h[?1049l[23;0;0t금  5월 15 21:06:34 jaeho $vim gdb_hw2.c[6Pgdb hw2cc -g -o hw2 gdb_hw2.c
+금  5월 15 21:06:37 jaeho $gcc -g -o hw2 gdb_hw2.c[10Pvim[C[C[C[C[C[C[C[C[C[C
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;28r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[28;1H"gdb_hw2.c" [도스] 39L, 776C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[34m//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다[2;1H.
+//배열 원소 값이 단조증가일 때에는 정상동작합니다.
+//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 [m[94m>>[m[5;1H[34m찾으세요![m
+
+[35m#include [m[31m<stdio.h>[m
+
+
+[32mint[m max([32mint[m x, [32mint[m y);
+[32mint[m max_arr2([32mint[m arr[],[32mint[m arr_len);
+
+
+[32mint[m main()
+{[16;9H[32mint[m a[[31m10[m] = { [31m0[m };[17;9H[32mint[m i;[19;9H[38;5;130mfor[m (i = [31m0[m; i < [31m10[m; i++)[20;17Ha[i] =  [31m9[m-i;[22;9Hprintf([31m"[m[35m%d\n[m[31m"[m, max_arr2(a, [31m10[m));[24;9H[38;5;130mreturn[m [31m0[m;
+
+}[28;62H18,14-28   꼭대기[20;28H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[1;1H[96m//배열 원소 값이 단조감소로 들어가는 경우 실행시간이 매우 오래걸리는 상황입니다[2;1H.
+//배열 원소 값이 단조증가일 때에는 정상동작합니다.
+//배열 원소 값이 단조감소로 들어가는 경우, 실행시간이 매우 오래 걸리는 이유를 [m[94m>>[m[5;1H[96m찾으세요![m
+
+[38;5;81m#include [m[95m<stdio.h>[m
+
+
+[38;5;121mint[m max([38;5;121mint[m x, [38;5;121mint[m y);
+[38;5;121mint[m max_arr2([38;5;121mint[m arr[],[38;5;121mint[m arr_len);
+
+
+[38;5;121mint[m main()
+{[16;9H[38;5;121mint[m a[[95m10[m] = { [95m0[m };[17;9H[38;5;121mint[m i;[19;9H[93mfor[m (i = [95m0[m; i < [95m10[m; i++)[20;17Ha[i] =  [95m9[m-i;[22;9Hprintf([95m"[m[38;5;224m%d\n[m[95m"[m, max_arr2(a, [95m10[m));[24;9H[93mreturn[m [95m0[m;
+
+}[28;62H18,14-28   꼭대기"gdb_hw2.c" [도스] 39L, 776C[20;28H[?25h[?25l[28;52H^[[20;28H[28;52H  [20;28H[28;52H^[[20;28H[28;52H  [20;28H[?25h[?25l[28;52H^[[20;28H[28;52H  [20;28H[28;52H^[[20;28H[28;52H  [20;28H[?25h[?25l[28;52H^[[20;28H[28;52H  [20;28H[28;52H^[[20;28H[28;52H  [20;28H[?25h[?25l[28;52H^[[20;28H[28;52H  [20;28H[28;52H^[[20;28H[28;52H  [20;28H[?25h[?25l[28;52H~@k[20;28H[28;52H   [20;28H[28;1H[1m-- 끼워넣기 -- [m[28;15H[K[28;62H18,14-28   꼭대기[20;28H[?25h[28;1H[K[20;27H[?25l[28;52H^[[20;27H[28;52H  [20;28H[28;62H18,13-27   꼭대기[20;27H[?25h[?25l[28;52H:[20;27H[28;52H[K[28;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"gdb_hw2.c" [도스] 39L, 776C 저장 했습니다
+[?2004l[?1l>[?25h[?1049l[23;0;0t금  5월 15 21:06:45 jaeho $vim gdb_hw2.c[10@gcc -g -o hw2[C[C[C[C[C[C[C[C[C[C[10Pvim[C[C[C[C[C[C[C[C[C[C[6Pgdb hw2
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from hw2...done.
+(gdb) l 30
+warning: Source file is more recent than executable.
+25	
+26	int max_arr2(int arr[],int arr_len)
+27	{
+28		if (arr_len == 1)
+29			return arr[0];
+30		else
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+32	}
+33	int max(int x, int y)
+34	{
+(gdb) b 31
+Breakpoint 1 at 0x76b: file gdb_hw2.c, line 31.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw2 
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=10) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=9) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=8) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=7) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=6) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=5) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=4) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=3) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+
+Breakpoint 1, max_arr2 (arr=0x7fffffffdfd0, arr_len=2) at gdb_hw2.c:31
+31			return max(arr[arr_len - 1], max_arr2(arr, arr_len - 1));
+(gdb) c
+Continuing.
+9
+[Inferior 1 (process 11186) exited normally]
+(gdb) c
+The program is not being run.
+(gdb) qu[K[Kquit
+금  5월 15 21:09:58 jaeho $eixt[K[K[K[Keix[K[Kxit
+exit
+
+Script done on 2020-05-15 21:10:03+0900

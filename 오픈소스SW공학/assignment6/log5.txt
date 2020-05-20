@@ -1,0 +1,192 @@
+Script started on 2020-05-15 14:49:55+0900
+]0;jaeho@jaeho-VirtualBox: ~/gdb_hw[01;32mjaeho@jaeho-VirtualBox[00m:[01;34m~/gdb_hw[00m$ PS1="\d \t \u $"
+금  5월 15 14:50:16 jaeho $ls
+gdb_hw1.c  gdb_hw3.c  gdb_hw5.c  [0m[01;32mhw1[0m  [01;32mhw4[0m      log3.txt  log5.txt
+gdb_hw2.c  gdb_hw4.c  gdb_hw6.c  [01;32mhw3[0m  log.txt  log4.txt
+금  5월 15 14:50:31 jaeho $clear
+[3J[H[2J금  5월 15 14:50:47 jaeho $ls
+gdb_hw1.c  gdb_hw3.c  gdb_hw5.c  [0m[01;32mhw1[0m  [01;32mhw4[0m      log3.txt  log5.txt
+gdb_hw2.c  gdb_hw4.c  gdb_hw6.c  [01;32mhw3[0m  log.txt  log4.txt
+금  5월 15 14:50:47 jaeho $gcc -g -o test[K[K[K[Khw5 gdb_hw5.c
+금  5월 15 14:51:18 jaeho $d[Kgdb hw5
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from hw5...done.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw5 
+
+Program received signal SIGSEGV, Segmentation fault.
+0x0000555555554658 in main () at gdb_hw5.c:10
+10		strcpy(str, "Hello world!");
+(gdb) c
+Continuing.
+
+Program terminated with signal SIGSEGV, Segmentation fault.
+The program no longer exists.
+(gdb) l
+5	
+6	int main()
+7	{
+8		char *str = NULL;
+9		
+10		strcpy(str, "Hello world!");
+11		
+12		printf("%s\n", str);
+13		
+14		return 0;
+(gdb) b 10[K[K[K 10
+Breakpoint 1 at 0x55555555464a: file gdb_hw5.c, line 10.
+(gdb) b 12
+Breakpoint 2 at 0x555555554666: file gdb_hw5.c, line 12.
+(gdb) b 8
+Breakpoint 3 at 0x555555554642: file gdb_hw5.c, line 8.
+(gdb) info break
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x000055555555464a in main at gdb_hw5.c:10
+2       breakpoint     keep y   0x0000555555554666 in main at gdb_hw5.c:12
+3       breakpoint     keep y   0x0000555555554642 in main at gdb_hw5.c:8
+(gdb) c
+The program is not being run.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw5 
+
+Breakpoint 3, main () at gdb_hw5.c:8
+8		char *str = NULL;
+(gdb) p str
+$1 = 0x0
+(gdb) c
+Continuing.
+
+Breakpoint 1, main () at gdb_hw5.c:10
+10		strcpy(str, "Hello world!");
+(gdb) p str
+$2 = 0x0
+(gdb) p[K[[Kp "hello world!"
+$3 = "hello world!"
+(gdb) c
+Continuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+0x0000555555554658 in main () at gdb_hw5.c:10
+10		strcpy(str, "Hello world!");
+(gdb) p[Kv[Kb[Kd
+Delete all breakpoints? (y or n) y
+(gdb) b 8
+Breakpoint 4 at 0x555555554642: file gdb_hw5.c, line 8.
+(gdb) b 11
+Breakpoint 5 at 0x555555554666: file gdb_hw5.c, line 11.
+(gdb) c
+Continuing.
+
+Program terminated with signal SIGSEGV, Segmentation fault.
+The program no longer exists.
+(gdb) c
+The program is not being run.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw5 
+
+Breakpoint 4, main () at gdb_hw5.c:8
+8		char *str = NULL;
+(gdb) p str
+$4 = 0x0
+(gdb) c
+Continuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+0x0000555555554658 in main () at gdb_hw5.c:10
+10		strcpy(str, "Hello world!");
+(gdb) p str
+$5 = 0x0
+(gdb) b[Kb[Kinfo break
+Num     Type           Disp Enb Address            What
+4       breakpoint     keep y   0x0000555555554642 in main at gdb_hw5.c:8
+	breakpoint already hit 1 time
+5       breakpoint     keep y   0x0000555555554666 in main at gdb_hw5.c:11
+(gdb) disas main
+Dump of assembler code for function main:
+   0x000055555555463a <+0>:	push   %rbp
+   0x000055555555463b <+1>:	mov    %rsp,%rbp
+   0x000055555555463e <+4>:	sub    $0x10,%rsp
+   0x0000555555554642 <+8>:	movq   $0x0,-0x8(%rbp)
+   0x000055555555464a <+16>:	mov    -0x8(%rbp),%rax
+   0x000055555555464e <+20>:	movabs $0x6f77206f6c6c6548,%rdx
+=> 0x0000555555554658 <+30>:	mov    %rdx,(%rax)
+   0x000055555555465b <+33>:	movl   $0x21646c72,0x8(%rax)
+   0x0000555555554662 <+40>:	movb   $0x0,0xc(%rax)
+   0x0000555555554666 <+44>:	mov    -0x8(%rbp),%rax
+   0x000055555555466a <+48>:	mov    %rax,%rdi
+   0x000055555555466d <+51>:	callq  0x555555554510 <puts@plt>
+   0x0000555555554672 <+56>:	mov    $0x0,%eax
+   0x0000555555554677 <+61>:	leaveq 
+   0x0000555555554678 <+62>:	retq   
+End of assembler dump.
+(gdb) Quit
+(gdb) ls
+Undefined command: "ls".  Try "help".
+(gdb) c
+Continuing.
+
+Program terminated with signal SIGSEGV, Segmentation fault.
+The program no longer exists.
+(gdb) quit
+금  5월 15 15:45:58 jaeho $ls
+gdb_hw1.c  gdb_hw3.c  gdb_hw5.c  [0m[01;32mhw1[0m  [01;32mhw4[0m  log.txt   log4.txt
+gdb_hw2.c  gdb_hw4.c  gdb_hw6.c  [01;32mhw3[0m  [01;32mhw5[0m  log3.txt  log5.txt
+금  5월 15 15:46:00 jaeho $vim gdb_hw5.c
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;28r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[28;1H"gdb_hw5.c" [도스] 15L, 229C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[34m//아래 프로그램은 동작하지 않는다. 디버깅하시오~![m
+
+[35m#include [m[31m<stdio.h>[m
+[35m#include [m[31m<string.h>[m
+
+[32mint[m main()
+{[8;9H[32mchar[m *str = [31mNULL[m;[10;9Hstrcpy(str, [31m"Hello world!"[m);[12;9Hprintf([31m"[m[35m%s\n[m[31m"[m, str);[14;9H[38;5;130mreturn[m [31m0[m;
+}
+[94m~                                                                              [17;1H~                                                                              [18;1H~                                                                              [19;1H~                                                                              [20;1H~                                                                              [21;1H~                                                                              [22;1H~                                                                              [23;1H~                                                                              [24;1H~                                                                              [25;1H~                                                                              [26;1H~                                                                              [27;1H~                                                                              [m[28;62H1,1[10C모두[1;1H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[1;1H[96m//아래 프로그램은 동작하지 않는다. 디버깅하시오~![m
+
+[38;5;81m#include [m[95m<stdio.h>[m
+[38;5;81m#include [m[95m<string.h>[m
+
+[38;5;121mint[m main()
+{[8;9H[38;5;121mchar[m *str = [95mNULL[m;[10;9Hstrcpy(str, [95m"Hello world!"[m);[12;9Hprintf([95m"[m[38;5;224m%s\n[m[95m"[m, str);[14;9H[93mreturn[m [95m0[m;
+}
+[94m~                                                                              [17;1H~                                                                              [18;1H~                                                                              [19;1H~                                                                              [20;1H~                                                                              [21;1H~                                                                              [22;1H~                                                                              [23;1H~                                                                              [24;1H~                                                                              [25;1H~                                                                              [26;1H~                                                                              [27;1H~                                                                              [m[28;62H1,1[10C모두"gdb_hw5.c" [도스] 15L, 229C[1;1H[?25h[?25l[28;52H~@k[1;1H[28;52H   [2;1H[28;62H2,0-1[2;1H[?25h[?25l[28;52H~@k[2;1H[28;52H   [3;1H[28;62H3,1  [3;1H[?25h[?25l[28;52H~@k[3;1H[28;52H   [4;1H[28;62H4[4;1H[?25h[?25l[28;52H~@k[4;1H[28;52H   [5;1H[28;62H5,0-1[5;1H[?25h[?25l[28;52H~@k[5;1H[28;52H   [6;1H[28;62H6,1  [6;1H[?25h[?25l[28;52H~@k[6;1H[28;52H   [7;1H[46m{[15;1H}[m[28;62H7[7;1H[?25h[?25l[28;52H~@k[7;1H[28;52H   [8;8H[7;1H{[15;1H}[28;62H8,1-8[8;8H[?25h[?25l[28;52H~@k[8;8H[28;52H   [9;8H[28;62H9[9;8H[?25h[?25l[28;52H~@k[9;8H[28;52H   [10;8H[28;62H10,1-8[10;8H[?25h[?25l[28;52H~@k[10;8H[28;52H   [9;8H[28;62H9,1-8 [9;8H[?25h[?25l[28;52H~@k[9;8H[28;52H   [8;8H[28;62H8[8;8H[?25h[?25l[28;52H~@@[8;8H[28;52H   [8;25H[28;65H8-25[8;25H[?25h[?25l[28;52H~@k[8;25H[28;52H   [8;24H[28;65H7-24[8;24H[?25h[?25l[28;52H~@k[8;24H[28;52H   [8;23H[28;65H6-23[8;23H[?25h[?25l[28;52H~@@[8;23H[28;52H   [8;25H[28;65H8-25[8;25H[?25h[?25l[28;52H~@k[8;25H[28;52H   [8;25H[28;1H[1m-- 끼워넣기 -- [m[28;15H[K[28;62H8,18-25      모두[8;25H[?25h[?25l[7;1H[46m{[15;1H}[m[28;62H7,2    [7;2H[?25h[?25l[6;9H[46m()[m
+{[15;1H}[28;62H6,11[6;11H[?25h[?25l()[28;62H5,1 [5;1H[?25h[?25l[28;62H4,20[4;20H[?25h[?25l[28;62H5,1 [5;1H[?25h[?25l#[28;64H2[5;2H[?25h[?25li[28;64H3[5;3H[?25h[?25ln[28;64H4[5;4H[?25h[?25lc[28;64H5[5;5H[?25h[?25ll[28;64H6[5;6H[?25h[?25lu[28;64H7[5;7H[?25h[?25ld[28;64H8[5;8H[?25h[?25le[28;64H9[5;9H[?25h[?25l[28;64H10[5;10H[?25h[?25l[38;5;81m#include <[m[28;65H1[5;11H[?25h[?25ls[28;65H2[5;12H[?25h[?25lt[28;65H3[5;13H[?25h[?25ld[28;65H4[5;14H[?25h[?25ll[28;65H5[5;15H[?25h[?25li[28;65H6[5;16H[?25h[?25lb[28;65H7[5;17H[?25h[?25l.[28;65H8[5;18H[?25h[?25lh[28;65H9[5;19H[?25h[?25l[5;10H[95m<stdlib.h>[m[28;64H20[5;20H[?25h[?25l[6;27r[6;1H[L[1;28r[28;62H[K[28;62H6,1[10C모두[6;1H[?25h[?25l[28;62H7[7;1H[?25h[?25l
+[46m{[16;1H}[m[28;62H8[8;1H[?25h[?25l{[16;1H}[28;62H9[9;1H[?25h[?25l[28;62H10,1[10;1H[?25h[?25l[28;65H2[10;2H[?25h[?25l[28;65H3[10;3H[?25h[?25l[28;65H4[10;4H[?25h[?25l[28;65H5[10;5H[?25h[?25l[28;65H6[10;6H[?25h[?25l[28;65H7[10;7H[?25h[?25l[28;65H8[10;8H[?25h[?25l[28;62H9,1 [9;1H[?25h[?25l[28;65H9-26[9;26H[?25h[?25l[28;65H8-25[9;25H[?25h[?25l[28;65H9-26[9;26H[?25h[?25l[9;25H[K[28;65H8-25[9;25H[?25h[?25lNUL[9;24H[K[28;65H7-24[9;24H[?25h[?25l[9;23H[K[28;65H6-23[9;23H[?25h[?25l[9;22H[K[28;65H5-22[9;22H[?25h[?25l[9;21H[K[28;65H4-21[9;21H[?25h[?25l[28;65H3-20[9;20H[?25h[?25l[28;65H4-21[9;21H[?25h[?25l([28;65H5-22[9;22H[?25h[?25lc[28;65H6-23[9;23H[?25h[?25lh[28;65H7-24[9;24H[?25h[?25la[28;65H8-25[9;25H[?25h[?25l[38;5;121mchar[m[28;65H9-26[9;26H[?25h[?25l[28;64H20-27[9;27H[?25h[?25l*[28;65H1-28[9;28H[?25h[?25l)[9;21H[46m([6C)[m[28;65H2-29[9;29H[?25h[?25lm[9;21H([6C)[28;65H3-30[9;30H[?25h[?25la[28;65H4-31[9;31H[?25h[?25ll[28;65H5-32[9;32H[?25h[?25ll[28;65H6-33[9;33H[?25h[?25lo[28;65H7-34[9;34H[?25h[?25lc[28;65H8-35[9;35H[?25h[?25l([28;65H9-36[9;36H[?25h[?25ls[28;64H30-37[9;37H[?25h[?25li[28;65H1-38[9;38H[?25h[?25lz[28;65H2-39[9;39H[?25h[?25le[28;65H3-40[9;40H[?25h[?25lo[28;65H4-41[9;41H[?25h[?25l[93msizeof[m[28;65H5-42[9;42H[?25h[?25l([28;65H6-43[9;43H[?25h[?25lc[28;65H7-44[9;44H[?25h[?25lh[28;65H8-45[9;45H[?25h[?25la[28;65H9-46[9;46H[?25h[?25l[38;5;121mchar[m[28;64H40-47[9;47H[?25h[?25l)[46m([4C)[m[28;65H1-48[9;48H[?25h[?25l*[9;42H([4C)[28;65H2-49[9;49H[?25h[?25l[95m1[m[28;65H3-50[9;50H[?25h[?25l[95m5[m[28;65H4-51[9;51H[?25h[?25l)[9;35H[46m([15C)[m[28;65H5-52[9;52H[?25h[?25l;[9;35H([15C)[28;65H6-53[9;53H[?25h[?25l[28;62H10,9   [10;9H[?25h[?25l[28;63H1,30-37[11;37H[?25h[?25l[28;63H2,2-9  [12;9H[?25h[?25l[28;63H3,22-29[13;29H[?25h[?25l[28;63H4,2-9  [14;9H[?25h[?25l[15;27r[15;1H[L[1;28r[28;62H[K[28;62H15,2-9[7C모두[15;9H[?25h[?25lf[28;65H3-10[15;10H[?25h[?25lr[28;65H4-11[15;11H[?25h[?25le[28;65H5-12[15;12H[?25h[?25le[28;65H6-13[15;13H[?25h[?25l[97m[101m)[m[28;65H7-14[15;14H[?25h[?25ls[28;65H8-15[15;15H[?25h[?25lt[28;65H9-16[15;16H[?25h[?25l[15;15H[K[28;65H8-15[15;15H[?25h[?25l[15;14H[K[28;65H7-14[15;14H[?25h[?25l[15;13H[K[28;65H6-13[15;13H[?25h[?25l([28;65H7-14[15;14H[?25h[?25ls[28;65H8-15[15;15H[?25h[?25lt[28;65H9-16[15;16H[?25h[?25lr[28;65H10-17[15;17H[?25h[?25l)[46m([mstr[46m)[m[28;66H1-18[15;18H[?25h[?25l;(str)[28;66H2-19[15;19H[?25h[?25l[16;27r[16;1H[L[1;28r[28;62H[K[28;62H16,2-9[7C모두[16;9H[?25h[?25l:[28;65H3-10[16;10H[?25h[?25l[16;9H[K[28;65H2-9 [16;9H[?25h[28;1H[K[16;8H[?25l[28;52H^[[16;8H[28;52H  [16;9H[28;62H16,1-8[7C모두[16;8H[?25h[?25l[28;52H:[16;8H[28;52H[K[28;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"gdb_hw5.c" [도스] 18L, 300C 저장 했습니다
+[?2004l[?1l>[?25h[?1049l[23;0;0t금  5월 15 15:51:19 jaeho $vim gdb_hw5.cls[Kvim gdb_hw5.cls[Kgdb hw5cc -g -o hw5 gdb_hw5.c
+금  5월 15 15:51:24 jaeho $gcc -g -o hw5 gdb_hw5.c[10Pvim[C[C[C[C[C[C[C[C[C[Cls[Kgdb hw5
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from hw5...done.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw5 
+Hello world!
+[Inferior 1 (process 10604) exited normally]
+(gdb) quit
+금  5월 15 15:57:19 jaeho $ex[K[Ke[Ke[Kexit
+exit
+
+Script done on 2020-05-15 15:57:29+0900

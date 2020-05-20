@@ -1,0 +1,166 @@
+Script started on 2020-05-15 10:34:40+0900
+]0;jaeho@jaeho-VirtualBox: ~/gdb_hw[01;32mjaeho@jaeho-VirtualBox[00m:[01;34m~/gdb_hw[00m$ PS1="\d \t \u $"
+금  5월 15 10:34:57 jaeho $ls
+gdb_hw1.c  gdb_hw3.c  gdb_hw5.c  [0m[01;32mhw1[0m      log3.txt
+gdb_hw2.c  gdb_hw4.c  gdb_hw6.c  log.txt
+금  5월 15 10:35:00 jaeho $lsPS1="\d \t \u $"[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K-g[K[K-g =o[K[K-o h[Khw3 gdb_hw3.c
+-g: 명령을 찾을 수 없습니다
+금  5월 15 10:35:36 jaeho $-g -o hw3 gdb_hw3.c[Kgcc -g -o hw3 gdb_hw3.c
+금  5월 15 10:36:35 jaeho $l[Kls
+gdb_hw1.c  gdb_hw3.c  gdb_hw5.c  [0m[01;32mhw1[0m  log.txt
+gdb_hw2.c  gdb_hw4.c  gdb_hw6.c  [01;32mhw3[0m  log3.txt
+금  5월 15 10:36:37 jaeho $gdb hw3
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from hw3...done.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw3 
+6
+ 7 8 9 0 1 2
+ 3 4 5 6 7 8
+ 9 0 1 2 3 4
+ 5 6 7 8 9 0
+ 1 2 3 4 5 6
+ 7 8 9 0 1 2
+[Inferior 1 (process 10092) exited normally]
+(gdb) b 25
+Breakpoint 1 at 0x5555555547ab: file gdb_hw3.c, line 25.
+(gdb) s
+The program is not being run.
+(gdb) c
+The program is not being run.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw3 
+6
+
+Breakpoint 1, main () at gdb_hw3.c:25
+25				printf(" %d", num % 10);
+(gdb) info locals
+n = 6
+i = 0
+j = 0
+num = 32767
+(gdb) eix[K[K[Ke[Kex[K[Keixt[K[K[Kxit
+Undefined command: "exit".  Try "help".
+(gdb) e[Kquit
+A debugging session is active.
+
+	Inferior 1 [process 10101] will be killed.
+
+Quit anyway? (y or n) n
+Not confirmed.
+(gdb) k
+Kill the program being debugged? (y or n) y
+(gdb) quit
+금  5월 15 11:02:30 jaeho $vim[K[K[Kvim gdb_hw3.c
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;28r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[28;1H"gdb_hw3.c" [noeol][도스] 31L, 594C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[34m/* 문제: 양의 정수 N을 입력받아, 아래와 같이 N줄을 출력하시오. 
+ 주의사항) 각 줄 첫 숫자 앞에는 공백 하나가 있음. 각 수 사이는 하나의 공백으로  [3;1H구분, 맨 마지막에는      공백 없음
+ 입력예시) [m[31m6[m
+[34m 출력예시)
+ [m[31m1[m[34m [m[31m2[m[34m [m[31m3[m[34m [m[31m4[m[34m [m[31m5[m[34m [m[31m6[m
+[34m [m[31m7[m[34m [m[31m8[m[34m [m[31m9[m[34m [m[31m0[m[34m [m[31m1[m[34m [m[31m2[m
+[34m [m[31m3[m[34m [m[31m4[m[34m [m[31m5[m[34m [m[31m6[m[34m [m[31m7[m[34m [m[31m8[m
+[34m [m[31m9[m[34m [m[31m0[m[34m [m[31m1[m[34m [m[31m2[m[34m [m[31m3[m[34m [m[31m4[m
+[34m [m[31m5[m[34m [m[31m6[m[34m [m[31m7[m[34m [m[31m8[m[34m [m[31m9[m[34m [m[31m0[m
+[34m [m[31m1[m[34m [m[31m2[m[34m [m[31m3[m[34m [m[31m4[m[34m [m[31m5[m[34m [m[31m6[m
+[34m*/[m
+
+[35m#include [m[31m<stdio.h>[m
+
+[32mint[m main()
+{[18;9H[32mint[m n, i, j, num;[20;9Hscanf([31m"[m[35m%d[m[31m"[m, &n);[22;9H[38;5;130mfor[m(i = [31m0[m; i < n; i++)[23;9H{[24;17H[38;5;130mfor[m(j = [31m0[m; j < n; j++)[25;17H{[26;25Hprintf([31m" [m[35m%d[m[31m"[m, num % [31m10[m);[27;25Hnum++;[28;62H1,1[8C꼭대기[1;1H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[1;1H[96m/* 문제: 양의 정수 N을 입력받아, 아래와 같이 N줄을 출력하시오. 
+ 주의사항) 각 줄 첫 숫자 앞에는 공백 하나가 있음. 각 수 사이는 하나의 공백으로  [3;1H구분, 맨 마지막에는      공백 없음
+ 입력예시) [m[95m6[m
+[96m 출력예시)
+ [m[95m1[m[96m [m[95m2[m[96m [m[95m3[m[96m [m[95m4[m[96m [m[95m5[m[96m [m[95m6[m
+[96m [m[95m7[m[96m [m[95m8[m[96m [m[95m9[m[96m [m[95m0[m[96m [m[95m1[m[96m [m[95m2[m
+[96m [m[95m3[m[96m [m[95m4[m[96m [m[95m5[m[96m [m[95m6[m[96m [m[95m7[m[96m [m[95m8[m
+[96m [m[95m9[m[96m [m[95m0[m[96m [m[95m1[m[96m [m[95m2[m[96m [m[95m3[m[96m [m[95m4[m
+[96m [m[95m5[m[96m [m[95m6[m[96m [m[95m7[m[96m [m[95m8[m[96m [m[95m9[m[96m [m[95m0[m
+[96m [m[95m1[m[96m [m[95m2[m[96m [m[95m3[m[96m [m[95m4[m[96m [m[95m5[m[96m [m[95m6[m
+[96m*/[m
+
+[38;5;81m#include [m[95m<stdio.h>[m
+
+[38;5;121mint[m main()
+{[18;9H[38;5;121mint[m n, i, j, num;[20;9Hscanf([95m"[m[38;5;224m%d[m[95m"[m, &n);[22;9H[93mfor[m(i = [95m0[m; i < n; i++)[23;9H{[24;17H[93mfor[m(j = [95m0[m; j < n; j++)[25;17H{[26;25Hprintf([95m" [m[38;5;224m%d[m[95m"[m, num % [95m10[m);[27;25Hnum++;[28;62H1,1[8C꼭대기"gdb_hw3.c" [noeol][도스] 31L, 594C[1;1H[?25h[?25l[28;52H~@k[1;1H[28;52H   [2;1H[28;62H2[2;1H[?25h[?25l[28;52H~@k[2;1H[28;52H   [4;1H[28;62H3[4;1H[?25h[?25l[28;52H~@k[4;1H[28;52H   [5;1H[28;62H4[5;1H[?25h[?25l[28;52H~@k[5;1H[28;52H   [6;1H[28;62H5[6;1H[?25h[?25l[28;52H~@k[6;1H[28;52H   [7;1H[28;62H6[7;1H[?25h[?25l[28;52H~@k[7;1H[28;52H   [8;1H[28;62H7[8;1H[?25h[?25l[28;52H~@k[8;1H[28;52H   [9;1H[28;62H8[9;1H[?25h[?25l[28;52H~@k[9;1H[28;52H   [10;1H[28;62H9[10;1H[?25h[?25l[28;52H~@k[10;1H[28;52H   [11;1H[28;62H10,1[11;1H[?25h[?25l[28;52H~@k[11;1H[28;52H   [12;1H[28;63H1[12;1H[?25h[?25l[28;52H~@k[12;1H[28;52H   [13;1H[28;63H2,0-1[13;1H[?25h[?25l[28;52H~@k[13;1H[28;52H   [14;1H[28;63H3,1  [14;1H[?25h[?25l[28;52H~@k[14;1H[28;52H   [15;1H[28;63H4,0-1[15;1H[?25h[?25l[28;52H~@k[15;1H[28;52H   [16;1H[28;63H5,1  [16;1H[?25h[?25l[28;52H~@k[16;1H[28;52H   [17;1H[28;63H6[17;1H[?25h[?25l[28;52H~@k[17;1H[28;52H   [18;8H[28;63H7,1-8[18;8H[?25h[?25l[28;52H~@k[18;8H[28;52H   [19;8H[28;63H8[19;8H[?25h[?25l[28;52H~@k[19;8H[28;52H   [19;1H[28;1H[1m-- 끼워넣기 --[m[28;15H[K[28;62H18,1[7C꼭대기[19;1H[?25h[?25l[28;63H9[20;1H[?25h[?25l[28;63H8[19;1H[?25h[?25l[28;63H7[18;1H[?25h[?25l[28;66H9-26[18;26H[?25h[?25l[18;25H[K[28;66H8-25[18;25H[?25h[?25l[18;24H[K[28;66H7-24[18;24H[?25h[?25l[18;23H[K[28;66H6-23[18;23H[?25h[?25l[18;22H[K[28;66H5-22[18;22H[?25h[?25l[28;66H4-21[18;21H[?25h[?25l[18;20H[K[28;66H3-20[18;20H[?25h[?25l;[28;66H4-21[18;21H[?25h[?25l[19;27r[19;1H[L[1;28r[28;62H[K[28;62H18,2-9     꼭대기[19;9H[?25h[?25li[28;65H3-10[19;10H[?25h[?25ln[28;65H4-11[19;11H[?25h[?25l[38;5;121mint[m[28;65H5-12[19;12H[?25h[?25l[28;65H6-13[19;13H[?25h[?25ln[28;65H7-14[19;14H[?25h[?25lu[28;65H8-15[19;15H[?25h[?25lm[28;65H9-16[19;16H[?25h[?25l=[28;65H10-17[19;17H[?25h[?25l[95m1[m[28;66H1-18[19;18H[?25h[?25l;[28;66H2-19[19;19H[?25h[?25l[28;63H9,2-9  [20;9H[?25h[?25l[28;62H20,12-19[21;19H[?25h[?25l[28;62H19,2-9  [20;9H[?25h[?25l[28;65H1  [20;1H[?25h[?25l:[28;65H2[20;2H[?25h[?25l[20;1H[K[28;65H1[20;1H[?25h[28;1H[K[20;1H[?25l[28;52H^[[20;1H[28;52H  [20;1H[28;62H19,0-1     꼭대기[20;1H[?25h[?25l[28;52H:[20;1H[28;52H[K[28;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?25h[?25l[?25h[?25l[?2004l"gdb_hw3.c" [도스] 32L, 603C 저장 했습니다
+[?2004l[?1l>[?25h[?1049l[23;0;0t금  5월 15 11:04:48 jaeho $vim gdb_hw3.c
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;28r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[28;1H"gdb_hw3.c" [도스] 32L, 603C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[34m/* 문제: 양의 정수 N을 입력받아, 아래와 같이 N줄을 출력하시오. 
+ 주의사항) 각 줄 첫 숫자 앞에는 공백 하나가 있음. 각 수 사이는 하나의 공백으로  [3;1H구분, 맨 마지막에는      공백 없음
+ 입력예시) [m[31m6[m
+[34m 출력예시)
+ [m[31m1[m[34m [m[31m2[m[34m [m[31m3[m[34m [m[31m4[m[34m [m[31m5[m[34m [m[31m6[m
+[34m [m[31m7[m[34m [m[31m8[m[34m [m[31m9[m[34m [m[31m0[m[34m [m[31m1[m[34m [m[31m2[m
+[34m [m[31m3[m[34m [m[31m4[m[34m [m[31m5[m[34m [m[31m6[m[34m [m[31m7[m[34m [m[31m8[m
+[34m [m[31m9[m[34m [m[31m0[m[34m [m[31m1[m[34m [m[31m2[m[34m [m[31m3[m[34m [m[31m4[m
+[34m [m[31m5[m[34m [m[31m6[m[34m [m[31m7[m[34m [m[31m8[m[34m [m[31m9[m[34m [m[31m0[m
+[34m [m[31m1[m[34m [m[31m2[m[34m [m[31m3[m[34m [m[31m4[m[34m [m[31m5[m[34m [m[31m6[m
+[34m*/[m
+
+[35m#include [m[31m<stdio.h>[m
+
+[32mint[m main()
+{[18;9H[32mint[m n, i, j;[19;9H[32mint[m num=[31m1[m;[21;9Hscanf([31m"[m[35m%d[m[31m"[m, &n);[23;9H[38;5;130mfor[m(i = [31m0[m; i < n; i++)[24;9H{[25;17H[38;5;130mfor[m(j = [31m0[m; j < n; j++)[26;17H{[27;25Hprintf([31m" [m[35m%d[m[31m"[m, num % [31m10[m);[28;62H19,0-1     꼭대기[20;1H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[1;1H[96m/* 문제: 양의 정수 N을 입력받아, 아래와 같이 N줄을 출력하시오. 
+ 주의사항) 각 줄 첫 숫자 앞에는 공백 하나가 있음. 각 수 사이는 하나의 공백으로  [3;1H구분, 맨 마지막에는      공백 없음
+ 입력예시) [m[95m6[m
+[96m 출력예시)
+ [m[95m1[m[96m [m[95m2[m[96m [m[95m3[m[96m [m[95m4[m[96m [m[95m5[m[96m [m[95m6[m
+[96m [m[95m7[m[96m [m[95m8[m[96m [m[95m9[m[96m [m[95m0[m[96m [m[95m1[m[96m [m[95m2[m
+[96m [m[95m3[m[96m [m[95m4[m[96m [m[95m5[m[96m [m[95m6[m[96m [m[95m7[m[96m [m[95m8[m
+[96m [m[95m9[m[96m [m[95m0[m[96m [m[95m1[m[96m [m[95m2[m[96m [m[95m3[m[96m [m[95m4[m
+[96m [m[95m5[m[96m [m[95m6[m[96m [m[95m7[m[96m [m[95m8[m[96m [m[95m9[m[96m [m[95m0[m
+[96m [m[95m1[m[96m [m[95m2[m[96m [m[95m3[m[96m [m[95m4[m[96m [m[95m5[m[96m [m[95m6[m
+[96m*/[m
+
+[38;5;81m#include [m[95m<stdio.h>[m
+
+[38;5;121mint[m main()
+{[18;9H[38;5;121mint[m n, i, j;[19;9H[38;5;121mint[m num=[95m1[m;[21;9Hscanf([95m"[m[38;5;224m%d[m[95m"[m, &n);[23;9H[93mfor[m(i = [95m0[m; i < n; i++)[24;9H{[25;17H[93mfor[m(j = [95m0[m; j < n; j++)[26;17H{[27;25Hprintf([95m" [m[38;5;224m%d[m[95m"[m, num % [95m10[m);[28;62H19,0-1     꼭대기"gdb_hw3.c" [도스] 32L, 603C[20;1H[?25h[?25l[28;62H20,1-8[21;8H[?25h[?25l[28;63H1[22;8H[?25h[?25l[28;52H~@k[22;8H[28;52H   [22;8H[1;27r[27;1H
+[1;28r[27;25Hnum++;[28;1H[K[28;62H22,1-8[8C16%[22;8H[?25h[?25l[1;27r[1;1H[2M[1;28r[26;17H}[27;17Hprintf([95m"[m[38;5;224m\n[m[95m"[m);[28;62H[K[28;62H23,1-8[8C40%[21;8H[?25h[?25l[28;63H4[22;8H[?25h[?25l[28;52H~@k[22;8H[28;52H   [22;8H[1;27r[27;1H
+[1;28r[27;9H}[28;62H[K[28;62H25,1-8[8C60%[22;8H[?25h[?25l[1;27r[27;1H
+[1;28r[27;9H[93mreturn[m [95m0[m;[28;62H[K[28;62H26,1-8[8C80%[22;8H[?25h[?25l[1;27r[27;1H
+[1;28r[27;1H}[28;62H[K[28;62H27,1-8[7C바닥[22;8H[?25h[?25l[28;52H~@k[22;8H[28;52H   [23;8H[28;63H8[23;8H[?25h[?25l[28;63H9[24;8H[?25h[?25l[28;62H30[25;8H[?25h[?25l[28;52H~@k[25;8H[28;52H   [26;8H[28;63H1[26;8H[?25h[?25l[28;52H:[26;8H[28;52H[K[28;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"gdb_hw3.c" [도스] 32L, 603C 저장 했습니다
+[?2004l[?1l>[?25h[?1049l[23;0;0t금  5월 15 11:08:14 jaeho $vim gdb_hw3.c[6Pgdb hw3ls[Kgcc -g -o hw3 gdb_hw3.c[4P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4@gcc [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+금  5월 15 11:09:19 jaeho $gcc -g -o hw3 gdb_hw3.c[10Pvim[C[C[C[C[C[C[C[C[C[C[6Pgdb hw3
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from hw3...done.
+(gdb) r
+Starting program: /home/jaeho/gdb_hw/hw3 
+6
+ 1 2 3 4 5 6
+ 7 8 9 0 1 2
+ 3 4 5 6 7 8
+ 9 0 1 2 3 4
+ 5 6 7 8 9 0
+ 1 2 3 4 5 6
+[Inferior 1 (process 10129) exited normally]
+(gdb) quit
+금  5월 15 11:11:22 jaeho $eix[K[K[Kexit[K[K[K[Kexit
+exit
+
+Script done on 2020-05-15 11:11:29+0900
